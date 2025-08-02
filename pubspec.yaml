@@ -41,6 +41,8 @@ dependencies:
   flutter_modular: ^6.4.1
   json_annotation: ^4.9.0
   google_fonts: ^6.3.0
+  persistent_bottom_nav_bar: ^6.2.1
+  lucide_icons: ^0.257.0
 
 dev_dependencies:
   flutter_test:

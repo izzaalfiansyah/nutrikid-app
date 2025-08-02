@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/components/button.dart';
+import 'package:nutrikid_app/components/input.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 
@@ -39,15 +41,19 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               spacing: 14,
               children: [
-                TextFormField(decoration: InputDecoration(hintText: 'Email')),
-                TextFormField(
-                  decoration: InputDecoration(hintText: 'Password'),
-                ),
+                Input(placeholder: "Email"),
+                Input(placeholder: "Password"),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Button(onPressed: () {}, child: Text('Login')),
+              padding: const EdgeInsets.only(top: 20),
+              child: Button(
+                full: true,
+                onPressed: () {
+                  Modular.to.pushReplacementNamed('/home');
+                },
+                child: Text('Login'),
+              ),
             ),
             Center(
               child: Text(

@@ -6,11 +6,13 @@ class Button extends StatelessWidget {
   const Button({
     super.key,
     this.color,
-    required this.child,
     required this.onPressed,
+    this.full = false,
+    required this.child,
   });
 
   final Color? color;
+  final bool full;
   final Widget child;
   final void Function() onPressed;
 
@@ -23,8 +25,9 @@ class Button extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: color ?? VariantColor.primary,
         foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        fixedSize: Size.fromWidth(SizeConfig.screenHeight!),
+        fixedSize: full ? Size.fromWidth(SizeConfig.screenWidth!) : null,
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        minimumSize: Size(0, 46),
       ),
       child: child,
     );
