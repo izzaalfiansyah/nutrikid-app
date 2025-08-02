@@ -42,6 +42,12 @@ class _MainScreenState extends State<MainScreen> {
         activeColorPrimary: activeColor,
         inactiveColorPrimary: inactiveColor,
       ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(LucideIcons.user2),
+        title: 'Siswa',
+        activeColorPrimary: activeColor,
+        inactiveColorPrimary: inactiveColor,
+      ),
     ];
   }
 
@@ -84,11 +90,26 @@ class _MainScreenState extends State<MainScreen> {
         //   child: Container(height: 1.5, color: Colors.black.withAlpha(25)),
         // ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 44),
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: VariantColor.primary,
+          foregroundColor: Colors.white,
+          child: Icon(LucideIcons.plus),
+        ),
+      ),
       body: PersistentTabView(
         backgroundColor: Colors.white,
         context,
         controller: _controller,
-        screens: [HomeScreen(), HistoryScreen(), StatisticScreen()],
+        screens: [
+          HomeScreen(),
+          HistoryScreen(),
+          StatisticScreen(),
+          StatisticScreen(),
+        ],
         items: _navbarItems(),
         resizeToAvoidBottomInset: true,
         hideNavigationBarWhenKeyboardAppears: true,
