@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 5),
               padding: const EdgeInsets.all(14),
               child: Row(
                 spacing: 14,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:nutrikid_app/blocs/login_cubit/login_cubit.dart';
 import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/components/input.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
@@ -13,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final loginCubit = Modular.get<LoginCubit>();
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -20,49 +24,77 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 20,
-          children: [
-            Column(
-              spacing: 2,
+        child: BlocBuilder<LoginCubit, LoginState>(
+          bloc: loginCubit,
+          builder: (context, state) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 20,
               children: [
-                Text(
-                  'Selamat Datang 👋',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600),
+                Column(
+                  spacing: 2,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Selamat Datang 👋',
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text('Masuk ke akun anda untuk memulai sesi!'),
+                  ],
                 ),
-                Text('Masuk ke akun anda untuk memulai sesi!'),
+                Column(
+                  spacing: 14,
+                  children: [
+                    Input(
+                      placeholder: "Email",
+                      onChanged: (value) {
+                        loginCubit.changeParams(
+                          state.params.copyWith(email: value),
+                        );
+                      },
+                    ),
+                    Input(
+                      placeholder: "Password",
+                      isPassword: true,
+                      onChanged: (value) {
+                        loginCubit.changeParams(
+                          state.params.copyWith(password: value),
+                        );
+                      },
+                    ),
+                    if (state.errorMessage.isNotEmpty)
+                      Text(
+                        state.errorMessage,
+                        style: TextStyle(color: VariantColor.destructive),
+                      ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Button(
+                    full: true,
+                    onPressed:
+                        state.isSubmitted
+                            ? null
+                            : () {
+                              loginCubit.login();
+                            },
+                    child: Text('Login'),
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    'Jika anda lupa password, hubungi admin',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: VariantColor.muted),
+                  ),
+                ),
               ],
-            ),
-            Column(
-              spacing: 14,
-              children: [
-                Input(placeholder: "Email"),
-                Input(placeholder: "Password"),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Button(
-                full: true,
-                onPressed: () {
-                  Modular.to.pushReplacementNamed('/home');
-                },
-                child: Text('Login'),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Jika anda lupa password, hubungi admin',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: VariantColor.muted),
-              ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

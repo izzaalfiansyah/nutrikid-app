@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
   final Color? color;
   final bool full;
   final Widget child;
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
