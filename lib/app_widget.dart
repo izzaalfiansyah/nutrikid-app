@@ -17,6 +17,14 @@ class AppWidget extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: VariantColor.primary),
         scaffoldBackgroundColor: VariantColor.background,
         textTheme: GoogleFonts.openSansTextTheme(),
+        cardTheme: CardThemeData(
+          color: Colors.white,
+          shadowColor: VariantColor.muted,
+          elevation: 1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
       ),
     );
   }

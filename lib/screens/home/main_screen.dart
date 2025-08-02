@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/components/app_drawer.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
+import 'package:nutrikid_app/screens/home/history/history_screen.dart';
 import 'package:nutrikid_app/screens/home/home/home_screen.dart';
+import 'package:nutrikid_app/screens/home/statistic_screen/statistic_screen.dart';
 import 'package:nutrikid_app/shared/env.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -49,6 +51,7 @@ class _MainScreenState extends State<MainScreen> {
       drawer: AppDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
         centerTitle: true,
         title: Row(
           spacing: 10,
@@ -75,20 +78,17 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(height: 1, color: Colors.grey.shade200),
-        ),
+        toolbarHeight: kToolbarHeight + 16,
+        // bottom: PreferredSize(
+        //   preferredSize: Size.fromHeight(0),
+        //   child: Container(height: 1.5, color: Colors.black.withAlpha(25)),
+        // ),
       ),
       body: PersistentTabView(
         backgroundColor: Colors.white,
         context,
         controller: _controller,
-        screens: [
-          HomeScreen(),
-          Center(child: Text('about')),
-          Center(child: Text('contact')),
-        ],
+        screens: [HomeScreen(), HistoryScreen(), StatisticScreen()],
         items: _navbarItems(),
         resizeToAvoidBottomInset: true,
         hideNavigationBarWhenKeyboardAppears: true,
