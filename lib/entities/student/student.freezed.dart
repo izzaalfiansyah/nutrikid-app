@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Student {
 
- int get id; String get name;@JsonKey(name: 'birth_date') DateTime? get birthDate; Gender get gender;@JsonKey(name: 'parent_id') int? get parentId; Profile? get parent;@JsonKey(name: 'last_measurement') Measurement? get lastMeasurement;
+ int get id; String get name;@JsonKey(name: 'birth_date') DateTime? get birthDate; Gender get gender;@JsonKey(name: 'parent_id') int? get parentId; Profile? get parent; Measurement? get measurement;
 /// Create a copy of Student
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $StudentCopyWith<Student> get copyWith => _$StudentCopyWithImpl<Student>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Student&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.parentId, parentId) || other.parentId == parentId)&&(identical(other.parent, parent) || other.parent == parent)&&(identical(other.lastMeasurement, lastMeasurement) || other.lastMeasurement == lastMeasurement));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Student&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.parentId, parentId) || other.parentId == parentId)&&(identical(other.parent, parent) || other.parent == parent)&&(identical(other.measurement, measurement) || other.measurement == measurement));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,birthDate,gender,parentId,parent,lastMeasurement);
+int get hashCode => Object.hash(runtimeType,id,name,birthDate,gender,parentId,parent,measurement);
 
 @override
 String toString() {
-  return 'Student(id: $id, name: $name, birthDate: $birthDate, gender: $gender, parentId: $parentId, parent: $parent, lastMeasurement: $lastMeasurement)';
+  return 'Student(id: $id, name: $name, birthDate: $birthDate, gender: $gender, parentId: $parentId, parent: $parent, measurement: $measurement)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $StudentCopyWith<$Res>  {
   factory $StudentCopyWith(Student value, $Res Function(Student) _then) = _$StudentCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'birth_date') DateTime? birthDate, Gender gender,@JsonKey(name: 'parent_id') int? parentId, Profile? parent,@JsonKey(name: 'last_measurement') Measurement? lastMeasurement
+ int id, String name,@JsonKey(name: 'birth_date') DateTime? birthDate, Gender gender,@JsonKey(name: 'parent_id') int? parentId, Profile? parent, Measurement? measurement
 });
 
 
-$ProfileCopyWith<$Res>? get parent;$MeasurementCopyWith<$Res>? get lastMeasurement;
+$ProfileCopyWith<$Res>? get parent;$MeasurementCopyWith<$Res>? get measurement;
 
 }
 /// @nodoc
@@ -65,7 +65,7 @@ class _$StudentCopyWithImpl<$Res>
 
 /// Create a copy of Student
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? birthDate = freezed,Object? gender = null,Object? parentId = freezed,Object? parent = freezed,Object? lastMeasurement = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? birthDate = freezed,Object? gender = null,Object? parentId = freezed,Object? parent = freezed,Object? measurement = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,7 @@ as String,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignor
 as DateTime?,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as Gender,parentId: freezed == parentId ? _self.parentId : parentId // ignore: cast_nullable_to_non_nullable
 as int?,parent: freezed == parent ? _self.parent : parent // ignore: cast_nullable_to_non_nullable
-as Profile?,lastMeasurement: freezed == lastMeasurement ? _self.lastMeasurement : lastMeasurement // ignore: cast_nullable_to_non_nullable
+as Profile?,measurement: freezed == measurement ? _self.measurement : measurement // ignore: cast_nullable_to_non_nullable
 as Measurement?,
   ));
 }
@@ -93,13 +93,13 @@ $ProfileCopyWith<$Res>? get parent {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MeasurementCopyWith<$Res>? get lastMeasurement {
-    if (_self.lastMeasurement == null) {
+$MeasurementCopyWith<$Res>? get measurement {
+    if (_self.measurement == null) {
     return null;
   }
 
-  return $MeasurementCopyWith<$Res>(_self.lastMeasurement!, (value) {
-    return _then(_self.copyWith(lastMeasurement: value));
+  return $MeasurementCopyWith<$Res>(_self.measurement!, (value) {
+    return _then(_self.copyWith(measurement: value));
   });
 }
 }
@@ -183,10 +183,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'birth_date')  DateTime? birthDate,  Gender gender, @JsonKey(name: 'parent_id')  int? parentId,  Profile? parent, @JsonKey(name: 'last_measurement')  Measurement? lastMeasurement)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'birth_date')  DateTime? birthDate,  Gender gender, @JsonKey(name: 'parent_id')  int? parentId,  Profile? parent,  Measurement? measurement)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Student() when $default != null:
-return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,_that.parent,_that.lastMeasurement);case _:
+return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,_that.parent,_that.measurement);case _:
   return orElse();
 
 }
@@ -204,10 +204,10 @@ return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'birth_date')  DateTime? birthDate,  Gender gender, @JsonKey(name: 'parent_id')  int? parentId,  Profile? parent, @JsonKey(name: 'last_measurement')  Measurement? lastMeasurement)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'birth_date')  DateTime? birthDate,  Gender gender, @JsonKey(name: 'parent_id')  int? parentId,  Profile? parent,  Measurement? measurement)  $default,) {final _that = this;
 switch (_that) {
 case _Student():
-return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,_that.parent,_that.lastMeasurement);case _:
+return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,_that.parent,_that.measurement);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -224,10 +224,10 @@ return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'birth_date')  DateTime? birthDate,  Gender gender, @JsonKey(name: 'parent_id')  int? parentId,  Profile? parent, @JsonKey(name: 'last_measurement')  Measurement? lastMeasurement)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'birth_date')  DateTime? birthDate,  Gender gender, @JsonKey(name: 'parent_id')  int? parentId,  Profile? parent,  Measurement? measurement)?  $default,) {final _that = this;
 switch (_that) {
 case _Student() when $default != null:
-return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,_that.parent,_that.lastMeasurement);case _:
+return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,_that.parent,_that.measurement);case _:
   return null;
 
 }
@@ -239,7 +239,7 @@ return $default(_that.id,_that.name,_that.birthDate,_that.gender,_that.parentId,
 @JsonSerializable()
 
 class _Student extends Student {
-  const _Student({this.id = 0, this.name = '', @JsonKey(name: 'birth_date') this.birthDate, this.gender = Gender.l, @JsonKey(name: 'parent_id') this.parentId, this.parent, @JsonKey(name: 'last_measurement') this.lastMeasurement}): super._();
+  const _Student({this.id = 0, this.name = '', @JsonKey(name: 'birth_date') this.birthDate, this.gender = Gender.l, @JsonKey(name: 'parent_id') this.parentId, this.parent, this.measurement}): super._();
   factory _Student.fromJson(Map<String, dynamic> json) => _$StudentFromJson(json);
 
 @override@JsonKey() final  int id;
@@ -248,7 +248,7 @@ class _Student extends Student {
 @override@JsonKey() final  Gender gender;
 @override@JsonKey(name: 'parent_id') final  int? parentId;
 @override final  Profile? parent;
-@override@JsonKey(name: 'last_measurement') final  Measurement? lastMeasurement;
+@override final  Measurement? measurement;
 
 /// Create a copy of Student
 /// with the given fields replaced by the non-null parameter values.
@@ -263,16 +263,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Student&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.parentId, parentId) || other.parentId == parentId)&&(identical(other.parent, parent) || other.parent == parent)&&(identical(other.lastMeasurement, lastMeasurement) || other.lastMeasurement == lastMeasurement));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Student&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.parentId, parentId) || other.parentId == parentId)&&(identical(other.parent, parent) || other.parent == parent)&&(identical(other.measurement, measurement) || other.measurement == measurement));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,birthDate,gender,parentId,parent,lastMeasurement);
+int get hashCode => Object.hash(runtimeType,id,name,birthDate,gender,parentId,parent,measurement);
 
 @override
 String toString() {
-  return 'Student(id: $id, name: $name, birthDate: $birthDate, gender: $gender, parentId: $parentId, parent: $parent, lastMeasurement: $lastMeasurement)';
+  return 'Student(id: $id, name: $name, birthDate: $birthDate, gender: $gender, parentId: $parentId, parent: $parent, measurement: $measurement)';
 }
 
 
@@ -283,11 +283,11 @@ abstract mixin class _$StudentCopyWith<$Res> implements $StudentCopyWith<$Res> {
   factory _$StudentCopyWith(_Student value, $Res Function(_Student) _then) = __$StudentCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'birth_date') DateTime? birthDate, Gender gender,@JsonKey(name: 'parent_id') int? parentId, Profile? parent,@JsonKey(name: 'last_measurement') Measurement? lastMeasurement
+ int id, String name,@JsonKey(name: 'birth_date') DateTime? birthDate, Gender gender,@JsonKey(name: 'parent_id') int? parentId, Profile? parent, Measurement? measurement
 });
 
 
-@override $ProfileCopyWith<$Res>? get parent;@override $MeasurementCopyWith<$Res>? get lastMeasurement;
+@override $ProfileCopyWith<$Res>? get parent;@override $MeasurementCopyWith<$Res>? get measurement;
 
 }
 /// @nodoc
@@ -300,7 +300,7 @@ class __$StudentCopyWithImpl<$Res>
 
 /// Create a copy of Student
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? birthDate = freezed,Object? gender = null,Object? parentId = freezed,Object? parent = freezed,Object? lastMeasurement = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? birthDate = freezed,Object? gender = null,Object? parentId = freezed,Object? parent = freezed,Object? measurement = freezed,}) {
   return _then(_Student(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -308,7 +308,7 @@ as String,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignor
 as DateTime?,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as Gender,parentId: freezed == parentId ? _self.parentId : parentId // ignore: cast_nullable_to_non_nullable
 as int?,parent: freezed == parent ? _self.parent : parent // ignore: cast_nullable_to_non_nullable
-as Profile?,lastMeasurement: freezed == lastMeasurement ? _self.lastMeasurement : lastMeasurement // ignore: cast_nullable_to_non_nullable
+as Profile?,measurement: freezed == measurement ? _self.measurement : measurement // ignore: cast_nullable_to_non_nullable
 as Measurement?,
   ));
 }
@@ -329,13 +329,13 @@ $ProfileCopyWith<$Res>? get parent {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MeasurementCopyWith<$Res>? get lastMeasurement {
-    if (_self.lastMeasurement == null) {
+$MeasurementCopyWith<$Res>? get measurement {
+    if (_self.measurement == null) {
     return null;
   }
 
-  return $MeasurementCopyWith<$Res>(_self.lastMeasurement!, (value) {
-    return _then(_self.copyWith(lastMeasurement: value));
+  return $MeasurementCopyWith<$Res>(_self.measurement!, (value) {
+    return _then(_self.copyWith(measurement: value));
   });
 }
 }

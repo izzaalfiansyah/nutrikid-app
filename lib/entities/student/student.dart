@@ -17,7 +17,7 @@ abstract class Student with _$Student {
     @Default(Gender.l) Gender gender,
     @JsonKey(name: 'parent_id') int? parentId,
     Profile? parent,
-    @JsonKey(name: 'last_measurement') Measurement? lastMeasurement,
+    Measurement? measurement,
   }) = _Student;
 
   int get age {

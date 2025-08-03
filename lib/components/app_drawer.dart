@@ -61,7 +61,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   spacing: 10,
                   children: [
                     Input(
-                      placeholder: "Cari siswa...",
+                      placeholder: "Cari Siswa...",
                       variant: 'none',
                       suffixIcon: Icon(LucideIcons.search),
                       onChanged: (val) {
@@ -91,6 +91,21 @@ class _AppDrawerState extends State<AppDrawer> {
                                         .contains(search),
                                   )
                                   .toList();
+
+                          if (filteredStudents.isEmpty) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    'Siswa tidak ditemukan',
+                                    style: TextStyle(color: VariantColor.muted),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
 
                           return SingleChildScrollView(
                             child: Column(
@@ -145,40 +160,37 @@ class _AppDrawerState extends State<AppDrawer> {
                     spacing: 5,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        student.name,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium!.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: isSelected ? VariantColor.primary : null,
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            WidgetSpan(
+                              child: Icon(
+                                student.gender.icon,
+                                size: 18,
+                                color: student.gender.color,
+                              ),
+                            ),
+                            TextSpan(text: '  '),
+                            TextSpan(
+                              text: student.name,
+                              style: Theme.of(
+                                context,
+                              ).textTheme.titleMedium!.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: isSelected ? VariantColor.primary : null,
+                              ),
+                            ),
+                          ],
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        spacing: 7,
-                        children: [
-                          Text(
-                            student.gender.name,
-                            style: TextStyle(
-                              color:
-                                  isSelected
-                                      ? VariantColor.primary
-                                      : VariantColor.muted,
-                            ),
-                          ),
-                          Icon(
-                            student.gender.icon,
-                            color: student.gender.color,
-                            size: 14,
-                          ),
-                        ],
-                      ),
                       Text(
-                        "${student.age} tahun",
+                        "${student.age} tahun (${student.gender.name})",
                         style: TextStyle(
-                          color: isSelected ? VariantColor.primary : null,
+                          color:
+                              isSelected
+                                  ? VariantColor.primary
+                                  : VariantColor.muted,
                         ),
                       ),
                     ],

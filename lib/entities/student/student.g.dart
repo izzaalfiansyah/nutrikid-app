@@ -19,12 +19,10 @@ _Student _$StudentFromJson(Map<String, dynamic> json) => _Student(
       json['parent'] == null
           ? null
           : Profile.fromJson(json['parent'] as Map<String, dynamic>),
-  lastMeasurement:
-      json['last_measurement'] == null
+  measurement:
+      json['measurement'] == null
           ? null
-          : Measurement.fromJson(
-            json['last_measurement'] as Map<String, dynamic>,
-          ),
+          : Measurement.fromJson(json['measurement'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$StudentToJson(_Student instance) => <String, dynamic>{
@@ -34,7 +32,7 @@ Map<String, dynamic> _$StudentToJson(_Student instance) => <String, dynamic>{
   'gender': _$GenderEnumMap[instance.gender]!,
   'parent_id': instance.parentId,
   'parent': instance.parent,
-  'last_measurement': instance.lastMeasurement,
+  'measurement': instance.measurement,
 };
 
 const _$GenderEnumMap = {Gender.l: 'l', Gender.p: 'p'};

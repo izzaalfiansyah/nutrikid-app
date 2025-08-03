@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 enum Gender {
   l,
@@ -7,6 +6,6 @@ enum Gender {
 
   String get name => this == Gender.l ? "Laki-laki" : "Perempuan";
   IconData get icon =>
-      this == Gender.l ? LucideIcons.dumbbell : LucideIcons.cake;
+      this == Gender.l ? Icons.male_rounded : Icons.female_rounded;
   Color get color => this == Gender.l ? Colors.blueAccent : Colors.pink;
 }
