@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
 import 'package:nutrikid_app/components/panel.dart';
+import 'package:nutrikid_app/shared/format_date.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 
@@ -32,33 +34,62 @@ class _HomeScreenState extends State<HomeScreen> {
         child: BlocBuilder(
           bloc: homeBloc,
           builder: (context, HomeState state) {
+            final measurement = state.student.measurement;
+
             return Column(
               children: [
                 Stack(
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: VariantColor.primary,
+                        color: Colors.white,
                         // color: VariantColor.primary,
                         borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(50),
+                          bottom: Radius.circular(70),
                         ),
                         boxShadow: panelShadow,
                       ),
+                      alignment: Alignment.center,
                       height: SizeConfig.blockSizeVertical! * 25,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(14),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(14),
-                            child: SizedBox(
-                              height: 140,
-                              width: double.infinity,
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: VariantColor.primary.withAlpha(200),
+                                width: 1.5,
+                              ),
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: CircleAvatar(
+                              radius: 82,
+                              backgroundColor: VariantColor.muted.withAlpha(25),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 10),
+                                  Text(
+                                    (measurement?.studentBmi ?? 0)
+                                        .toStringAsFixed(1),
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.displayMedium!.copyWith(
+                                      color: VariantColor.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    "BMI",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
+                          Text('BMI', style: TextStyle(color: Colors.white)),
                         ],
                       ),
                     ),
@@ -69,8 +100,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(14),
                   child: Builder(
                     builder: (context) {
-                      final measurement = state.student.measurement;
-
                       return Row(
                         spacing: 14,
                         children: [
@@ -84,10 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Text(
                                       (measurement?.studentHeight ?? 0)
                                           .toStringAsFixed(1),
-                                      style:
-                                          Theme.of(
-                                            context,
-                                          ).textTheme.displayMedium,
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.displaySmall!.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -96,10 +126,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Icon(
                                           LucideIcons.signalHigh,
-                                          size: 14,
+                                          size: 18,
                                           color: VariantColor.primary,
                                         ),
-                                        Text('Tinggi (cm)'),
+                                        Text(
+                                          'Tinggi (cm)',
+                                          style: TextStyle(
+                                            color: VariantColor.muted,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -117,10 +152,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Text(
                                       (measurement?.studentWeight ?? 0)
                                           .toStringAsFixed(1),
-                                      style:
-                                          Theme.of(
-                                            context,
-                                          ).textTheme.displayMedium,
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.displaySmall!.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -129,10 +165,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Icon(
                                           LucideIcons.dumbbell,
-                                          size: 14,
+                                          size: 18,
                                           color: VariantColor.destructive,
                                         ),
-                                        Text('Berat (kg)'),
+                                        Text(
+                                          'Berat (kg)',
+                                          style: TextStyle(
+                                            color: VariantColor.muted,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -150,7 +191,120 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Panel(
                     child: Padding(
                       padding: const EdgeInsets.all(14),
-                      child: SizedBox(height: 300, width: double.infinity),
+                      child: Column(
+                        spacing: 10,
+                        children: [
+                          Text(
+                            "Detail Pengukuran",
+                            style: Theme.of(context).textTheme.titleMedium!
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(),
+                          Row(
+                            children: [
+                              Expanded(child: Text('Umur')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  (measurement?.studentAge ?? 0).toString(),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text('Tinggi (cm)')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  (measurement?.studentHeight ?? 0)
+                                      .toStringAsFixed(1),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text('Berat (kg)')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  (measurement?.studentWeight ?? 0)
+                                      .toStringAsFixed(1),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text('BMI')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  (measurement?.studentBmi ?? 0)
+                                      .toStringAsFixed(1),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text('Z-Score')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  (measurement?.zScore ?? 0).toStringAsFixed(1),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text('Status')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  measurement?.statusName ?? 'normal',
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text('Diambil Tanggal')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  formatDate(
+                                    measurement?.createdAt ?? DateTime.now(),
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text('Jam')),
+                              Text(':'),
+                              Expanded(
+                                child: Text(
+                                  DateFormat('HH:mm').format(
+                                    measurement?.createdAt ?? DateTime.now(),
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

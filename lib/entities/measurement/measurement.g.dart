@@ -14,9 +14,9 @@ _Measurement _$MeasurementFromJson(Map<String, dynamic> json) => _Measurement(
           ? null
           : Student.fromJson(json['student'] as Map<String, dynamic>),
   studentAge: (json['student_age'] as num?)?.toInt() ?? 0,
-  studentWeight: (json['student_weight'] as num?)?.toInt() ?? 0,
-  studentHeight: (json['student_height'] as num?)?.toInt() ?? 0,
-  studentBmi: (json['student_bmi'] as num?)?.toInt() ?? 0,
+  studentWeight: (json['student_weight'] as num?)?.toDouble() ?? 0,
+  studentHeight: (json['student_height'] as num?)?.toDouble() ?? 0,
+  studentBmi: (json['student_bmi'] as num?)?.toDouble() ?? 0,
   creatorId: (json['creator_id'] as num?)?.toInt(),
   creator:
       json['creator'] == null

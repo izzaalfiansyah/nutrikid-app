@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Measurement {
 
- int get id;@JsonKey(name: 'student_id') int? get studentId; Student? get student;@JsonKey(name: 'student_age') int get studentAge;@JsonKey(name: 'student_weight') int get studentWeight;@JsonKey(name: 'student_height') int get studentHeight;@JsonKey(name: 'student_bmi') int get studentBmi;@JsonKey(name: 'creator_id') int? get creatorId; Profile? get creator;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'deleted_at') DateTime? get deltedAt;
+ int get id;@JsonKey(name: 'student_id') int? get studentId; Student? get student;@JsonKey(name: 'student_age') int get studentAge;@JsonKey(name: 'student_weight') double get studentWeight;@JsonKey(name: 'student_height') double get studentHeight;@JsonKey(name: 'student_bmi') double get studentBmi;@JsonKey(name: 'creator_id') int? get creatorId; Profile? get creator;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'deleted_at') DateTime? get deltedAt;
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $MeasurementCopyWith<$Res>  {
   factory $MeasurementCopyWith(Measurement value, $Res Function(Measurement) _then) = _$MeasurementCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') int studentWeight,@JsonKey(name: 'student_height') int studentHeight,@JsonKey(name: 'student_bmi') int studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt
+ int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt
 });
 
 
@@ -72,9 +72,9 @@ as int,studentId: freezed == studentId ? _self.studentId : studentId // ignore: 
 as int?,student: freezed == student ? _self.student : student // ignore: cast_nullable_to_non_nullable
 as Student?,studentAge: null == studentAge ? _self.studentAge : studentAge // ignore: cast_nullable_to_non_nullable
 as int,studentWeight: null == studentWeight ? _self.studentWeight : studentWeight // ignore: cast_nullable_to_non_nullable
-as int,studentHeight: null == studentHeight ? _self.studentHeight : studentHeight // ignore: cast_nullable_to_non_nullable
-as int,studentBmi: null == studentBmi ? _self.studentBmi : studentBmi // ignore: cast_nullable_to_non_nullable
-as int,creatorId: freezed == creatorId ? _self.creatorId : creatorId // ignore: cast_nullable_to_non_nullable
+as double,studentHeight: null == studentHeight ? _self.studentHeight : studentHeight // ignore: cast_nullable_to_non_nullable
+as double,studentBmi: null == studentBmi ? _self.studentBmi : studentBmi // ignore: cast_nullable_to_non_nullable
+as double,creatorId: freezed == creatorId ? _self.creatorId : creatorId // ignore: cast_nullable_to_non_nullable
 as int?,creator: freezed == creator ? _self.creator : creator // ignore: cast_nullable_to_non_nullable
 as Profile?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,deltedAt: freezed == deltedAt ? _self.deltedAt : deltedAt // ignore: cast_nullable_to_non_nullable
@@ -187,7 +187,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  int studentWeight, @JsonKey(name: 'student_height')  int studentHeight, @JsonKey(name: 'student_bmi')  int studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Measurement() when $default != null:
 return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt);case _:
@@ -208,7 +208,7 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  int studentWeight, @JsonKey(name: 'student_height')  int studentHeight, @JsonKey(name: 'student_bmi')  int studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Measurement():
 return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt);case _:
@@ -228,7 +228,7 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  int studentWeight, @JsonKey(name: 'student_height')  int studentHeight, @JsonKey(name: 'student_bmi')  int studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Measurement() when $default != null:
 return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt);case _:
@@ -242,17 +242,17 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// @nodoc
 @JsonSerializable()
 
-class _Measurement implements Measurement {
-  const _Measurement({this.id = 0, @JsonKey(name: 'student_id') this.studentId, this.student, @JsonKey(name: 'student_age') this.studentAge = 0, @JsonKey(name: 'student_weight') this.studentWeight = 0, @JsonKey(name: 'student_height') this.studentHeight = 0, @JsonKey(name: 'student_bmi') this.studentBmi = 0, @JsonKey(name: 'creator_id') this.creatorId, this.creator, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'deleted_at') this.deltedAt});
+class _Measurement extends Measurement {
+  const _Measurement({this.id = 0, @JsonKey(name: 'student_id') this.studentId, this.student, @JsonKey(name: 'student_age') this.studentAge = 0, @JsonKey(name: 'student_weight') this.studentWeight = 0, @JsonKey(name: 'student_height') this.studentHeight = 0, @JsonKey(name: 'student_bmi') this.studentBmi = 0, @JsonKey(name: 'creator_id') this.creatorId, this.creator, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'deleted_at') this.deltedAt}): super._();
   factory _Measurement.fromJson(Map<String, dynamic> json) => _$MeasurementFromJson(json);
 
 @override@JsonKey() final  int id;
 @override@JsonKey(name: 'student_id') final  int? studentId;
 @override final  Student? student;
 @override@JsonKey(name: 'student_age') final  int studentAge;
-@override@JsonKey(name: 'student_weight') final  int studentWeight;
-@override@JsonKey(name: 'student_height') final  int studentHeight;
-@override@JsonKey(name: 'student_bmi') final  int studentBmi;
+@override@JsonKey(name: 'student_weight') final  double studentWeight;
+@override@JsonKey(name: 'student_height') final  double studentHeight;
+@override@JsonKey(name: 'student_bmi') final  double studentBmi;
 @override@JsonKey(name: 'creator_id') final  int? creatorId;
 @override final  Profile? creator;
 @override@JsonKey(name: 'created_at') final  DateTime? createdAt;
@@ -291,7 +291,7 @@ abstract mixin class _$MeasurementCopyWith<$Res> implements $MeasurementCopyWith
   factory _$MeasurementCopyWith(_Measurement value, $Res Function(_Measurement) _then) = __$MeasurementCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') int studentWeight,@JsonKey(name: 'student_height') int studentHeight,@JsonKey(name: 'student_bmi') int studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt
+ int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt
 });
 
 
@@ -315,9 +315,9 @@ as int,studentId: freezed == studentId ? _self.studentId : studentId // ignore: 
 as int?,student: freezed == student ? _self.student : student // ignore: cast_nullable_to_non_nullable
 as Student?,studentAge: null == studentAge ? _self.studentAge : studentAge // ignore: cast_nullable_to_non_nullable
 as int,studentWeight: null == studentWeight ? _self.studentWeight : studentWeight // ignore: cast_nullable_to_non_nullable
-as int,studentHeight: null == studentHeight ? _self.studentHeight : studentHeight // ignore: cast_nullable_to_non_nullable
-as int,studentBmi: null == studentBmi ? _self.studentBmi : studentBmi // ignore: cast_nullable_to_non_nullable
-as int,creatorId: freezed == creatorId ? _self.creatorId : creatorId // ignore: cast_nullable_to_non_nullable
+as double,studentHeight: null == studentHeight ? _self.studentHeight : studentHeight // ignore: cast_nullable_to_non_nullable
+as double,studentBmi: null == studentBmi ? _self.studentBmi : studentBmi // ignore: cast_nullable_to_non_nullable
+as double,creatorId: freezed == creatorId ? _self.creatorId : creatorId // ignore: cast_nullable_to_non_nullable
 as int?,creator: freezed == creator ? _self.creator : creator // ignore: cast_nullable_to_non_nullable
 as Profile?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,deltedAt: freezed == deltedAt ? _self.deltedAt : deltedAt // ignore: cast_nullable_to_non_nullable

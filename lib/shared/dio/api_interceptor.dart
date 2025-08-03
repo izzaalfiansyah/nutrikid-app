@@ -15,25 +15,25 @@ class ApiInterceptors extends Interceptor {
     log(options.path, name: "ENDPOINT");
     log((options.data ?? options.queryParameters).toString(), name: "PARAMS");
 
-    try {
-      final appBloc = Modular.get<AppBloc>();
-      final accessToken = appBloc.state.accessToken;
-      final refreshToken = appBloc.state.refreshToken;
-
-      if (JwtDecoder.isExpired(accessToken) && refreshToken.isNotEmpty) {
-        final token = await Modular.get<AuthService>().refreshToken();
-
-        if (token != null) {
-          options.headers.addAll({
-            "authorization": "Bearer ${token.refreshToken}",
-          });
-        }
-      } else {
-        throw 'error';
-      }
-    } catch (err) {
-      Modular.get<AppBloc>().add(AppEvent.logout(redirect: false));
-    }
+    // try {
+    //   final appBloc = Modular.get<AppBloc>();
+    //   final accessToken = appBloc.state.accessToken;
+    //   final refreshToken = appBloc.state.refreshToken;
+    //
+    //   if (JwtDecoder.isExpired(accessToken) && refreshToken.isNotEmpty) {
+    //     final token = await Modular.get<AuthService>().refreshToken();
+    //
+    //     if (token != null) {
+    //       options.headers.addAll({
+    //         "authorization": "Bearer ${token.refreshToken}",
+    //       });
+    //     }
+    //   } else {
+    //     throw 'error';
+    //   }
+    // } catch (err) {
+    //   Modular.get<AppBloc>().add(AppEvent.logout(redirect: false));
+    // }
 
     super.onRequest(options, handler);
   }
