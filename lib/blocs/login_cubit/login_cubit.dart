@@ -21,12 +21,11 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       final result = await authService.login(state.params);
 
-      if (result) {
-        Modular.to.pushReplacementNamed('/home');
-        return;
+      if (result == null) {
+        throw 'error';
       }
 
-      throw 'error';
+      Modular.to.pushReplacementNamed('/home');
     } catch (err) {
       emit(state.copyWith(errorMessage: "Username atau password salah"));
     }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
-import 'package:nutrikid_app/shared/variant.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

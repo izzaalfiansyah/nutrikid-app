@@ -27,7 +27,7 @@ class AuthService {
     return Token(accessToken: accessToken, refreshToken: refreshToken);
   }
 
-  Future<bool> login(LoginParams params) async {
+  Future<Token?> login(LoginParams params) async {
     try {
       final result = await http().post('/login', data: params.toJson());
 
@@ -35,26 +35,53 @@ class AuthService {
         final accessToken = result.data['data']['access_token'];
         final refreshToken = result.data['data']['refresh_token'];
 
-        await saveToken(
-          Token(accessToken: accessToken, refreshToken: refreshToken),
+        final token = Token(
+          accessToken: accessToken,
+          refreshToken: refreshToken,
         );
+
+        await saveToken(token);
 
         Modular.get<AppBloc>().add(AppEvent.loadProfile());
 
-        return true;
+        return token;
       }
     } catch (e) {
       rethrow;
     }
+  }
 
-    return false;
+  Future<Token?> refreshToken() async {
+    try {
+      final token = await getToken();
+
+      if (token.refreshToken.isEmpty) {
+        return null;
+      }
+
+      final result = await http().post(
+        '/refresh-token',
+        data: {'refresh_token': token.refreshToken},
+      );
+
+      final newAccessToken = result.data['data']['access_token'];
+      final newRefreshToken = result.data['data']['refresh_token'];
+
+      final newToken = Token(
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+      );
+
+      await saveToken(newToken);
+
+      return token;
+    } catch (err) {
+      rethrow;
+    }
   }
 
   Future<Profile> profile() async {
     try {
-      final token = await getToken();
-      final accessToken = token.accessToken;
-
       final result = await http().get('/profile');
 
       return Profile.fromJson(result.data['data']['profile']);

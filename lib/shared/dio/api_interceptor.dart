@@ -1,12 +1,38 @@
 import 'dart:developer';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'package:dio/dio.dart';
+import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
+import 'package:nutrikid_app/services/auth_service.dart';
 
 class ApiInterceptors extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     log(options.path, name: "ENDPOINT");
     log((options.data ?? options.queryParameters).toString(), name: "PARAMS");
+
+    try {
+      final appBloc = Modular.get<AppBloc>();
+      final accessToken = appBloc.state.accessToken;
+
+      log(accessToken, name: "ACCES_TOKEN");
+
+      if (JwtDecoder.isExpired(accessToken)) {
+        final token = await Modular.get<AuthService>().refreshToken();
+
+        if (token != null) {
+          options.headers.addAll({
+            "authorization": "Bearer ${token.refreshToken}",
+          });
+        }
+      }
+    } catch (err) {
+      // do nothing
+    }
 
     super.onRequest(options, handler);
   }
