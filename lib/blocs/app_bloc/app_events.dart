@@ -8,7 +8,7 @@ class AppEvent with _$AppEvent {
     void Function(Profile? profile)? callback,
   }) = _LoadProfile;
 
-  const factory AppEvent.logout() = _Logout;
+  const factory AppEvent.logout({@Default(true) bool redirect}) = _Logout;
 
   const factory AppEvent.selectStudent(Student student) = _SelectStudent;
 }

@@ -22,7 +22,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final appBloc = Modular.get<AppBloc>();
   final _controller = PersistentTabController();
+
+  @override
+  void initState() {
+    appBloc.add(AppEvent.loadStudent());
+    super.initState();
+  }
 
   List<PersistentBottomNavBarItem> _navbarItems() {
     final inactiveColor = VariantColor.muted;

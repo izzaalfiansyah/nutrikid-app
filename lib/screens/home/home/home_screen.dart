@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
 
@@ -10,6 +12,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final homeBloc = Modular.get<HomeBloc>();
+
+  @override
+  void initState() {
+    homeBloc.add(HomeEvent.loadStudent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);

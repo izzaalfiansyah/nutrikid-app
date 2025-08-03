@@ -128,12 +128,12 @@ return selectStudent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function()?  logout,TResult Function( Student student)?  selectStudent,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function( bool redirect)?  logout,TResult Function( Student student)?  selectStudent,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
 return loadProfile(_that.callback);case _Logout() when logout != null:
-return logout();case _SelectStudent() when selectStudent != null:
+return logout(_that.redirect);case _SelectStudent() when selectStudent != null:
 return selectStudent(_that.student);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return selectStudent(_that.student);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function()  logout,required TResult Function( Student student)  selectStudent,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function( bool redirect)  logout,required TResult Function( Student student)  selectStudent,}) {final _that = this;
 switch (_that) {
 case _LoadStudent():
 return loadStudent();case _LoadProfile():
 return loadProfile(_that.callback);case _Logout():
-return logout();case _SelectStudent():
+return logout(_that.redirect);case _SelectStudent():
 return selectStudent(_that.student);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return selectStudent(_that.student);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function()?  logout,TResult? Function( Student student)?  selectStudent,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function( bool redirect)?  logout,TResult? Function( Student student)?  selectStudent,}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
 return loadProfile(_that.callback);case _Logout() when logout != null:
-return logout();case _SelectStudent() when selectStudent != null:
+return logout(_that.redirect);case _SelectStudent() when selectStudent != null:
 return selectStudent(_that.student);case _:
   return null;
 
@@ -291,33 +291,67 @@ as void Function(Profile? profile)?,
 
 
 class _Logout implements AppEvent {
-  const _Logout();
+  const _Logout({this.redirect = true});
   
 
+@JsonKey() final  bool redirect;
 
-
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LogoutCopyWith<_Logout> get copyWith => __$LogoutCopyWithImpl<_Logout>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Logout);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Logout&&(identical(other.redirect, redirect) || other.redirect == redirect));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,redirect);
 
 @override
 String toString() {
-  return 'AppEvent.logout()';
+  return 'AppEvent.logout(redirect: $redirect)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$LogoutCopyWith<$Res> implements $AppEventCopyWith<$Res> {
+  factory _$LogoutCopyWith(_Logout value, $Res Function(_Logout) _then) = __$LogoutCopyWithImpl;
+@useResult
+$Res call({
+ bool redirect
+});
 
 
+
+
+}
+/// @nodoc
+class __$LogoutCopyWithImpl<$Res>
+    implements _$LogoutCopyWith<$Res> {
+  __$LogoutCopyWithImpl(this._self, this._then);
+
+  final _Logout _self;
+  final $Res Function(_Logout) _then;
+
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? redirect = null,}) {
+  return _then(_Logout(
+redirect: null == redirect ? _self.redirect : redirect // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

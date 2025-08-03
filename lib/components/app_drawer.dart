@@ -22,13 +22,8 @@ class _AppDrawerState extends State<AppDrawer> {
   String search = '';
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void initState() {
-    appBloc.add(AppEvent.loadStudent());
+    // appBloc.add(AppEvent.loadStudent());
     super.initState();
   }
 

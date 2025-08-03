@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/entities/gender/gender.dart';
+import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/entities/profile/profile.dart';
 
 part 'student.freezed.dart';
@@ -16,6 +17,7 @@ abstract class Student with _$Student {
     @Default(Gender.l) Gender gender,
     @JsonKey(name: 'parent_id') int? parentId,
     Profile? parent,
+    @JsonKey(name: 'last_measurement') Measurement? lastMeasurement,
   }) = _Student;
 
   int get age {
