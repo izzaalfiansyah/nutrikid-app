@@ -4,7 +4,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
+import 'package:nutrikid_app/components/app/measurement_detail.dart';
 import 'package:nutrikid_app/components/panel.dart';
+import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/shared/format_date.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
 import 'package:nutrikid_app/shared/variant.dart';
@@ -65,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.all(10),
                             child: CircleAvatar(
                               radius: 82,
-                              backgroundColor: VariantColor.muted.withAlpha(25),
+                              backgroundColor: VariantColor.muted.withAlpha(18),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -191,120 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Panel(
                     child: Padding(
                       padding: const EdgeInsets.all(14),
-                      child: Column(
-                        spacing: 10,
-                        children: [
-                          Text(
-                            "Detail Pengukuran",
-                            style: Theme.of(context).textTheme.titleMedium!
-                                .copyWith(fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(),
-                          Row(
-                            children: [
-                              Expanded(child: Text('Umur')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  (measurement?.studentAge ?? 0).toString(),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text('Tinggi (cm)')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  (measurement?.studentHeight ?? 0)
-                                      .toStringAsFixed(1),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text('Berat (kg)')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  (measurement?.studentWeight ?? 0)
-                                      .toStringAsFixed(1),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text('BMI')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  (measurement?.studentBmi ?? 0)
-                                      .toStringAsFixed(1),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text('Z-Score')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  (measurement?.zScore ?? 0).toStringAsFixed(1),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text('Status')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  measurement?.statusName ?? 'normal',
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text('Diambil Tanggal')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  formatDate(
-                                    measurement?.createdAt ?? DateTime.now(),
-                                  ),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text('Jam')),
-                              Text(':'),
-                              Expanded(
-                                child: Text(
-                                  DateFormat('HH:mm').format(
-                                    measurement?.createdAt ?? DateTime.now(),
-                                  ),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      child: MeasurementDetail(measurement: measurement),
                     ),
                   ),
                 ),

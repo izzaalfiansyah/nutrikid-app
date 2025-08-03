@@ -139,6 +139,7 @@ class _AppDrawerState extends State<AppDrawer> {
         return GestureDetector(
           onTap: () {
             appBloc.add(AppEvent.selectStudent(student));
+            Scaffold.of(context).closeDrawer();
           },
           child: Container(
             padding: const EdgeInsets.all(14),
