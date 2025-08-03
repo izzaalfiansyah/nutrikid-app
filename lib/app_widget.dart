@@ -16,7 +16,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: VariantColor.primary),
         scaffoldBackgroundColor: VariantColor.background,
-        textTheme: GoogleFonts.poppinsTextTheme(),
+        textTheme: GoogleFonts.robotoTextTheme(),
         cardTheme: CardThemeData(
           color: Colors.white,
           shadowColor: VariantColor.muted,
