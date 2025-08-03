@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
+import 'package:nutrikid_app/components/app/add_measurement_dialog.dart';
 import 'package:nutrikid_app/components/app_drawer.dart';
 import 'package:nutrikid_app/components/logout_dialog.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
@@ -117,7 +118,14 @@ class _MainScreenState extends State<MainScreen> {
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 44),
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useRootNavigator: true,
+                  builder: (context) => AddMeasurementDialog(),
+                );
+              },
               backgroundColor: VariantColor.primary,
               foregroundColor: Colors.white,
               child: Icon(LucideIcons.plus),

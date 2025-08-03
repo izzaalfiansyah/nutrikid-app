@@ -26,7 +26,7 @@ class Button extends StatelessWidget {
         backgroundColor: color ?? VariantColor.primary,
         foregroundColor: Colors.white,
         fixedSize: full ? Size.fromWidth(SizeConfig.screenWidth!) : null,
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
         minimumSize: Size(0, 46),
       ),
       child: child,
