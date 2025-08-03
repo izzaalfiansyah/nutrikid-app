@@ -60,51 +60,58 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 10,
-                children: [
-                  Input(
-                    placeholder: "Cari siswa...",
-                    variant: 'none',
-                    suffixIcon: Icon(LucideIcons.search),
-                    onChanged: (val) {
-                      setState(() {
-                        search = val;
-                      });
-                    },
-                  ),
-                  SizedBox(),
-                  BlocBuilder<AppBloc, AppState>(
-                    bloc: appBloc,
-                    builder: (context, state) {
-                      if (state.isStudentLoading) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            color: VariantColor.primary,
-                          ),
-                        );
-                      }
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 10,
+                  children: [
+                    Input(
+                      placeholder: "Cari siswa...",
+                      variant: 'none',
+                      suffixIcon: Icon(LucideIcons.search),
+                      onChanged: (val) {
+                        setState(() {
+                          search = val;
+                        });
+                      },
+                    ),
+                    SizedBox(),
+                    Expanded(
+                      child: BlocBuilder<AppBloc, AppState>(
+                        bloc: appBloc,
+                        builder: (context, state) {
+                          if (state.isStudentLoading) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: VariantColor.primary,
+                              ),
+                            );
+                          }
 
-                      final filteredStudents =
-                          state.students
-                              .where(
-                                (student) =>
-                                    student.name.toLowerCase().contains(search),
-                              )
-                              .toList();
+                          final filteredStudents =
+                              state.students
+                                  .where(
+                                    (student) => student.name
+                                        .toLowerCase()
+                                        .contains(search),
+                                  )
+                                  .toList();
 
-                      return Column(
-                        spacing: 14,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                            filteredStudents.map((student) {
-                              return studentCard(student);
-                            }).toList(),
-                      );
-                    },
-                  ),
-                ],
+                          return SingleChildScrollView(
+                            child: Column(
+                              spacing: 14,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  filteredStudents.map((student) {
+                                    return studentCard(student);
+                                  }).toList(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -113,69 +120,85 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
-  Container studentCard(Student student) {
-    final isSelected = student.id == 4;
+  Widget studentCard(Student student) {
+    return BlocBuilder(
+      bloc: appBloc,
+      builder: (context, AppState state) {
+        final isSelected = state.selectedStudent?.id == student.id;
 
-    return Container(
-      padding: const EdgeInsets.all(14),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: isSelected ? VariantColor.primary : VariantColor.border,
-        ),
-        color: isSelected ? VariantColor.primary.withAlpha(10) : Colors.white,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              spacing: 5,
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return GestureDetector(
+          onTap: () {
+            appBloc.add(AppEvent.selectStudent(student));
+          },
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: isSelected ? VariantColor.primary : VariantColor.border,
+              ),
+              color:
+                  isSelected
+                      ? VariantColor.primary.withAlpha(10)
+                      : Colors.white,
+            ),
+            child: Row(
               children: [
-                Text(
-                  student.name,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: isSelected ? VariantColor.primary : null,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 7,
-                  children: [
-                    Text(
-                      student.gender.name,
-                      style: TextStyle(
-                        color:
-                            isSelected
-                                ? VariantColor.primary
-                                : VariantColor.muted,
+                Expanded(
+                  child: Column(
+                    spacing: 5,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        student.name,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: isSelected ? VariantColor.primary : null,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    Icon(
-                      student.gender.icon,
-                      color: student.gender.color,
-                      size: 14,
-                    ),
-                  ],
-                ),
-                Text(
-                  "${student.age} tahun",
-                  style: TextStyle(
-                    color: isSelected ? VariantColor.primary : null,
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: 7,
+                        children: [
+                          Text(
+                            student.gender.name,
+                            style: TextStyle(
+                              color:
+                                  isSelected
+                                      ? VariantColor.primary
+                                      : VariantColor.muted,
+                            ),
+                          ),
+                          Icon(
+                            student.gender.icon,
+                            color: student.gender.color,
+                            size: 14,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "${student.age} tahun",
+                        style: TextStyle(
+                          color: isSelected ? VariantColor.primary : null,
+                        ),
+                      ),
+                    ],
                   ),
+                ),
+                Icon(
+                  isSelected ? LucideIcons.circleDot : LucideIcons.circle,
+                  color:
+                      isSelected ? VariantColor.primary : VariantColor.border,
                 ),
               ],
             ),
           ),
-          Icon(
-            isSelected ? LucideIcons.circleDot : LucideIcons.circle,
-            color: isSelected ? VariantColor.primary : VariantColor.border,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

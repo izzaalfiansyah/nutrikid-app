@@ -25,6 +25,11 @@ class AppWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        popupMenuTheme: PopupMenuThemeData(color: Colors.white),
+        dialogTheme: DialogThemeData(backgroundColor: Colors.white),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(foregroundColor: VariantColor.primary),
+        ),
       ),
     );
   }

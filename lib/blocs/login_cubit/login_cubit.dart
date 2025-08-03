@@ -19,10 +19,11 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(isSubmitted: true, errorMessage: ''));
 
     try {
-      final result = await AuthService.login(state.params);
+      final result = await authService.login(state.params);
 
       if (result) {
         Modular.to.pushReplacementNamed('/home');
+        return;
       }
 
       throw 'error';

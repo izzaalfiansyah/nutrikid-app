@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
 import 'package:nutrikid_app/shared/env.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
@@ -13,11 +14,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final appBloc = Modular.get<AppBloc>();
+
+  getProfile() async {
+    appBloc.add(
+      AppEvent.loadProfile(
+        callback: (profile) {
+          var redirect = '/login';
+          if (profile != null) {
+            redirect = '/home';
+          }
+
+          Future.delayed(Duration(seconds: 1), () {
+            Modular.to.pushReplacementNamed(redirect);
+          });
+        },
+      ),
+    );
+  }
+
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
-      Modular.to.pushReplacementNamed('/login');
-    });
+    getProfile();
 
     super.initState();
   }

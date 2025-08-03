@@ -6,5 +6,13 @@ abstract class AppState with _$AppState {
     @Default([]) List<Student> students,
     @Default(0) int studentTotal,
     @Default(true) bool isStudentLoading,
+
+    // role
+    @Default('') String accessToken,
+    @Default('') String refreshToken,
+    Profile? profile,
+
+    // selected student
+    Student? selectedStudent,
   }) = _AppState;
 }
