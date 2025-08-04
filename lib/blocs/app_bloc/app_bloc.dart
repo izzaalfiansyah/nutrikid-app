@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
 import 'package:nutrikid_app/entities/profile/profile.dart';
 import 'package:nutrikid_app/entities/student/student.dart';
 import 'package:nutrikid_app/services/auth_service.dart';
 import 'package:nutrikid_app/services/student_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'app_events.dart';
 part 'app_state.dart';
@@ -55,6 +55,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         await Modular.get<StudentService>().setStudentId(event.student.id);
 
         Modular.get<HomeBloc>().add(HomeEvent.loadStudent());
+        Modular.get<HistoryBloc>().add(
+          HistoryEvent.loadMeasurement(isReset: true),
+        );
 
         emit(state.copyWith(selectedStudent: event.student));
       }

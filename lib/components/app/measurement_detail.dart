@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/shared/format_date.dart';
 import 'package:nutrikid_app/shared/variant.dart';
@@ -13,6 +16,7 @@ class MeasurementDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       spacing: 10,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           "Detail Pengukuran",
@@ -157,6 +161,27 @@ class MeasurementDetail extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        SizedBox(height: 10),
+        Button(
+          onPressed:
+              measurement == null
+                  ? null
+                  : () {
+                    print('download');
+                  },
+          full: true,
+          child:
+              measurement == null
+                  ? Text('Belum ada pengukuran')
+                  : Row(
+                    spacing: 14,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(LucideIcons.downloadCloud),
+                      Text('Download'),
+                    ],
+                  ),
         ),
       ],
     );
