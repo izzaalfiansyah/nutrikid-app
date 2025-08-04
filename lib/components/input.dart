@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 
-class Input extends StatelessWidget {
+class Input extends StatefulWidget {
   const Input({
     super.key,
     this.placeholder,
@@ -23,6 +24,13 @@ class Input extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
 
+  @override
+  State<Input> createState() => _InputState();
+}
+
+class _InputState extends State<Input> {
+  bool showPassword = false;
+
   InputDecoration get inputDecoration {
     final borderRadius = BorderRadius.circular(10);
     var border = OutlineInputBorder(
@@ -40,16 +48,35 @@ class Input extends StatelessWidget {
       borderSide: BorderSide(color: VariantColor.destructive, width: 1.5),
     );
 
+    Widget? suffix;
+
+    if (widget.isPassword == true) {
+      suffix = Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                showPassword = !showPassword;
+              });
+            },
+            icon: Icon(showPassword ? LucideIcons.eye : LucideIcons.eyeOff),
+          ),
+        ],
+      );
+    }
+
     return InputDecoration(
-      hintText: placeholder,
+      hintText: widget.placeholder,
       border: border,
       enabledBorder: enabledBorder,
       focusedBorder: focusedBorder,
       errorBorder: errorBorder,
       focusedErrorBorder: errorBorder,
       isDense: true,
-      suffixIcon: suffixIcon,
-      prefixIcon: prefixIcon,
+      suffixIcon: suffix ?? widget.suffixIcon,
+      prefixIcon: widget.prefixIcon,
     );
   }
 
@@ -57,10 +84,10 @@ class Input extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: inputDecoration,
-      obscureText: isPassword ?? false,
-      controller: controller,
-      onChanged: onChanged,
-      initialValue: initialValue,
+      obscureText: widget.isPassword == true ? !showPassword : false,
+      controller: widget.controller,
+      onChanged: widget.onChanged,
+      initialValue: widget.initialValue,
     );
   }
 }
