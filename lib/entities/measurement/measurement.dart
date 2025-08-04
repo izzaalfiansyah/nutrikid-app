@@ -61,7 +61,7 @@ abstract class Measurement with _$Measurement {
     return {
       'wasted': Colors.red,
       'normal': Colors.green,
-      'overweight': Colors.yellow,
+      'overweight': Colors.orange,
       'obese': Colors.red,
     }[status]!;
   }
