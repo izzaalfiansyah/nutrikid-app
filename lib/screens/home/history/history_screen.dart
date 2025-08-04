@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/components/app/measurement_detail.dart';
+import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/shared/format_date.dart';
@@ -39,13 +39,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: BlocBuilder<HistoryBloc, HistoryState>(
         bloc: historyBloc,
         builder: (context, state) {
-          if (state.isLoading) {
-            return Center(
-              child: CircularProgressIndicator(color: VariantColor.primary),
-            );
-          }
-
-          if (state.total == 0) {
+          if (state.total == 0 && !state.isLoading) {
             return SizedBox(
               width: double.infinity,
               child: Column(
@@ -97,6 +91,23 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             color: VariantColor.primary,
                           ),
                         ),
+                      ),
+                    if (state.total > state.measurements.length &&
+                        !state.isLoading)
+                      Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Button(
+                            onPressed:
+                                state.isLoading
+                                    ? null
+                                    : () {
+                                      loadMeasurements();
+                                    },
+                            full: true,
+                            child: Text('Muat Lebih Banyak'),
+                          ),
+                        ],
                       ),
                   ],
                 ),
