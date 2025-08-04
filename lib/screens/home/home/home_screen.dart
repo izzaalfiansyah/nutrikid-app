@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               padding: EdgeInsets.all(10),
                               child: CircleAvatar(
-                                radius: 82,
+                                radius: 74,
                                 backgroundColor: VariantColor.muted.withAlpha(
                                   18,
                                 ),
@@ -94,12 +94,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .toStringAsFixed(1),
                                           style: Theme.of(
                                             context,
-                                          ).textTheme.displayMedium!.copyWith(
+                                          ).textTheme.displaySmall!.copyWith(
                                             color: VariantColor.primary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                        Text("BMI"),
+                                        Text(
+                                          "BMI",
+                                          style:
+                                              Theme.of(
+                                                context,
+                                              ).textTheme.bodyMedium,
+                                        ),
                                       ],
                                     );
                                   },
@@ -137,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .toStringAsFixed(1),
                                           style: Theme.of(
                                             context,
-                                          ).textTheme.displaySmall!.copyWith(
+                                          ).textTheme.headlineMedium!.copyWith(
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -181,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .toStringAsFixed(1),
                                           style: Theme.of(
                                             context,
-                                          ).textTheme.displaySmall!.copyWith(
+                                          ).textTheme.headlineMedium!.copyWith(
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),

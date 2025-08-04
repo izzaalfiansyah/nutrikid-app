@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nutrikid_app/blocs/statistic_bloc/statistic_bloc.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/services/measurement_service.dart';
 
@@ -10,6 +11,8 @@ part 'history_state.dart';
 part 'history_bloc.freezed.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
+  final statisticBloc = Modular.get<StatisticBloc>();
+
   HistoryBloc() : super(HistoryState.initial()) {
     on<HistoryEvent>((event, emit) async {
       if (event is _LoadMeasurement) {
@@ -20,6 +23,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         }
 
         try {
+          final isReset = state.measurements.isEmpty;
           final result =
               await Modular.get<MeasurementService>().getMeasurements();
 
@@ -29,6 +33,10 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
               measurements: [...state.measurements, ...result.measurements],
             ),
           );
+
+          if (isReset) {
+            statisticBloc.add(StatisticEvent.load());
+          }
         } catch (e) {
           // do nothing;
         }

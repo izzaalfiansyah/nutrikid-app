@@ -39,6 +39,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: BlocBuilder<HistoryBloc, HistoryState>(
         bloc: historyBloc,
         builder: (context, state) {
+          if (state.isLoading) {
+            return Center(
+              child: CircularProgressIndicator(color: VariantColor.primary),
+            );
+          }
+
           if (state.total == 0) {
             return SizedBox(
               width: double.infinity,
