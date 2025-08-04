@@ -15,28 +15,28 @@ class ApiInterceptors extends Interceptor {
     log(options.path, name: "ENDPOINT");
     log((options.data ?? options.queryParameters).toString(), name: "PARAMS");
 
-    if (options.uri.path.contains('/refresh-token')) {
-      return;
-    }
+    final isRequestRefreshToken = options.uri.path.contains('/refresh-token');
 
-    try {
-      final appBloc = Modular.get<AppBloc>();
-      final accessToken = appBloc.state.accessToken;
-      final refreshToken = appBloc.state.refreshToken;
+    if (!isRequestRefreshToken) {
+      try {
+        final appBloc = Modular.get<AppBloc>();
+        final accessToken = appBloc.state.accessToken;
+        final refreshToken = appBloc.state.refreshToken;
 
-      if (JwtDecoder.isExpired(accessToken) && refreshToken.isNotEmpty) {
-        final token = await Modular.get<AuthService>().refreshToken();
+        if (JwtDecoder.isExpired(accessToken) && refreshToken.isNotEmpty) {
+          final token = await Modular.get<AuthService>().refreshToken();
 
-        if (token != null) {
-          options.headers.addAll({
-            "authorization": "Bearer ${token.refreshToken}",
-          });
+          if (token != null) {
+            options.headers.addAll({
+              "authorization": "Bearer ${token.refreshToken}",
+            });
+          }
+        } else {
+          throw 'error';
         }
-      } else {
-        throw 'error';
+      } catch (err) {
+        Modular.get<AppBloc>().add(AppEvent.logout(redirect: false));
       }
-    } catch (err) {
-      Modular.get<AppBloc>().add(AppEvent.logout(redirect: false));
     }
 
     super.onRequest(options, handler);
