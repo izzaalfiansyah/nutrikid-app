@@ -55,12 +55,13 @@ extension HistoryEventPatterns on HistoryEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurement value)?  loadMeasurement,TResult Function( _DeleteMeasurement value)?  deleteMeasurement,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurement value)?  loadMeasurement,TResult Function( _DeleteMeasurement value)?  deleteMeasurement,TResult Function( _AddMeasurement value)?  addMeasurement,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that);case _DeleteMeasurement() when deleteMeasurement != null:
-return deleteMeasurement(_that);case _:
+return deleteMeasurement(_that);case _AddMeasurement() when addMeasurement != null:
+return addMeasurement(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return deleteMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurement value)  loadMeasurement,required TResult Function( _DeleteMeasurement value)  deleteMeasurement,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurement value)  loadMeasurement,required TResult Function( _DeleteMeasurement value)  deleteMeasurement,required TResult Function( _AddMeasurement value)  addMeasurement,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement():
 return loadMeasurement(_that);case _DeleteMeasurement():
-return deleteMeasurement(_that);case _:
+return deleteMeasurement(_that);case _AddMeasurement():
+return addMeasurement(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +102,13 @@ return deleteMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurement value)?  loadMeasurement,TResult? Function( _DeleteMeasurement value)?  deleteMeasurement,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurement value)?  loadMeasurement,TResult? Function( _DeleteMeasurement value)?  deleteMeasurement,TResult? Function( _AddMeasurement value)?  addMeasurement,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that);case _DeleteMeasurement() when deleteMeasurement != null:
-return deleteMeasurement(_that);case _:
+return deleteMeasurement(_that);case _AddMeasurement() when addMeasurement != null:
+return addMeasurement(_that);case _:
   return null;
 
 }
@@ -122,11 +125,12 @@ return deleteMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? page,  bool? isReset)?  loadMeasurement,TResult Function( int id)?  deleteMeasurement,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? page,  bool? isReset)?  loadMeasurement,TResult Function( int id)?  deleteMeasurement,TResult Function( int height,  int weight)?  addMeasurement,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement() when deleteMeasurement != null:
-return deleteMeasurement(_that.id);case _:
+return deleteMeasurement(_that.id);case _AddMeasurement() when addMeasurement != null:
+return addMeasurement(_that.height,_that.weight);case _:
   return orElse();
 
 }
@@ -144,11 +148,12 @@ return deleteMeasurement(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? page,  bool? isReset)  loadMeasurement,required TResult Function( int id)  deleteMeasurement,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? page,  bool? isReset)  loadMeasurement,required TResult Function( int id)  deleteMeasurement,required TResult Function( int height,  int weight)  addMeasurement,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement():
 return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement():
-return deleteMeasurement(_that.id);case _:
+return deleteMeasurement(_that.id);case _AddMeasurement():
+return addMeasurement(_that.height,_that.weight);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +170,12 @@ return deleteMeasurement(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? page,  bool? isReset)?  loadMeasurement,TResult? Function( int id)?  deleteMeasurement,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? page,  bool? isReset)?  loadMeasurement,TResult? Function( int id)?  deleteMeasurement,TResult? Function( int height,  int weight)?  addMeasurement,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement() when deleteMeasurement != null:
-return deleteMeasurement(_that.id);case _:
+return deleteMeasurement(_that.id);case _AddMeasurement() when addMeasurement != null:
+return addMeasurement(_that.height,_that.weight);case _:
   return null;
 
 }
@@ -304,6 +310,74 @@ class __$DeleteMeasurementCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
   return _then(_DeleteMeasurement(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _AddMeasurement implements HistoryEvent {
+  const _AddMeasurement({required this.height, required this.weight});
+  
+
+ final  int height;
+ final  int weight;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AddMeasurementCopyWith<_AddMeasurement> get copyWith => __$AddMeasurementCopyWithImpl<_AddMeasurement>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddMeasurement&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,height,weight);
+
+@override
+String toString() {
+  return 'HistoryEvent.addMeasurement(height: $height, weight: $weight)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AddMeasurementCopyWith<$Res> implements $HistoryEventCopyWith<$Res> {
+  factory _$AddMeasurementCopyWith(_AddMeasurement value, $Res Function(_AddMeasurement) _then) = __$AddMeasurementCopyWithImpl;
+@useResult
+$Res call({
+ int height, int weight
+});
+
+
+
+
+}
+/// @nodoc
+class __$AddMeasurementCopyWithImpl<$Res>
+    implements _$AddMeasurementCopyWith<$Res> {
+  __$AddMeasurementCopyWithImpl(this._self, this._then);
+
+  final _AddMeasurement _self;
+  final $Res Function(_AddMeasurement) _then;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? height = null,Object? weight = null,}) {
+  return _then(_AddMeasurement(
+height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

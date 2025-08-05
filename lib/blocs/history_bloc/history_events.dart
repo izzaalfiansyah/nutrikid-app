@@ -7,4 +7,9 @@ abstract class HistoryEvent with _$HistoryEvent {
 
   const factory HistoryEvent.deleteMeasurement({required int id}) =
       _DeleteMeasurement;
+
+  const factory HistoryEvent.addMeasurement({
+    required int height,
+    required int weight,
+  }) = _AddMeasurement;
 }

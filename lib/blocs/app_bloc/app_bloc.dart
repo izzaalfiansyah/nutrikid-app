@@ -97,7 +97,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
 
       if (event is _ShowAlert) {
-        emit(state.copyWith(alertMessage: event.message));
+        emit(
+          state.copyWith(
+            alertMessage: event.message,
+            alertTriggerer: !state.alertTriggerer,
+          ),
+        );
       }
     });
   }

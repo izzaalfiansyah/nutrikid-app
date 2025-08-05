@@ -17,5 +17,6 @@ abstract class AppState with _$AppState {
 
     // alert
     @Default('') String alertMessage,
+    @Default(false) bool alertTriggerer, // just for trigger the alert
   }) = _AppState;
 }

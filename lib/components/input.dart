@@ -13,6 +13,7 @@ class Input extends StatefulWidget {
     this.onChanged,
     this.prefixIcon,
     this.suffixIcon,
+    this.keyboardType,
   });
 
   final String? placeholder;
@@ -23,6 +24,7 @@ class Input extends StatefulWidget {
   final void Function(String)? onChanged;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final TextInputType? keyboardType;
 
   @override
   State<Input> createState() => _InputState();
@@ -83,6 +85,7 @@ class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: widget.keyboardType,
       decoration: inputDecoration,
       obscureText: widget.isPassword == true ? !showPassword : false,
       controller: widget.controller,

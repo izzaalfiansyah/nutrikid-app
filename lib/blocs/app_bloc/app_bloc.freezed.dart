@@ -506,7 +506,7 @@ mixin _$AppState {
  List<Student> get students; int get studentTotal; bool get isStudentLoading;// role
  String get accessToken; String get refreshToken; Profile? get profile;// selected student
  Student? get selectedStudent;// alert
- String get alertMessage;
+ String get alertMessage; bool get alertTriggerer;
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -517,16 +517,16 @@ $AppStateCopyWith<AppState> get copyWith => _$AppStateCopyWithImpl<AppState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage)&&(identical(other.alertTriggerer, alertTriggerer) || other.alertTriggerer == alertTriggerer));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,alertMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,alertMessage,alertTriggerer);
 
 @override
 String toString() {
-  return 'AppState(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, alertMessage: $alertMessage)';
+  return 'AppState(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, alertMessage: $alertMessage, alertTriggerer: $alertTriggerer)';
 }
 
 
@@ -537,7 +537,7 @@ abstract mixin class $AppStateCopyWith<$Res>  {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) _then) = _$AppStateCopyWithImpl;
 @useResult
 $Res call({
- List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, String alertMessage
+ List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, String alertMessage, bool alertTriggerer
 });
 
 
@@ -554,7 +554,7 @@ class _$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? alertMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? alertMessage = null,Object? alertTriggerer = null,}) {
   return _then(_self.copyWith(
 students: null == students ? _self.students : students // ignore: cast_nullable_to_non_nullable
 as List<Student>,studentTotal: null == studentTotal ? _self.studentTotal : studentTotal // ignore: cast_nullable_to_non_nullable
@@ -564,7 +564,8 @@ as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken
 as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as Profile?,selectedStudent: freezed == selectedStudent ? _self.selectedStudent : selectedStudent // ignore: cast_nullable_to_non_nullable
 as Student?,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as String,alertTriggerer: null == alertTriggerer ? _self.alertTriggerer : alertTriggerer // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 /// Create a copy of AppState
@@ -673,10 +674,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage,  bool alertTriggerer)?  initial,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppState() when initial != null:
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage,_that.alertTriggerer);case _:
   return orElse();
 
 }
@@ -694,10 +695,10 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage,  bool alertTriggerer)  initial,}) {final _that = this;
 switch (_that) {
 case _AppState():
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage,_that.alertTriggerer);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -714,10 +715,10 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage,  bool alertTriggerer)?  initial,}) {final _that = this;
 switch (_that) {
 case _AppState() when initial != null:
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage,_that.alertTriggerer);case _:
   return null;
 
 }
@@ -729,7 +730,7 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 
 
 class _AppState implements AppState {
-  const _AppState({final  List<Student> students = const [], this.studentTotal = 0, this.isStudentLoading = true, this.accessToken = '', this.refreshToken = '', this.profile, this.selectedStudent, this.alertMessage = ''}): _students = students;
+  const _AppState({final  List<Student> students = const [], this.studentTotal = 0, this.isStudentLoading = true, this.accessToken = '', this.refreshToken = '', this.profile, this.selectedStudent, this.alertMessage = '', this.alertTriggerer = false}): _students = students;
   
 
  final  List<Student> _students;
@@ -749,6 +750,7 @@ class _AppState implements AppState {
 @override final  Student? selectedStudent;
 // alert
 @override@JsonKey() final  String alertMessage;
+@override@JsonKey() final  bool alertTriggerer;
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
@@ -760,16 +762,16 @@ _$AppStateCopyWith<_AppState> get copyWith => __$AppStateCopyWithImpl<_AppState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage)&&(identical(other.alertTriggerer, alertTriggerer) || other.alertTriggerer == alertTriggerer));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,alertMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,alertMessage,alertTriggerer);
 
 @override
 String toString() {
-  return 'AppState.initial(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, alertMessage: $alertMessage)';
+  return 'AppState.initial(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, alertMessage: $alertMessage, alertTriggerer: $alertTriggerer)';
 }
 
 
@@ -780,7 +782,7 @@ abstract mixin class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res>
   factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) _then) = __$AppStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, String alertMessage
+ List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, String alertMessage, bool alertTriggerer
 });
 
 
@@ -797,7 +799,7 @@ class __$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? alertMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? alertMessage = null,Object? alertTriggerer = null,}) {
   return _then(_AppState(
 students: null == students ? _self._students : students // ignore: cast_nullable_to_non_nullable
 as List<Student>,studentTotal: null == studentTotal ? _self.studentTotal : studentTotal // ignore: cast_nullable_to_non_nullable
@@ -807,7 +809,8 @@ as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken
 as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as Profile?,selectedStudent: freezed == selectedStudent ? _self.selectedStudent : selectedStudent // ignore: cast_nullable_to_non_nullable
 as Student?,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as String,alertTriggerer: null == alertTriggerer ? _self.alertTriggerer : alertTriggerer // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

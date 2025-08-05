@@ -65,18 +65,21 @@ class _MainScreenState extends State<MainScreen> {
     ];
   }
 
+  showAlert(String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AppBloc, AppState>(
       bloc: appBloc,
-      listenWhen:
-          (previous, current) =>
-              previous.alertMessage != current.alertMessage &&
-              current.alertMessage.isNotEmpty,
+      listenWhen: (previous, current) => current.alertMessage.isNotEmpty,
       listener: (context, state) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(state.alertMessage)));
+        showAlert(state.alertMessage);
       },
       child: BlocBuilder<AppBloc, AppState>(
         bloc: appBloc,
@@ -131,22 +134,25 @@ class _MainScreenState extends State<MainScreen> {
             ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: Padding(
-              padding: const EdgeInsets.only(bottom: 44),
-              child: FloatingActionButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    useRootNavigator: true,
-                    builder: (context) => AddMeasurementDialog(),
-                  );
-                },
-                backgroundColor: VariantColor.primary,
-                foregroundColor: Colors.white,
-                child: Icon(LucideIcons.plus),
-              ),
-            ),
+            floatingActionButton:
+                state.profile?.isParent == true
+                    ? null
+                    : Padding(
+                      padding: EdgeInsets.only(bottom: 44),
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            useRootNavigator: true,
+                            builder: (context) => AddMeasurementDialog(),
+                          );
+                        },
+                        backgroundColor: VariantColor.primary,
+                        foregroundColor: Colors.white,
+                        child: Icon(LucideIcons.plus),
+                      ),
+                    ),
             body: PersistentTabView(
               context,
               decoration: NavBarDecoration(

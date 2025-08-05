@@ -23,6 +23,8 @@ class ApiInterceptors extends Interceptor {
         final accessToken = appBloc.state.accessToken;
         final refreshToken = appBloc.state.refreshToken;
 
+        log(accessToken.substring(0, 8), name: "ACCESS_TOKEN");
+
         if (JwtDecoder.isExpired(accessToken) && refreshToken.isNotEmpty) {
           final token = await Modular.get<AuthService>().refreshToken();
 
@@ -31,8 +33,6 @@ class ApiInterceptors extends Interceptor {
               "authorization": "Bearer ${token.accessToken}",
             });
           }
-        } else {
-          throw 'error';
         }
       } catch (err) {
         Modular.get<AppBloc>().add(AppEvent.logout(redirect: false));
