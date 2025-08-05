@@ -1,6 +1,10 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 String letterName(String name) {
+  if (name.isEmpty) {
+    return letterName(dotenv.get('APP_NAME'));
+  }
+
   final names = name.split(' ');
 
   if (names.isEmpty) {
