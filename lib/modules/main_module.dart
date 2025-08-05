@@ -18,6 +18,7 @@ class MainModule extends Module {
     i.addLazySingleton(HistoryBloc.new);
     i.addLazySingleton(StatisticBloc.new);
     i.addLazySingleton(StudentBloc.new);
+
     super.binds(i);
   }
 

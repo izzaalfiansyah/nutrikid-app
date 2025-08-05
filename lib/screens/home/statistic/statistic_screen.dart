@@ -62,6 +62,34 @@ class _StatisticScreenState extends State<StatisticScreen> {
                     child: BlocBuilder<StatisticBloc, StatisticState>(
                       bloc: statisticBloc,
                       builder: (context, state) {
+                        if (state.isLoading) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: VariantColor.primary,
+                            ),
+                          );
+                        }
+
+                        if (state.measurementData.isEmpty) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                LucideIcons.barChart2,
+                                size: 100,
+                                color: VariantColor.border,
+                              ),
+                              Center(
+                                child: Text(
+                                  'Belum ada data pengukuran',
+                                  style: Theme.of(context).textTheme.bodyMedium!
+                                      .copyWith(color: VariantColor.muted),
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+
                         final statistics = state.measurementData;
                         return SfCartesianChart(
                           primaryXAxis: CategoryAxis(),

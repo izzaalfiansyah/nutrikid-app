@@ -162,26 +162,27 @@ class MeasurementDetail extends StatelessWidget {
           ],
         ),
         SizedBox(height: 10),
-        Button(
-          onPressed:
-              measurement == null
-                  ? null
-                  : () {
-                    print('download');
-                  },
-          full: true,
-          child:
-              measurement == null
-                  ? Text('Belum ada pengukuran')
-                  : Row(
-                    spacing: 14,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(LucideIcons.downloadCloud),
-                      Text('Download'),
-                    ],
-                  ),
-        ),
+        if (measurement != null)
+          Button(
+            onPressed:
+                measurement == null
+                    ? null
+                    : () {
+                      print('download');
+                    },
+            full: true,
+            child:
+                measurement == null
+                    ? Text('Belum ada pengukuran')
+                    : Row(
+                      spacing: 14,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(LucideIcons.downloadCloud),
+                        Text('Download'),
+                      ],
+                    ),
+          ),
       ],
     );
   }

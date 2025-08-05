@@ -14,11 +14,10 @@ import 'package:flutter/widgets.dart';
 class Assets {
   const Assets._();
 
-  static const String aEnv = '.env';
   static const AssetGenImage favicon = AssetGenImage('assets/favicon.png');
 
   /// List of all assets
-  static List<dynamic> get values => [aEnv, favicon];
+  static List<AssetGenImage> get values => [favicon];
 }
 
 class AssetGenImage {
