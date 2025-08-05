@@ -26,6 +26,21 @@ class _StatisticScreenState extends State<StatisticScreen> {
       enable: true,
       color: VariantColor.muted,
     ),
+    builder: (context, trackballDetails) {
+      return Container(
+        decoration: BoxDecoration(
+          color: VariantColor.muted,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        padding: EdgeInsets.all(5),
+        child: Text(
+          '${trackballDetails.series.name} : ${trackballDetails.point?.y?.toStringAsFixed(2)}',
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(color: Colors.white),
+        ),
+      );
+    },
   );
   final MarkerSettings markerSettings = MarkerSettings(isVisible: true);
 

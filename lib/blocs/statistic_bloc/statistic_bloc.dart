@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
-import 'package:nutrikid_app/shared/format_date.dart';
 
 part 'statistic_events.dart';
 part 'statistic_state.dart';
@@ -20,7 +20,9 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
             measurementData:
                 historyBloc.state.measurements.map((measurement) {
                   return StatisticChart(
-                    label: formatDate(measurement.createdAt!),
+                    label: DateFormat(
+                      "dd/MM/yy",
+                    ).format(measurement.createdAt!),
                     height: measurement.studentHeight,
                     weight: measurement.studentWeight,
                     bmi: measurement.studentBmi,
