@@ -16,22 +16,6 @@ abstract class Profile with _$Profile {
     @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = _Profile;
 
-  const Profile._();
-
-  String get letterName {
-    try {
-      final names = name.split(' ');
-
-      if (names.length > 1) {
-        return names[0][0] + names[1][0];
-      }
-
-      return names[0][0] + names[0][1];
-    } catch (e) {
-      return 'NK';
-    }
-  }
-
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
 }

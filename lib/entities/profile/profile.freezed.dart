@@ -214,8 +214,8 @@ return $default(_that.id,_that.name,_that.userId,_that.email,_that.phone,_that.r
 /// @nodoc
 @JsonSerializable()
 
-class _Profile extends Profile {
-  const _Profile({this.id = 0, this.name = '', @JsonKey(name: 'user_id') this.userId = '', this.email = '', this.phone = '', this.role = ProfileRole.teacher, @JsonKey(name: 'created_at') this.createdAt}): super._();
+class _Profile implements Profile {
+  const _Profile({this.id = 0, this.name = '', @JsonKey(name: 'user_id') this.userId = '', this.email = '', this.phone = '', this.role = ProfileRole.teacher, @JsonKey(name: 'created_at') this.createdAt});
   factory _Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
 
 @override@JsonKey() final  int id;

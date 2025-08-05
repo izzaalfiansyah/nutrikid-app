@@ -9,9 +9,11 @@ import 'package:nutrikid_app/components/logout_dialog.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
 import 'package:nutrikid_app/screens/home/history/history_screen.dart';
 import 'package:nutrikid_app/screens/home/home/home_screen.dart';
-import 'package:nutrikid_app/screens/home/statistic_screen/statistic_screen.dart';
+import 'package:nutrikid_app/screens/home/statistic/statistic_screen.dart';
+import 'package:nutrikid_app/screens/home/student/student_screen.dart';
 import 'package:nutrikid_app/shared/env.dart';
 import 'package:nutrikid_app/shared/variant.dart';
+import 'package:nutrikid_app/utils/letter_name.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -109,7 +111,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: CircleAvatar(
                     radius: 18,
                     backgroundColor: VariantColor.muted.withAlpha(50),
-                    child: Text(state.profile?.letterName ?? 'NK'),
+                    child: Text(letterName(state.profile?.name ?? '')),
                   ),
                 ),
               ),
@@ -145,7 +147,7 @@ class _MainScreenState extends State<MainScreen> {
               HomeScreen(),
               HistoryScreen(),
               StatisticScreen(),
-              StatisticScreen(),
+              StudentScreen(),
             ],
             items: _navbarItems(),
             resizeToAvoidBottomInset: true,
