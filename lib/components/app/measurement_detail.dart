@@ -113,7 +113,7 @@ class MeasurementDetail extends StatelessWidget {
               label: "Jam",
               value:
                   measurement?.createdAt != null
-                      ? DateFormat('HH:mm').format(measurement!.createdAt!)
+                      ? formatDate(measurement!.createdAt!, onlyTime: true)
                       : "-",
             ),
             SizedBox(height: 10),
