@@ -1,15 +1,15 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Env {
-  static const APP_NAME = "NutriKid";
+  static final APP_KEY = dotenv.get('APP_KEY', fallback: "");
 
-  static const APP_KEY = "nutrikid272025";
+  static final APP_NAME = dotenv.get('APP_NAME', fallback: "NutriKid");
 
-  static const APP_DESCRIPTION =
-      "NutriKid adalah aplikasi digital yang dirancang khusus untuk membantu orang tua, tenaga kesehatan, dan pendidik dalam memantau status gizi anak secara praktis dan akurat. Dengan mengandalkan parameter Body Mass Index (BMI) dan Z-Score, NutriKid memberikan informasi menyeluruh mengenai pertumbuhan dan perkembangan anak berdasarkan standar WHO.";
+  static final APP_DESCRIPTION = dotenv.get('APP_DESCRIPTION', fallback: "");
 
-  static const APP_BASE_URL = 'http://localhost:3000/api';
-
-  static const SUPABASE_URL = "https://wxrdtltplypydtjcavvf.supabase.co";
-
-  static const SUPABASE_KEY =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4cmR0bHRwbHlweWR0amNhdnZmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Mzc5NjAzNCwiZXhwIjoyMDY5MzcyMDM0fQ.ctySrLP5jQTReDAwMPNmbwzj6THr1CtNmspqtIHSIWk";
+  // static const APP_BASE_URL = 'http://localhost:3000/api';
+  static final APP_BASE_URL = dotenv.get(
+    'APP_BASE_URL',
+    fallback: "http://localhost:3000/api",
+  );
 }

@@ -115,10 +115,6 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ],
             toolbarHeight: kToolbarHeight + 16,
-            // bottom: PreferredSize(
-            //   preferredSize: Size.fromHeight(0),
-            //   child: Container(height: 1.5, color: Colors.black.withAlpha(25)),
-            // ),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
@@ -139,6 +135,9 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           body: PersistentTabView(
+            decoration: NavBarDecoration(
+              colorBehindNavBar: VariantColor.background,
+            ),
             backgroundColor: Colors.white,
             context,
             controller: _controller,
@@ -155,16 +154,14 @@ class _MainScreenState extends State<MainScreen> {
             isVisible: true,
             animationSettings: const NavBarAnimationSettings(
               navBarItemAnimation: ItemAnimationSettings(
-                // Navigation Bar's items animation properties.
                 duration: Duration(milliseconds: 400),
                 curve: Curves.ease,
               ),
               screenTransitionAnimation: ScreenTransitionAnimationSettings(
-                // Screen transition animation on change of selected tab.
                 animateTabTransition: true,
                 duration: Duration(milliseconds: 200),
                 screenTransitionAnimationType:
-                    ScreenTransitionAnimationType.fadeIn,
+                    ScreenTransitionAnimationType.slide,
               ),
             ),
             confineToSafeArea: true,

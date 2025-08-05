@@ -28,7 +28,7 @@ class ApiInterceptors extends Interceptor {
 
           if (token != null) {
             options.headers.addAll({
-              "authorization": "Bearer ${token.refreshToken}",
+              "authorization": "Bearer ${token.accessToken}",
             });
           }
         } else {
