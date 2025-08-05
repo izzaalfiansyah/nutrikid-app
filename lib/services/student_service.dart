@@ -1,3 +1,5 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/entities/student/student.dart';
 import 'package:nutrikid_app/model/students_response/students_response.dart';
 import 'package:nutrikid_app/shared/dio.dart';
@@ -20,9 +22,18 @@ class StudentService {
 
   Future<StudentsResponse> getStudents() async {
     try {
+      final appBloc = Modular.get<AppBloc>();
+      final profile = appBloc.state.profile;
+
+      Map<String, dynamic> queryParameters = {'limit': 500};
+
+      if (profile?.isParent == true) {
+        queryParameters.addAll({'parent_id': profile?.id});
+      }
+
       final response = await http().get(
         '/student',
-        queryParameters: {'limit': 500},
+        queryParameters: queryParameters,
       );
 
       return StudentsResponse.fromJson(response.data['data']);

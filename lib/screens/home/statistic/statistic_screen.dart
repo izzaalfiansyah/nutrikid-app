@@ -90,7 +90,9 @@ class _StatisticScreenState extends State<StatisticScreen> {
                           );
                         }
 
-                        final statistics = state.measurementData;
+                        final statistics =
+                            state.measurementData.reversed.toList();
+
                         return SfCartesianChart(
                           primaryXAxis: CategoryAxis(),
                           trackballBehavior: trackballBehavior,
@@ -150,50 +152,10 @@ class _StatisticScreenState extends State<StatisticScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              spacing: 5,
-                              children: [
-                                Icon(
-                                  LucideIcons.circle,
-                                  color: Colors.green,
-                                  size: 12,
-                                ),
-                                Text("Z-Score"),
-                              ],
-                            ),
-                            Row(
-                              spacing: 5,
-                              children: [
-                                Icon(
-                                  LucideIcons.circle,
-                                  color: VariantColor.primary,
-                                  size: 12,
-                                ),
-                                Text("BMI"),
-                              ],
-                            ),
-                            Row(
-                              spacing: 5,
-                              children: [
-                                Icon(
-                                  LucideIcons.circle,
-                                  color: Colors.orange,
-                                  size: 12,
-                                ),
-                                Text("Tinggi"),
-                              ],
-                            ),
-                            Row(
-                              spacing: 5,
-                              children: [
-                                Icon(
-                                  LucideIcons.circle,
-                                  color: Colors.red,
-                                  size: 12,
-                                ),
-                                Text("Berat"),
-                              ],
-                            ),
+                            chartLegend(label: 'Z-Score', color: Colors.green),
+                            chartLegend(label: "BMI", color: Colors.blue),
+                            chartLegend(label: "Tinggi", color: Colors.orange),
+                            chartLegend(label: "Berat", color: Colors.red),
                           ],
                         ),
                       ),
@@ -205,6 +167,13 @@ class _StatisticScreenState extends State<StatisticScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget chartLegend({required Color color, required String label}) {
+    return Row(
+      spacing: 5,
+      children: [CircleAvatar(radius: 5, backgroundColor: color), Text(label)],
     );
   }
 }

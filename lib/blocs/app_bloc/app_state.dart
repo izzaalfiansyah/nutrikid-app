@@ -14,5 +14,8 @@ abstract class AppState with _$AppState {
 
     // selected student
     Student? selectedStudent,
+
+    // alert
+    @Default('') String alertMessage,
   }) = _AppState;
 }

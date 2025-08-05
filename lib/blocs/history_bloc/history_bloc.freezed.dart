@@ -14,62 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HistoryEvent {
 
- int? get page; bool? get isReset;
-/// Create a copy of HistoryEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$HistoryEventCopyWith<HistoryEvent> get copyWith => _$HistoryEventCopyWithImpl<HistoryEvent>(this as HistoryEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryEvent&&(identical(other.page, page) || other.page == page)&&(identical(other.isReset, isReset) || other.isReset == isReset));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,page,isReset);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HistoryEvent(page: $page, isReset: $isReset)';
+  return 'HistoryEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $HistoryEventCopyWith<$Res>  {
-  factory $HistoryEventCopyWith(HistoryEvent value, $Res Function(HistoryEvent) _then) = _$HistoryEventCopyWithImpl;
-@useResult
-$Res call({
- int? page, bool? isReset
-});
-
-
-
-
-}
-/// @nodoc
-class _$HistoryEventCopyWithImpl<$Res>
-    implements $HistoryEventCopyWith<$Res> {
-  _$HistoryEventCopyWithImpl(this._self, this._then);
-
-  final HistoryEvent _self;
-  final $Res Function(HistoryEvent) _then;
-
-/// Create a copy of HistoryEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? page = freezed,Object? isReset = freezed,}) {
-  return _then(_self.copyWith(
-page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
-as int?,isReset: freezed == isReset ? _self.isReset : isReset // ignore: cast_nullable_to_non_nullable
-as bool?,
-  ));
-}
-
+class $HistoryEventCopyWith<$Res>  {
+$HistoryEventCopyWith(HistoryEvent _, $Res Function(HistoryEvent) __);
 }
 
 
@@ -87,11 +55,12 @@ extension HistoryEventPatterns on HistoryEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurement value)?  loadMeasurement,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurement value)?  loadMeasurement,TResult Function( _DeleteMeasurement value)?  deleteMeasurement,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
-return loadMeasurement(_that);case _:
+return loadMeasurement(_that);case _DeleteMeasurement() when deleteMeasurement != null:
+return deleteMeasurement(_that);case _:
   return orElse();
 
 }
@@ -109,11 +78,12 @@ return loadMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurement value)  loadMeasurement,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurement value)  loadMeasurement,required TResult Function( _DeleteMeasurement value)  deleteMeasurement,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement():
-return loadMeasurement(_that);case _:
+return loadMeasurement(_that);case _DeleteMeasurement():
+return deleteMeasurement(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -130,11 +100,12 @@ return loadMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurement value)?  loadMeasurement,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurement value)?  loadMeasurement,TResult? Function( _DeleteMeasurement value)?  deleteMeasurement,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
-return loadMeasurement(_that);case _:
+return loadMeasurement(_that);case _DeleteMeasurement() when deleteMeasurement != null:
+return deleteMeasurement(_that);case _:
   return null;
 
 }
@@ -151,10 +122,11 @@ return loadMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? page,  bool? isReset)?  loadMeasurement,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? page,  bool? isReset)?  loadMeasurement,TResult Function( int id)?  deleteMeasurement,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
-return loadMeasurement(_that.page,_that.isReset);case _:
+return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement() when deleteMeasurement != null:
+return deleteMeasurement(_that.id);case _:
   return orElse();
 
 }
@@ -172,10 +144,11 @@ return loadMeasurement(_that.page,_that.isReset);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? page,  bool? isReset)  loadMeasurement,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? page,  bool? isReset)  loadMeasurement,required TResult Function( int id)  deleteMeasurement,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement():
-return loadMeasurement(_that.page,_that.isReset);case _:
+return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement():
+return deleteMeasurement(_that.id);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +165,11 @@ return loadMeasurement(_that.page,_that.isReset);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? page,  bool? isReset)?  loadMeasurement,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? page,  bool? isReset)?  loadMeasurement,TResult? Function( int id)?  deleteMeasurement,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
-return loadMeasurement(_that.page,_that.isReset);case _:
+return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement() when deleteMeasurement != null:
+return deleteMeasurement(_that.id);case _:
   return null;
 
 }
@@ -210,12 +184,12 @@ class _LoadMeasurement implements HistoryEvent {
   const _LoadMeasurement({this.page, this.isReset});
   
 
-@override final  int? page;
-@override final  bool? isReset;
+ final  int? page;
+ final  bool? isReset;
 
 /// Create a copy of HistoryEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$LoadMeasurementCopyWith<_LoadMeasurement> get copyWith => __$LoadMeasurementCopyWithImpl<_LoadMeasurement>(this, _$identity);
 
@@ -241,7 +215,7 @@ String toString() {
 /// @nodoc
 abstract mixin class _$LoadMeasurementCopyWith<$Res> implements $HistoryEventCopyWith<$Res> {
   factory _$LoadMeasurementCopyWith(_LoadMeasurement value, $Res Function(_LoadMeasurement) _then) = __$LoadMeasurementCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  int? page, bool? isReset
 });
@@ -260,11 +234,77 @@ class __$LoadMeasurementCopyWithImpl<$Res>
 
 /// Create a copy of HistoryEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? page = freezed,Object? isReset = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? page = freezed,Object? isReset = freezed,}) {
   return _then(_LoadMeasurement(
 page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,isReset: freezed == isReset ? _self.isReset : isReset // ignore: cast_nullable_to_non_nullable
 as bool?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _DeleteMeasurement implements HistoryEvent {
+  const _DeleteMeasurement({required this.id});
+  
+
+ final  int id;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DeleteMeasurementCopyWith<_DeleteMeasurement> get copyWith => __$DeleteMeasurementCopyWithImpl<_DeleteMeasurement>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteMeasurement&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'HistoryEvent.deleteMeasurement(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DeleteMeasurementCopyWith<$Res> implements $HistoryEventCopyWith<$Res> {
+  factory _$DeleteMeasurementCopyWith(_DeleteMeasurement value, $Res Function(_DeleteMeasurement) _then) = __$DeleteMeasurementCopyWithImpl;
+@useResult
+$Res call({
+ int id
+});
+
+
+
+
+}
+/// @nodoc
+class __$DeleteMeasurementCopyWithImpl<$Res>
+    implements _$DeleteMeasurementCopyWith<$Res> {
+  __$DeleteMeasurementCopyWithImpl(this._self, this._then);
+
+  final _DeleteMeasurement _self;
+  final $Res Function(_DeleteMeasurement) _then;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(_DeleteMeasurement(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

@@ -11,4 +11,6 @@ class AppEvent with _$AppEvent {
   const factory AppEvent.logout({@Default(true) bool redirect}) = _Logout;
 
   const factory AppEvent.selectStudent(Student student) = _SelectStudent;
+
+  const factory AppEvent.showAlert({required String message}) = _ShowAlert;
 }

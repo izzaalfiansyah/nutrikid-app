@@ -95,6 +95,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           Modular.to.pushReplacementNamed('/login');
         }
       }
+
+      if (event is _ShowAlert) {
+        emit(state.copyWith(alertMessage: event.message));
+      }
     });
   }
 }

@@ -16,6 +16,14 @@ abstract class Profile with _$Profile {
     @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = _Profile;
 
+  const Profile._();
+
+  bool get isTeacher => role == ProfileRole.teacher;
+
+  bool get isExpert => role == ProfileRole.expert || role == ProfileRole.admin;
+
+  bool get isParent => role == ProfileRole.parent;
+
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
 }

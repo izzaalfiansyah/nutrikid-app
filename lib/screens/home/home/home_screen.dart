@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Panel(
                       child: Padding(
                         padding: const EdgeInsets.all(14),

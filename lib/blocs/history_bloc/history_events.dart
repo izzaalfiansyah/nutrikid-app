@@ -4,4 +4,7 @@ part of 'history_bloc.dart';
 abstract class HistoryEvent with _$HistoryEvent {
   const factory HistoryEvent.loadMeasurement({int? page, bool? isReset}) =
       _LoadMeasurement;
+
+  const factory HistoryEvent.deleteMeasurement({required int id}) =
+      _DeleteMeasurement;
 }

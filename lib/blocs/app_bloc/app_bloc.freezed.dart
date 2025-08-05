@@ -55,14 +55,15 @@ extension AppEventPatterns on AppEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadStudent value)?  loadStudent,TResult Function( _LoadProfile value)?  loadProfile,TResult Function( _Logout value)?  logout,TResult Function( _SelectStudent value)?  selectStudent,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadStudent value)?  loadStudent,TResult Function( _LoadProfile value)?  loadProfile,TResult Function( _Logout value)?  logout,TResult Function( _SelectStudent value)?  selectStudent,TResult Function( _ShowAlert value)?  showAlert,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent(_that);case _LoadProfile() when loadProfile != null:
 return loadProfile(_that);case _Logout() when logout != null:
 return logout(_that);case _SelectStudent() when selectStudent != null:
-return selectStudent(_that);case _:
+return selectStudent(_that);case _ShowAlert() when showAlert != null:
+return showAlert(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return selectStudent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadStudent value)  loadStudent,required TResult Function( _LoadProfile value)  loadProfile,required TResult Function( _Logout value)  logout,required TResult Function( _SelectStudent value)  selectStudent,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadStudent value)  loadStudent,required TResult Function( _LoadProfile value)  loadProfile,required TResult Function( _Logout value)  logout,required TResult Function( _SelectStudent value)  selectStudent,required TResult Function( _ShowAlert value)  showAlert,}){
 final _that = this;
 switch (_that) {
 case _LoadStudent():
 return loadStudent(_that);case _LoadProfile():
 return loadProfile(_that);case _Logout():
 return logout(_that);case _SelectStudent():
-return selectStudent(_that);case _:
+return selectStudent(_that);case _ShowAlert():
+return showAlert(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return selectStudent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadStudent value)?  loadStudent,TResult? Function( _LoadProfile value)?  loadProfile,TResult? Function( _Logout value)?  logout,TResult? Function( _SelectStudent value)?  selectStudent,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadStudent value)?  loadStudent,TResult? Function( _LoadProfile value)?  loadProfile,TResult? Function( _Logout value)?  logout,TResult? Function( _SelectStudent value)?  selectStudent,TResult? Function( _ShowAlert value)?  showAlert,}){
 final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent(_that);case _LoadProfile() when loadProfile != null:
 return loadProfile(_that);case _Logout() when logout != null:
 return logout(_that);case _SelectStudent() when selectStudent != null:
-return selectStudent(_that);case _:
+return selectStudent(_that);case _ShowAlert() when showAlert != null:
+return showAlert(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return selectStudent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function( bool redirect)?  logout,TResult Function( Student student)?  selectStudent,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function( bool redirect)?  logout,TResult Function( Student student)?  selectStudent,TResult Function( String message)?  showAlert,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
 return loadProfile(_that.callback);case _Logout() when logout != null:
 return logout(_that.redirect);case _SelectStudent() when selectStudent != null:
-return selectStudent(_that.student);case _:
+return selectStudent(_that.student);case _ShowAlert() when showAlert != null:
+return showAlert(_that.message);case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return selectStudent(_that.student);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function( bool redirect)  logout,required TResult Function( Student student)  selectStudent,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function( bool redirect)  logout,required TResult Function( Student student)  selectStudent,required TResult Function( String message)  showAlert,}) {final _that = this;
 switch (_that) {
 case _LoadStudent():
 return loadStudent();case _LoadProfile():
 return loadProfile(_that.callback);case _Logout():
 return logout(_that.redirect);case _SelectStudent():
-return selectStudent(_that.student);case _:
+return selectStudent(_that.student);case _ShowAlert():
+return showAlert(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return selectStudent(_that.student);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function( bool redirect)?  logout,TResult? Function( Student student)?  selectStudent,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function( bool redirect)?  logout,TResult? Function( Student student)?  selectStudent,TResult? Function( String message)?  showAlert,}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
 return loadProfile(_that.callback);case _Logout() when logout != null:
 return logout(_that.redirect);case _SelectStudent() when selectStudent != null:
-return selectStudent(_that.student);case _:
+return selectStudent(_that.student);case _ShowAlert() when showAlert != null:
+return showAlert(_that.message);case _:
   return null;
 
 }
@@ -429,11 +435,78 @@ $StudentCopyWith<$Res> get student {
 }
 
 /// @nodoc
+
+
+class _ShowAlert implements AppEvent {
+  const _ShowAlert({required this.message});
+  
+
+ final  String message;
+
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ShowAlertCopyWith<_ShowAlert> get copyWith => __$ShowAlertCopyWithImpl<_ShowAlert>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShowAlert&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'AppEvent.showAlert(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ShowAlertCopyWith<$Res> implements $AppEventCopyWith<$Res> {
+  factory _$ShowAlertCopyWith(_ShowAlert value, $Res Function(_ShowAlert) _then) = __$ShowAlertCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ShowAlertCopyWithImpl<$Res>
+    implements _$ShowAlertCopyWith<$Res> {
+  __$ShowAlertCopyWithImpl(this._self, this._then);
+
+  final _ShowAlert _self;
+  final $Res Function(_ShowAlert) _then;
+
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_ShowAlert(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$AppState {
 
  List<Student> get students; int get studentTotal; bool get isStudentLoading;// role
  String get accessToken; String get refreshToken; Profile? get profile;// selected student
- Student? get selectedStudent;
+ Student? get selectedStudent;// alert
+ String get alertMessage;
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -444,16 +517,16 @@ $AppStateCopyWith<AppState> get copyWith => _$AppStateCopyWithImpl<AppState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,alertMessage);
 
 @override
 String toString() {
-  return 'AppState(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent)';
+  return 'AppState(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, alertMessage: $alertMessage)';
 }
 
 
@@ -464,7 +537,7 @@ abstract mixin class $AppStateCopyWith<$Res>  {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) _then) = _$AppStateCopyWithImpl;
 @useResult
 $Res call({
- List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent
+ List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, String alertMessage
 });
 
 
@@ -481,7 +554,7 @@ class _$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? alertMessage = null,}) {
   return _then(_self.copyWith(
 students: null == students ? _self.students : students // ignore: cast_nullable_to_non_nullable
 as List<Student>,studentTotal: null == studentTotal ? _self.studentTotal : studentTotal // ignore: cast_nullable_to_non_nullable
@@ -490,7 +563,8 @@ as bool,accessToken: null == accessToken ? _self.accessToken : accessToken // ig
 as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
 as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as Profile?,selectedStudent: freezed == selectedStudent ? _self.selectedStudent : selectedStudent // ignore: cast_nullable_to_non_nullable
-as Student?,
+as Student?,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 /// Create a copy of AppState
@@ -599,10 +673,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage)?  initial,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppState() when initial != null:
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage);case _:
   return orElse();
 
 }
@@ -620,10 +694,10 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage)  initial,}) {final _that = this;
 switch (_that) {
 case _AppState():
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -640,10 +714,10 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  String alertMessage)?  initial,}) {final _that = this;
 switch (_that) {
 case _AppState() when initial != null:
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.alertMessage);case _:
   return null;
 
 }
@@ -655,7 +729,7 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 
 
 class _AppState implements AppState {
-  const _AppState({final  List<Student> students = const [], this.studentTotal = 0, this.isStudentLoading = true, this.accessToken = '', this.refreshToken = '', this.profile, this.selectedStudent}): _students = students;
+  const _AppState({final  List<Student> students = const [], this.studentTotal = 0, this.isStudentLoading = true, this.accessToken = '', this.refreshToken = '', this.profile, this.selectedStudent, this.alertMessage = ''}): _students = students;
   
 
  final  List<Student> _students;
@@ -673,6 +747,8 @@ class _AppState implements AppState {
 @override final  Profile? profile;
 // selected student
 @override final  Student? selectedStudent;
+// alert
+@override@JsonKey() final  String alertMessage;
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
@@ -684,16 +760,16 @@ _$AppStateCopyWith<_AppState> get copyWith => __$AppStateCopyWithImpl<_AppState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,alertMessage);
 
 @override
 String toString() {
-  return 'AppState.initial(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent)';
+  return 'AppState.initial(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, alertMessage: $alertMessage)';
 }
 
 
@@ -704,7 +780,7 @@ abstract mixin class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res>
   factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) _then) = __$AppStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent
+ List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, String alertMessage
 });
 
 
@@ -721,7 +797,7 @@ class __$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? alertMessage = null,}) {
   return _then(_AppState(
 students: null == students ? _self._students : students // ignore: cast_nullable_to_non_nullable
 as List<Student>,studentTotal: null == studentTotal ? _self.studentTotal : studentTotal // ignore: cast_nullable_to_non_nullable
@@ -730,7 +806,8 @@ as bool,accessToken: null == accessToken ? _self.accessToken : accessToken // ig
 as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
 as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as Profile?,selectedStudent: freezed == selectedStudent ? _self.selectedStudent : selectedStudent // ignore: cast_nullable_to_non_nullable
-as Student?,
+as Student?,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

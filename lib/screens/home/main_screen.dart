@@ -67,113 +67,125 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppBloc, AppState>(
-      bloc: Modular.get<AppBloc>(),
-      builder: (context, state) {
-        return Scaffold(
-          drawer: AppDrawer(),
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            surfaceTintColor: Colors.white,
-            centerTitle: true,
-            title: Row(
-              spacing: 10,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Assets.favicon.image(width: 20),
-                Text(
-                  Env.APP_NAME,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: VariantColor.primary,
-                    fontWeight: FontWeight.w600,
+    return BlocListener<AppBloc, AppState>(
+      bloc: appBloc,
+      listenWhen:
+          (previous, current) =>
+              previous.alertMessage != current.alertMessage &&
+              current.alertMessage.isNotEmpty,
+      listener: (context, state) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(state.alertMessage)));
+      },
+      child: BlocBuilder<AppBloc, AppState>(
+        bloc: appBloc,
+        builder: (context, state) {
+          return Scaffold(
+            drawer: AppDrawer(),
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              surfaceTintColor: Colors.white,
+              centerTitle: true,
+              title: Row(
+                spacing: 10,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Assets.favicon.image(width: 20),
+                  Text(
+                    Env.APP_NAME,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: VariantColor.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 14),
+                  child: PopupMenuButton(
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(child: Text('Profil')),
+                        PopupMenuItem(
+                          onTap:
+                              () => showDialog(
+                                context: context,
+                                builder: (context) => LogoutDialog(),
+                              ),
+                          child: Text('Logout'),
+                        ),
+                      ];
+                    },
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: VariantColor.muted.withAlpha(50),
+                      child: Text(letterName(state.profile?.name ?? '')),
+                    ),
                   ),
                 ),
               ],
+              toolbarHeight: kToolbarHeight + 16,
             ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 14),
-                child: PopupMenuButton(
-                  itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(child: Text('Profil')),
-                      PopupMenuItem(
-                        onTap:
-                            () => showDialog(
-                              context: context,
-                              builder: (context) => LogoutDialog(),
-                            ),
-                        child: Text('Logout'),
-                      ),
-                    ];
-                  },
-                  child: CircleAvatar(
-                    radius: 18,
-                    backgroundColor: VariantColor.muted.withAlpha(50),
-                    child: Text(letterName(state.profile?.name ?? '')),
-                  ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.only(bottom: 44),
+              child: FloatingActionButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    useRootNavigator: true,
+                    builder: (context) => AddMeasurementDialog(),
+                  );
+                },
+                backgroundColor: VariantColor.primary,
+                foregroundColor: Colors.white,
+                child: Icon(LucideIcons.plus),
+              ),
+            ),
+            body: PersistentTabView(
+              context,
+              decoration: NavBarDecoration(
+                colorBehindNavBar: VariantColor.background,
+              ),
+              backgroundColor: Colors.white,
+              controller: _controller,
+              screens: [
+                HomeScreen(),
+                HistoryScreen(),
+                StatisticScreen(),
+                StudentScreen(),
+              ],
+              items: _navbarItems(),
+              resizeToAvoidBottomInset: true,
+              hideNavigationBarWhenKeyboardAppears: true,
+              padding: const EdgeInsets.only(top: 8),
+              isVisible: true,
+              animationSettings: const NavBarAnimationSettings(
+                navBarItemAnimation: ItemAnimationSettings(
+                  duration: Duration(milliseconds: 400),
+                  curve: Curves.ease,
+                ),
+                screenTransitionAnimation: ScreenTransitionAnimationSettings(
+                  animateTabTransition: true,
+                  duration: Duration(milliseconds: 200),
+                  screenTransitionAnimationType:
+                      ScreenTransitionAnimationType.slide,
                 ),
               ),
-            ],
-            toolbarHeight: kToolbarHeight + 16,
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 44),
-            child: FloatingActionButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  useRootNavigator: true,
-                  builder: (context) => AddMeasurementDialog(),
-                );
-              },
-              backgroundColor: VariantColor.primary,
-              foregroundColor: Colors.white,
-              child: Icon(LucideIcons.plus),
+              confineToSafeArea: true,
+              navBarHeight: kBottomNavigationBarHeight,
+              navBarStyle:
+                  NavBarStyle
+                      .style6, // Choose the nav bar style with this property
             ),
-          ),
-          body: PersistentTabView(
-            decoration: NavBarDecoration(
-              colorBehindNavBar: VariantColor.background,
-            ),
-            backgroundColor: Colors.white,
-            context,
-            controller: _controller,
-            screens: [
-              HomeScreen(),
-              HistoryScreen(),
-              StatisticScreen(),
-              StudentScreen(),
-            ],
-            items: _navbarItems(),
-            resizeToAvoidBottomInset: true,
-            hideNavigationBarWhenKeyboardAppears: true,
-            padding: const EdgeInsets.only(top: 8),
-            isVisible: true,
-            animationSettings: const NavBarAnimationSettings(
-              navBarItemAnimation: ItemAnimationSettings(
-                duration: Duration(milliseconds: 400),
-                curve: Curves.ease,
-              ),
-              screenTransitionAnimation: ScreenTransitionAnimationSettings(
-                animateTabTransition: true,
-                duration: Duration(milliseconds: 200),
-                screenTransitionAnimationType:
-                    ScreenTransitionAnimationType.slide,
-              ),
-            ),
-            confineToSafeArea: true,
-            navBarHeight: kBottomNavigationBarHeight,
-            navBarStyle:
-                NavBarStyle
-                    .style6, // Choose the nav bar style with this property
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
