@@ -86,11 +86,12 @@ extension MeasurementSuggestionEventPatterns on MeasurementSuggestionEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurementSuggestions value)?  load,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurementSuggestions value)?  load,TResult Function( _StoreMeasurementSuggestion value)?  store,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurementSuggestions() when load != null:
-return load(_that);case _:
+return load(_that);case _StoreMeasurementSuggestion() when store != null:
+return store(_that);case _:
   return orElse();
 
 }
@@ -108,11 +109,12 @@ return load(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurementSuggestions value)  load,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurementSuggestions value)  load,required TResult Function( _StoreMeasurementSuggestion value)  store,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurementSuggestions():
-return load(_that);case _:
+return load(_that);case _StoreMeasurementSuggestion():
+return store(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -129,11 +131,12 @@ return load(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurementSuggestions value)?  load,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurementSuggestions value)?  load,TResult? Function( _StoreMeasurementSuggestion value)?  store,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurementSuggestions() when load != null:
-return load(_that);case _:
+return load(_that);case _StoreMeasurementSuggestion() when store != null:
+return store(_that);case _:
   return null;
 
 }
@@ -150,10 +153,11 @@ return load(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int measurementId)?  load,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int measurementId)?  load,TResult Function( int measurementId,  String advice,  void Function()? callback)?  store,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadMeasurementSuggestions() when load != null:
-return load(_that.measurementId);case _:
+return load(_that.measurementId);case _StoreMeasurementSuggestion() when store != null:
+return store(_that.measurementId,_that.advice,_that.callback);case _:
   return orElse();
 
 }
@@ -171,10 +175,11 @@ return load(_that.measurementId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int measurementId)  load,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int measurementId)  load,required TResult Function( int measurementId,  String advice,  void Function()? callback)  store,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurementSuggestions():
-return load(_that.measurementId);case _:
+return load(_that.measurementId);case _StoreMeasurementSuggestion():
+return store(_that.measurementId,_that.advice,_that.callback);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +196,11 @@ return load(_that.measurementId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int measurementId)?  load,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int measurementId)?  load,TResult? Function( int measurementId,  String advice,  void Function()? callback)?  store,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurementSuggestions() when load != null:
-return load(_that.measurementId);case _:
+return load(_that.measurementId);case _StoreMeasurementSuggestion() when store != null:
+return store(_that.measurementId,_that.advice,_that.callback);case _:
   return null;
 
 }
@@ -269,9 +275,79 @@ as int,
 }
 
 /// @nodoc
+
+
+class _StoreMeasurementSuggestion implements MeasurementSuggestionEvent {
+  const _StoreMeasurementSuggestion({required this.measurementId, required this.advice, this.callback});
+  
+
+@override final  int measurementId;
+ final  String advice;
+ final  void Function()? callback;
+
+/// Create a copy of MeasurementSuggestionEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$StoreMeasurementSuggestionCopyWith<_StoreMeasurementSuggestion> get copyWith => __$StoreMeasurementSuggestionCopyWithImpl<_StoreMeasurementSuggestion>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreMeasurementSuggestion&&(identical(other.measurementId, measurementId) || other.measurementId == measurementId)&&(identical(other.advice, advice) || other.advice == advice)&&(identical(other.callback, callback) || other.callback == callback));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,measurementId,advice,callback);
+
+@override
+String toString() {
+  return 'MeasurementSuggestionEvent.store(measurementId: $measurementId, advice: $advice, callback: $callback)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$StoreMeasurementSuggestionCopyWith<$Res> implements $MeasurementSuggestionEventCopyWith<$Res> {
+  factory _$StoreMeasurementSuggestionCopyWith(_StoreMeasurementSuggestion value, $Res Function(_StoreMeasurementSuggestion) _then) = __$StoreMeasurementSuggestionCopyWithImpl;
+@override @useResult
+$Res call({
+ int measurementId, String advice, void Function()? callback
+});
+
+
+
+
+}
+/// @nodoc
+class __$StoreMeasurementSuggestionCopyWithImpl<$Res>
+    implements _$StoreMeasurementSuggestionCopyWith<$Res> {
+  __$StoreMeasurementSuggestionCopyWithImpl(this._self, this._then);
+
+  final _StoreMeasurementSuggestion _self;
+  final $Res Function(_StoreMeasurementSuggestion) _then;
+
+/// Create a copy of MeasurementSuggestionEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? measurementId = null,Object? advice = null,Object? callback = freezed,}) {
+  return _then(_StoreMeasurementSuggestion(
+measurementId: null == measurementId ? _self.measurementId : measurementId // ignore: cast_nullable_to_non_nullable
+as int,advice: null == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
+as String,callback: freezed == callback ? _self.callback : callback // ignore: cast_nullable_to_non_nullable
+as void Function()?,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$MeasurementSuggestionState {
 
- bool get isLoading; List<MeasurementSuggestion> get suggestions; String get errorMessage;
+ bool get isLoading; bool get isSubmitting; List<MeasurementSuggestion> get suggestions; String get errorMessage;
 /// Create a copy of MeasurementSuggestionState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -282,16 +358,16 @@ $MeasurementSuggestionStateCopyWith<MeasurementSuggestionState> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MeasurementSuggestionState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.suggestions, suggestions)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MeasurementSuggestionState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&const DeepCollectionEquality().equals(other.suggestions, suggestions)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(suggestions),errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,isSubmitting,const DeepCollectionEquality().hash(suggestions),errorMessage);
 
 @override
 String toString() {
-  return 'MeasurementSuggestionState(isLoading: $isLoading, suggestions: $suggestions, errorMessage: $errorMessage)';
+  return 'MeasurementSuggestionState(isLoading: $isLoading, isSubmitting: $isSubmitting, suggestions: $suggestions, errorMessage: $errorMessage)';
 }
 
 
@@ -302,7 +378,7 @@ abstract mixin class $MeasurementSuggestionStateCopyWith<$Res>  {
   factory $MeasurementSuggestionStateCopyWith(MeasurementSuggestionState value, $Res Function(MeasurementSuggestionState) _then) = _$MeasurementSuggestionStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, List<MeasurementSuggestion> suggestions, String errorMessage
+ bool isLoading, bool isSubmitting, List<MeasurementSuggestion> suggestions, String errorMessage
 });
 
 
@@ -319,9 +395,10 @@ class _$MeasurementSuggestionStateCopyWithImpl<$Res>
 
 /// Create a copy of MeasurementSuggestionState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? suggestions = null,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isSubmitting = null,Object? suggestions = null,Object? errorMessage = null,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,suggestions: null == suggestions ? _self.suggestions : suggestions // ignore: cast_nullable_to_non_nullable
 as List<MeasurementSuggestion>,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
@@ -409,10 +486,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isLoading,  List<MeasurementSuggestion> suggestions,  String errorMessage)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isLoading,  bool isSubmitting,  List<MeasurementSuggestion> suggestions,  String errorMessage)?  initial,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MeasurementSuggestionState() when initial != null:
-return initial(_that.isLoading,_that.suggestions,_that.errorMessage);case _:
+return initial(_that.isLoading,_that.isSubmitting,_that.suggestions,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -430,10 +507,10 @@ return initial(_that.isLoading,_that.suggestions,_that.errorMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isLoading,  List<MeasurementSuggestion> suggestions,  String errorMessage)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isLoading,  bool isSubmitting,  List<MeasurementSuggestion> suggestions,  String errorMessage)  initial,}) {final _that = this;
 switch (_that) {
 case _MeasurementSuggestionState():
-return initial(_that.isLoading,_that.suggestions,_that.errorMessage);case _:
+return initial(_that.isLoading,_that.isSubmitting,_that.suggestions,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -450,10 +527,10 @@ return initial(_that.isLoading,_that.suggestions,_that.errorMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isLoading,  List<MeasurementSuggestion> suggestions,  String errorMessage)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isLoading,  bool isSubmitting,  List<MeasurementSuggestion> suggestions,  String errorMessage)?  initial,}) {final _that = this;
 switch (_that) {
 case _MeasurementSuggestionState() when initial != null:
-return initial(_that.isLoading,_that.suggestions,_that.errorMessage);case _:
+return initial(_that.isLoading,_that.isSubmitting,_that.suggestions,_that.errorMessage);case _:
   return null;
 
 }
@@ -465,10 +542,11 @@ return initial(_that.isLoading,_that.suggestions,_that.errorMessage);case _:
 
 
 class _MeasurementSuggestionState implements MeasurementSuggestionState {
-  const _MeasurementSuggestionState({this.isLoading = false, final  List<MeasurementSuggestion> suggestions = const [], this.errorMessage = ''}): _suggestions = suggestions;
+  const _MeasurementSuggestionState({this.isLoading = false, this.isSubmitting = false, final  List<MeasurementSuggestion> suggestions = const [], this.errorMessage = ''}): _suggestions = suggestions;
   
 
 @override@JsonKey() final  bool isLoading;
+@override@JsonKey() final  bool isSubmitting;
  final  List<MeasurementSuggestion> _suggestions;
 @override@JsonKey() List<MeasurementSuggestion> get suggestions {
   if (_suggestions is EqualUnmodifiableListView) return _suggestions;
@@ -488,16 +566,16 @@ _$MeasurementSuggestionStateCopyWith<_MeasurementSuggestionState> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MeasurementSuggestionState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._suggestions, _suggestions)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MeasurementSuggestionState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&const DeepCollectionEquality().equals(other._suggestions, _suggestions)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_suggestions),errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,isSubmitting,const DeepCollectionEquality().hash(_suggestions),errorMessage);
 
 @override
 String toString() {
-  return 'MeasurementSuggestionState.initial(isLoading: $isLoading, suggestions: $suggestions, errorMessage: $errorMessage)';
+  return 'MeasurementSuggestionState.initial(isLoading: $isLoading, isSubmitting: $isSubmitting, suggestions: $suggestions, errorMessage: $errorMessage)';
 }
 
 
@@ -508,7 +586,7 @@ abstract mixin class _$MeasurementSuggestionStateCopyWith<$Res> implements $Meas
   factory _$MeasurementSuggestionStateCopyWith(_MeasurementSuggestionState value, $Res Function(_MeasurementSuggestionState) _then) = __$MeasurementSuggestionStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, List<MeasurementSuggestion> suggestions, String errorMessage
+ bool isLoading, bool isSubmitting, List<MeasurementSuggestion> suggestions, String errorMessage
 });
 
 
@@ -525,9 +603,10 @@ class __$MeasurementSuggestionStateCopyWithImpl<$Res>
 
 /// Create a copy of MeasurementSuggestionState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? suggestions = null,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isSubmitting = null,Object? suggestions = null,Object? errorMessage = null,}) {
   return _then(_MeasurementSuggestionState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,suggestions: null == suggestions ? _self._suggestions : suggestions // ignore: cast_nullable_to_non_nullable
 as List<MeasurementSuggestion>,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/entities/measurement_suggestion/measurement_suggestion.dart';
 import 'package:nutrikid_app/services/measurement_service.dart';
 
@@ -33,6 +34,41 @@ class MeasurementSuggestionBloc
         }
 
         emit(state.copyWith(isLoading: false));
+      }
+
+      if (event is _StoreMeasurementSuggestion) {
+        emit(state.copyWith(isSubmitting: true));
+
+        try {
+          final result = await measurementService.storeSuggestion(
+            advice: event.advice,
+            measurementId: event.measurementId,
+          );
+
+          if (result) {
+            add(
+              MeasurementSuggestionEvent.load(
+                measurementId: event.measurementId,
+              ),
+            );
+          }
+
+          if (event.callback != null) {
+            event.callback!();
+          }
+
+          Modular.get<AppBloc>().add(
+            AppEvent.showAlert(message: "Saran berhasil tersimpan"),
+          );
+        } catch (err) {
+          Modular.get<AppBloc>().add(
+            AppEvent.showAlert(
+              message: "Terjadi kesalahan saat memberikan saran",
+            ),
+          );
+        }
+
+        emit(state.copyWith(isSubmitting: true));
       }
     });
   }

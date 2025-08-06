@@ -73,12 +73,28 @@ class MeasurementService {
       final result = await http().get('/measurement/$measurementId/suggestion');
 
       return List<MeasurementSuggestion>.from(
-        result.data['data']['suggestion'].map(
-          (json) => Measurement.fromJson(json),
+        result.data['data']['suggestions'].map(
+          (json) => MeasurementSuggestion.fromJson(json),
         ),
       );
     } catch (err) {
       return [];
+    }
+  }
+
+  Future<bool> storeSuggestion({
+    required String advice,
+    required int measurementId,
+  }) async {
+    try {
+      final result = await http().post(
+        '/measurement/$measurementId/suggestion',
+        data: {"advice": advice},
+      );
+
+      return true;
+    } catch (err) {
+      rethrow;
     }
   }
 }
