@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/measurement_suggestion_bloc/measurement_suggestion_bloc.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
@@ -37,7 +38,7 @@ class _MeasurementSuggestionsWidgetState
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-      height: SizeConfig.screenHeight! * .9,
+      height: SizeConfig.screenHeight! * .8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         color: VariantColor.background,
@@ -62,6 +63,25 @@ class _MeasurementSuggestionsWidgetState
                       child: CircularProgressIndicator(
                         color: VariantColor.primary,
                       ),
+                    ),
+                  )
+                else if (state.suggestions.isEmpty)
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      spacing: 14,
+                      children: [
+                        Icon(
+                          LucideIcons.inbox,
+                          size: 80,
+                          color: VariantColor.border,
+                        ),
+                        Text(
+                          'Tidak ada saran',
+                          style: TextStyle(color: VariantColor.muted),
+                        ),
+                      ],
                     ),
                   )
                 else
