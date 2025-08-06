@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
+import 'package:nutrikid_app/entities/measurement_suggestion/measurement_suggestion.dart';
 import 'package:nutrikid_app/model/measurements_response/measurements_response.dart';
 import 'package:nutrikid_app/services/student_service.dart';
 import 'package:nutrikid_app/shared/dio.dart';
@@ -35,7 +36,7 @@ class MeasurementService {
     required double weight,
   }) async {
     try {
-      final student = await Modular.get<AppBloc>().state.selectedStudent;
+      final student = Modular.get<AppBloc>().state.selectedStudent;
       final studentId = student?.id;
       final studentAge = student?.age;
 
@@ -62,6 +63,22 @@ class MeasurementService {
       return true;
     } catch (err) {
       rethrow;
+    }
+  }
+
+  Future<List<MeasurementSuggestion>> getMeasurementSuggestion({
+    required int measurementId,
+  }) async {
+    try {
+      final result = await http().get('/measurement/$measurementId/suggestion');
+
+      return List<MeasurementSuggestion>.from(
+        result.data['data']['suggestion'].map(
+          (json) => Measurement.fromJson(json),
+        ),
+      );
+    } catch (err) {
+      return [];
     }
   }
 }

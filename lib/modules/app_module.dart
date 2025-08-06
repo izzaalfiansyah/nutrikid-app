@@ -4,7 +4,6 @@ import 'package:nutrikid_app/modules/login_module.dart';
 import 'package:nutrikid_app/modules/main_module.dart';
 import 'package:nutrikid_app/screens/splash/splash_screen.dart';
 import 'package:nutrikid_app/services/auth_service.dart';
-import 'package:nutrikid_app/services/student_service.dart';
 
 class AppModule extends Module {
   @override

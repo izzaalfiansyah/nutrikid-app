@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
+import 'package:nutrikid_app/blocs/measurement_suggestion_bloc/measurement_suggestion_bloc.dart';
 import 'package:nutrikid_app/blocs/statistic_bloc/statistic_bloc.dart';
 import 'package:nutrikid_app/blocs/student_bloc/student_bloc.dart';
 import 'package:nutrikid_app/screens/home/main_screen.dart';
@@ -18,6 +19,7 @@ class MainModule extends Module {
     i.addLazySingleton(HistoryBloc.new);
     i.addLazySingleton(StatisticBloc.new);
     i.addLazySingleton(StudentBloc.new);
+    i.addLazySingleton(MeasurementSuggestionBloc.new);
 
     super.binds(i);
   }

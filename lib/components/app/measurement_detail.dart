@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
+import 'package:nutrikid_app/components/app/measurement_detail/measurement_suggestions_widget.dart';
 import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/components/delete_dialog.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
@@ -51,23 +51,37 @@ class MeasurementDetail extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                PopupMenuButton(
-                  itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(child: Text('Saran')),
-                      if (state.profile?.isTeacher == true ||
-                          state.profile?.isExpert == true)
+                if (measurement != null)
+                  PopupMenuButton(
+                    itemBuilder: (context) {
+                      return [
                         PopupMenuItem(
-                          onTap: () => handleDelete(context, measurement!.id),
-                          child: Text(
-                            'Hapus',
-                            style: TextStyle(color: VariantColor.destructive),
-                          ),
+                          onTap: () async {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (context) {
+                                return MeasurementSuggestionsWidget(
+                                  measurement: measurement!,
+                                );
+                              },
+                            );
+                          },
+                          child: Text('Saran'),
                         ),
-                    ];
-                  },
-                  icon: Icon(LucideIcons.moreHorizontal, size: 20),
-                ),
+                        if (state.profile?.isTeacher == true ||
+                            state.profile?.isExpert == true)
+                          PopupMenuItem(
+                            onTap: () => handleDelete(context, measurement!.id),
+                            child: Text(
+                              'Hapus',
+                              style: TextStyle(color: VariantColor.destructive),
+                            ),
+                          ),
+                      ];
+                    },
+                    icon: Icon(LucideIcons.moreHorizontal, size: 20),
+                  ),
               ],
             ),
             SizedBox(),
