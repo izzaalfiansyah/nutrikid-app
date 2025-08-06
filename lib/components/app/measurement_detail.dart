@@ -60,6 +60,7 @@ class MeasurementDetail extends StatelessWidget {
                             showModalBottomSheet(
                               context: context,
                               isScrollControlled: true,
+                              useRootNavigator: true,
                               builder: (context) {
                                 return MeasurementSuggestionsWidget(
                                   measurement: measurement!,
