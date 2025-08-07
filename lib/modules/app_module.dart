@@ -25,7 +25,7 @@ class AppModule extends Module {
       transition: TransitionType.fadeIn,
     );
 
-    r.module('/home', module: MainModule(), transition: TransitionType.fadeIn);
+    r.module('/main', module: MainModule(), transition: TransitionType.fadeIn);
 
     super.routes(r);
   }

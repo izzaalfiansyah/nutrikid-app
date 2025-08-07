@@ -55,7 +55,7 @@ extension AppEventPatterns on AppEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadStudent value)?  loadStudent,TResult Function( _LoadProfile value)?  loadProfile,TResult Function( _Logout value)?  logout,TResult Function( _SelectStudent value)?  selectStudent,TResult Function( _ShowAlert value)?  showAlert,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadStudent value)?  loadStudent,TResult Function( _LoadProfile value)?  loadProfile,TResult Function( _Logout value)?  logout,TResult Function( _SelectStudent value)?  selectStudent,TResult Function( _ShowAlert value)?  showAlert,TResult Function( _SetProfile value)?  setProfile,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
@@ -63,7 +63,8 @@ return loadStudent(_that);case _LoadProfile() when loadProfile != null:
 return loadProfile(_that);case _Logout() when logout != null:
 return logout(_that);case _SelectStudent() when selectStudent != null:
 return selectStudent(_that);case _ShowAlert() when showAlert != null:
-return showAlert(_that);case _:
+return showAlert(_that);case _SetProfile() when setProfile != null:
+return setProfile(_that);case _:
   return orElse();
 
 }
@@ -81,7 +82,7 @@ return showAlert(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadStudent value)  loadStudent,required TResult Function( _LoadProfile value)  loadProfile,required TResult Function( _Logout value)  logout,required TResult Function( _SelectStudent value)  selectStudent,required TResult Function( _ShowAlert value)  showAlert,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadStudent value)  loadStudent,required TResult Function( _LoadProfile value)  loadProfile,required TResult Function( _Logout value)  logout,required TResult Function( _SelectStudent value)  selectStudent,required TResult Function( _ShowAlert value)  showAlert,required TResult Function( _SetProfile value)  setProfile,}){
 final _that = this;
 switch (_that) {
 case _LoadStudent():
@@ -89,7 +90,8 @@ return loadStudent(_that);case _LoadProfile():
 return loadProfile(_that);case _Logout():
 return logout(_that);case _SelectStudent():
 return selectStudent(_that);case _ShowAlert():
-return showAlert(_that);case _:
+return showAlert(_that);case _SetProfile():
+return setProfile(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +108,7 @@ return showAlert(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadStudent value)?  loadStudent,TResult? Function( _LoadProfile value)?  loadProfile,TResult? Function( _Logout value)?  logout,TResult? Function( _SelectStudent value)?  selectStudent,TResult? Function( _ShowAlert value)?  showAlert,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadStudent value)?  loadStudent,TResult? Function( _LoadProfile value)?  loadProfile,TResult? Function( _Logout value)?  logout,TResult? Function( _SelectStudent value)?  selectStudent,TResult? Function( _ShowAlert value)?  showAlert,TResult? Function( _SetProfile value)?  setProfile,}){
 final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
@@ -114,7 +116,8 @@ return loadStudent(_that);case _LoadProfile() when loadProfile != null:
 return loadProfile(_that);case _Logout() when logout != null:
 return logout(_that);case _SelectStudent() when selectStudent != null:
 return selectStudent(_that);case _ShowAlert() when showAlert != null:
-return showAlert(_that);case _:
+return showAlert(_that);case _SetProfile() when setProfile != null:
+return setProfile(_that);case _:
   return null;
 
 }
@@ -131,14 +134,15 @@ return showAlert(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function( bool redirect)?  logout,TResult Function( Student student)?  selectStudent,TResult Function( String message)?  showAlert,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function( bool redirect)?  logout,TResult Function( Student student)?  selectStudent,TResult Function( String message)?  showAlert,TResult Function( Profile profile)?  setProfile,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
 return loadProfile(_that.callback);case _Logout() when logout != null:
 return logout(_that.redirect);case _SelectStudent() when selectStudent != null:
 return selectStudent(_that.student);case _ShowAlert() when showAlert != null:
-return showAlert(_that.message);case _:
+return showAlert(_that.message);case _SetProfile() when setProfile != null:
+return setProfile(_that.profile);case _:
   return orElse();
 
 }
@@ -156,14 +160,15 @@ return showAlert(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function( bool redirect)  logout,required TResult Function( Student student)  selectStudent,required TResult Function( String message)  showAlert,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function( bool redirect)  logout,required TResult Function( Student student)  selectStudent,required TResult Function( String message)  showAlert,required TResult Function( Profile profile)  setProfile,}) {final _that = this;
 switch (_that) {
 case _LoadStudent():
 return loadStudent();case _LoadProfile():
 return loadProfile(_that.callback);case _Logout():
 return logout(_that.redirect);case _SelectStudent():
 return selectStudent(_that.student);case _ShowAlert():
-return showAlert(_that.message);case _:
+return showAlert(_that.message);case _SetProfile():
+return setProfile(_that.profile);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +185,15 @@ return showAlert(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function( bool redirect)?  logout,TResult? Function( Student student)?  selectStudent,TResult? Function( String message)?  showAlert,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function( bool redirect)?  logout,TResult? Function( Student student)?  selectStudent,TResult? Function( String message)?  showAlert,TResult? Function( Profile profile)?  setProfile,}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
 return loadProfile(_that.callback);case _Logout() when logout != null:
 return logout(_that.redirect);case _SelectStudent() when selectStudent != null:
 return selectStudent(_that.student);case _ShowAlert() when showAlert != null:
-return showAlert(_that.message);case _:
+return showAlert(_that.message);case _SetProfile() when setProfile != null:
+return setProfile(_that.profile);case _:
   return null;
 
 }
@@ -498,6 +504,81 @@ as String,
 }
 
 
+}
+
+/// @nodoc
+
+
+class _SetProfile implements AppEvent {
+  const _SetProfile(this.profile);
+  
+
+ final  Profile profile;
+
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SetProfileCopyWith<_SetProfile> get copyWith => __$SetProfileCopyWithImpl<_SetProfile>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetProfile&&(identical(other.profile, profile) || other.profile == profile));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,profile);
+
+@override
+String toString() {
+  return 'AppEvent.setProfile(profile: $profile)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SetProfileCopyWith<$Res> implements $AppEventCopyWith<$Res> {
+  factory _$SetProfileCopyWith(_SetProfile value, $Res Function(_SetProfile) _then) = __$SetProfileCopyWithImpl;
+@useResult
+$Res call({
+ Profile profile
+});
+
+
+$ProfileCopyWith<$Res> get profile;
+
+}
+/// @nodoc
+class __$SetProfileCopyWithImpl<$Res>
+    implements _$SetProfileCopyWith<$Res> {
+  __$SetProfileCopyWithImpl(this._self, this._then);
+
+  final _SetProfile _self;
+  final $Res Function(_SetProfile) _then;
+
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? profile = null,}) {
+  return _then(_SetProfile(
+null == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
+as Profile,
+  ));
+}
+
+/// Create a copy of AppEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileCopyWith<$Res> get profile {
+  
+  return $ProfileCopyWith<$Res>(_self.profile, (value) {
+    return _then(_self.copyWith(profile: value));
+  });
+}
 }
 
 /// @nodoc

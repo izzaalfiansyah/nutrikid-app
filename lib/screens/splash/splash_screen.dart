@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         callback: (profile) {
           var redirect = '/login';
           if (profile != null) {
-            redirect = '/home';
+            redirect = '/main';
           }
 
           Future.delayed(Duration(seconds: 1), () {

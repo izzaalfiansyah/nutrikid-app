@@ -111,7 +111,12 @@ class _MainScreenState extends State<MainScreen> {
                   child: PopupMenuButton(
                     itemBuilder: (context) {
                       return [
-                        PopupMenuItem(child: Text('Profil')),
+                        PopupMenuItem(
+                          onTap: () {
+                            Modular.to.pushNamed('/main/profile');
+                          },
+                          child: Text('Profil'),
+                        ),
                         PopupMenuItem(
                           onTap:
                               () => showDialog(

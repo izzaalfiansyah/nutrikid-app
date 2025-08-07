@@ -89,4 +89,33 @@ class AuthService {
       rethrow;
     }
   }
+
+  Future<bool> updateProfile({
+    required String name,
+    required String phone,
+  }) async {
+    try {
+      final result = await http().post(
+        '/profile',
+        data: {"name": name, "phone": phone},
+      );
+
+      return true;
+    } catch (err) {
+      rethrow;
+    }
+  }
+
+  Future<bool> updatePassword({required String password}) async {
+    try {
+      final result = await http().post(
+        '/profile/change-password',
+        data: {"password": password},
+      );
+
+      return true;
+    } catch (err) {
+      rethrow;
+    }
+  }
 }

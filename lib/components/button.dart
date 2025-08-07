@@ -3,7 +3,7 @@ import 'package:nutrikid_app/shared/size-config.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 
 class Button extends StatelessWidget {
-  const Button({
+  Button({
     super.key,
     this.color,
     required this.onPressed,
@@ -16,6 +16,8 @@ class Button extends StatelessWidget {
   final Widget child;
   final void Function()? onPressed;
 
+  late final finalColor = color ?? VariantColor.primary;
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -23,10 +25,17 @@ class Button extends StatelessWidget {
     return FilledButton(
       onPressed: onPressed,
       style: FilledButton.styleFrom(
-        backgroundColor: color ?? VariantColor.primary,
-        foregroundColor: Colors.white,
+        backgroundColor: finalColor,
+        foregroundColor:
+            finalColor == Colors.white ? Colors.grey.shade900 : Colors.white,
         fixedSize: full ? Size.fromWidth(SizeConfig.screenWidth!) : null,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(13),
+          side:
+              finalColor == Colors.white
+                  ? BorderSide(color: VariantColor.border)
+                  : BorderSide.none,
+        ),
         minimumSize: Size(0, 46),
       ),
       child: child,

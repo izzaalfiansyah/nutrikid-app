@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
         throw 'error';
       }
 
-      Modular.to.pushReplacementNamed('/home');
+      Modular.to.pushReplacementNamed('/main');
     } catch (err) {
       emit(state.copyWith(errorMessage: "Username atau password salah"));
     }

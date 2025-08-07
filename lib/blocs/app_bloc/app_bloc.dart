@@ -104,6 +104,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           ),
         );
       }
+
+      if (event is _SetProfile) {
+        emit(state.copyWith(profile: event.profile));
+      }
     });
   }
 }
