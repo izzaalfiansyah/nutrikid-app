@@ -20,18 +20,35 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       final result = await authService.updateProfile(name: name, phone: phone);
 
-      if (result) {
-        appBloc.add(
-          AppEvent.setProfile(
-            appBloc.state.profile!.copyWith(name: name, phone: phone),
-          ),
-        );
-        appBloc.add(AppEvent.showAlert(message: "Profil berhasil disimpan"));
-      }
+      appBloc.add(
+        AppEvent.setProfile(
+          appBloc.state.profile!.copyWith(name: name, phone: phone),
+        ),
+      );
+      appBloc.add(AppEvent.showAlert(message: "Profil berhasil disimpan"));
     } catch (err) {
-      print(err);
       appBloc.add(
         AppEvent.showAlert(message: "Terjadi kesalahan saat mengubah profil"),
+      );
+    }
+
+    emit(state.copyWith(isLoading: false));
+  }
+
+  changePassword({required String password, void Function()? callback}) async {
+    emit(state.copyWith(isLoading: true));
+
+    try {
+      final result = await authService.updatePassword(password: password);
+
+      appBloc.add(AppEvent.showAlert(message: "Password berhasil diubah"));
+
+      if (callback != null) {
+        callback();
+      }
+    } catch (err) {
+      appBloc.add(
+        AppEvent.showAlert(message: "Terjadi kesalahan saat mengubah password"),
       );
     }
 

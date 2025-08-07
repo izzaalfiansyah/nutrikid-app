@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/blocs/profile_cubit/profile_cubit.dart';
 import 'package:nutrikid_app/components/button.dart';
+import 'package:nutrikid_app/components/change_password_bottom_sheet.dart';
 import 'package:nutrikid_app/components/input.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/shared/variant.dart';
@@ -38,8 +39,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                title: const Text('Profil'),
                 centerTitle: true,
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(1),
+                  child: Divider(color: VariantColor.border),
+                ),
               ),
               body: Padding(
                 padding: const EdgeInsets.all(14),
@@ -112,7 +116,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Button(
-                            onPressed: () {},
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder:
+                                    (context) => ChangePasswordBottomSheet(),
+                              );
+                            },
                             full: true,
                             color: Colors.white,
                             child: Text(
