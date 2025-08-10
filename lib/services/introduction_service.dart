@@ -1,6 +1,7 @@
 import 'package:nutrikid_app/utils/shared_preferences.dart';
 
 const INTRODUCTION_SHOWN = 'introduction_shown';
+const INTRODUCTION_ROLE = 'introduction_role';
 
 class IntroductionService {
   static Future<bool> shown() async {
@@ -13,5 +14,17 @@ class IntroductionService {
     final prefs = await sharedPreferences();
 
     await prefs.setBool(INTRODUCTION_SHOWN, true);
+  }
+
+  static Future<bool> isTeacher() async {
+    final prefs = await sharedPreferences();
+
+    return prefs.getString(INTRODUCTION_ROLE) == 'teacher';
+  }
+
+  static Future<void> setRole(String role) async {
+    final prefs = await sharedPreferences();
+
+    await prefs.setString(INTRODUCTION_ROLE, role);
   }
 }

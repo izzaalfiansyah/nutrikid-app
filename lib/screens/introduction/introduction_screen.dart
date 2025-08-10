@@ -18,6 +18,14 @@ class IntroductionScreen extends StatefulWidget {
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
+  String role = 'parent';
+
+  void changeRole(String? value) {
+    setState(() {
+      role = value ?? 'parent';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,47 +43,103 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             image: Assets.favicon.image(width: 60),
           ),
           intro.PageViewModel(
-            title: "Pilih Sekolah",
+            title: "Pilih Role!",
             bodyWidget: Column(
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 12,
               children: [
                 Text(
-                  "Pilih sekolah tempat anak anda sekolah. Semua data yang ditampilkan akan terkait dengan sekolah yang terpilih. Anda dapat menggantinya di pengaturan nanti.",
+                  "Pilih role anda untuk melihat fitur-fitur yang tersedia. Anda bisa memilih sebagai guru atau orang tua.",
                   textAlign: TextAlign.center,
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
                 ),
-                SizedBox(height: 14),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: VariantColor.border),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: BlocBuilder<AppBloc, AppState>(
-                    bloc: Modular.get<AppBloc>(),
-                    builder: (context, state) {
-                      return SchoolDropdown(
-                        value: state.currentSchool,
-                        onChanged: (val) {
-                          Modular.get<AppBloc>().add(
-                            AppEvent.selectSchool(val),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 14,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Radio(
+                          value: 'parent',
+                          activeColor: VariantColor.primary,
+                          groupValue: role,
+                          onChanged: changeRole,
+                          visualDensity: VisualDensity.compact,
+                        ),
+                        Text("Orang Tua"),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Radio(
+                          value: 'teacher',
+                          activeColor: VariantColor.primary,
+                          groupValue: role,
+                          onChanged: changeRole,
+                          visualDensity: VisualDensity.compact,
+                        ),
+                        Text("Guru"),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
             image: Icon(
-              LucideIcons.building2,
-              color: VariantColor.primary,
+              LucideIcons.user2,
               size: 65,
+              color: VariantColor.primary,
             ),
           ),
+          if (role == 'parent')
+            intro.PageViewModel(
+              title: "Pilih Sekolah",
+              bodyWidget: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Pilih sekolah tempat anak anda sekolah. Semua data yang ditampilkan akan terkait dengan sekolah yang terpilih. Anda dapat menggantinya di pengaturan nanti.",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
+                  ),
+                  SizedBox(height: 14),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: VariantColor.border),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: BlocBuilder<AppBloc, AppState>(
+                      bloc: Modular.get<AppBloc>(),
+                      builder: (context, state) {
+                        return SchoolDropdown(
+                          value: state.currentSchool,
+                          onChanged: (val) {
+                            Modular.get<AppBloc>().add(
+                              AppEvent.selectSchool(val),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              image: Icon(
+                LucideIcons.building2,
+                color: VariantColor.primary,
+                size: 65,
+              ),
+            ),
           intro.PageViewModel(
             title: "Anda sudah siap!",
             bodyWidget: Text(
@@ -92,12 +156,38 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             ),
           ),
         ],
+        showBackButton: true,
         showNextButton: true,
-        next: Text('Selanjutnya'),
-        done: const Text("Selesai"),
+        next: Text(
+          'Selanjutnya'.toUpperCase(),
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+        back: Text(
+          'Kembali'.toUpperCase(),
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: Colors.grey.shade500,
+          ),
+        ),
+        done: Text(
+          "Selesai".toUpperCase(),
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+        dotsDecorator: intro.DotsDecorator(
+          activeColor: VariantColor.primary,
+          color: VariantColor.border,
+        ),
         onDone: () {
           IntroductionService.setShown();
-          Modular.to.pushReplacementNamed('/main');
+          IntroductionService.setRole(role);
+
+          String redirect = '/login';
+
+          if (role == 'parent') {
+            redirect = '/main';
+          }
+
+          Modular.to.pushReplacementNamed(redirect);
         },
       ),
     );

@@ -19,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   getProfile() async {
     final isIntroductionShowed = await IntroductionService.shown();
+    final isTeacher = await IntroductionService.isTeacher();
     appBloc.add(AppEvent.loadSchool());
 
     appBloc.add(
@@ -32,6 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
             if (profile != null) {
               redirect = '/main';
             }
+          }
+
+          if (!isTeacher) {
+            redirect = '/main';
           }
 
           Future.delayed(Duration(seconds: 1), () {

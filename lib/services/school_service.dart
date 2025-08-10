@@ -11,13 +11,10 @@ class SchoolService {
     try {
       final result = await http().get('/school');
 
-      print(result);
-
       return List<School>.from(
         result.data['data']['schools'].map((json) => School.fromJson(json)),
       );
     } catch (err) {
-      print(err);
       return <School>[];
     }
   }

@@ -23,7 +23,7 @@ class AppModule extends Module {
     r.child(
       '/introduction',
       child: (context) => IntroductionScreen(),
-      transition: TransitionType.upToDown,
+      transition: TransitionType.fadeIn,
     );
 
     r.module(
