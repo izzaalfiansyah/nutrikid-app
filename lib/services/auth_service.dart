@@ -4,25 +4,28 @@ import 'package:nutrikid_app/entities/profile/profile.dart';
 import 'package:nutrikid_app/model/login_params/login_params.dart';
 import 'package:nutrikid_app/model/token/token.dart';
 import 'package:nutrikid_app/shared/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nutrikid_app/utils/shared_preferences.dart';
+
+const ACCESS_TOKEN = 'access_token';
+const REFRESH_TOKEN = 'refresh_token';
 
 class AuthService {
   Future<void> saveToken(Token token) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('access_token', token.accessToken);
-    await prefs.setString('refresh_token', token.refreshToken);
+    final prefs = await sharedPreferences();
+    await prefs.setString(ACCESS_TOKEN, token.accessToken);
+    await prefs.setString(REFRESH_TOKEN, token.refreshToken);
   }
 
   Future<void> deleteToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('access_token');
-    await prefs.remove('refresh_token');
+    final prefs = await sharedPreferences();
+    await prefs.remove(ACCESS_TOKEN);
+    await prefs.remove(REFRESH_TOKEN);
   }
 
   Future<Token> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    final accessToken = prefs.getString('access_token') ?? "";
-    final refreshToken = prefs.getString('refresh_token') ?? "";
+    final prefs = await sharedPreferences();
+    final accessToken = prefs.getString(ACCESS_TOKEN) ?? "";
+    final refreshToken = prefs.getString(REFRESH_TOKEN) ?? "";
 
     return Token(accessToken: accessToken, refreshToken: refreshToken);
   }

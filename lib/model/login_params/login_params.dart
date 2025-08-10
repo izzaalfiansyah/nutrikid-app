@@ -6,7 +6,7 @@ part 'login_params.g.dart';
 @Freezed(toJson: true)
 abstract class LoginParams with _$LoginParams {
   const factory LoginParams({
-    @Default('') String email,
+    @Default('') String username,
     @Default('') String password,
   }) = _LoginParams;
 }

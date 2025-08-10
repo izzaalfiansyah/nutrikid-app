@@ -120,7 +120,7 @@ class _StudentScreenState extends State<StudentScreen> {
                             children: [
                               Center(
                                 child: Text(
-                                  'Informasi Orang Tua',
+                                  'Informasi Sekolah',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium!
@@ -130,11 +130,7 @@ class _StudentScreenState extends State<StudentScreen> {
                               SizedBox(),
                               attributeRow(
                                 label: "Nama",
-                                value: state.student.parent?.name ?? "-",
-                              ),
-                              attributeRow(
-                                label: "Telepon",
-                                value: state.student.parent?.phone ?? "-",
+                                value: state.student.school?.name ?? "-",
                               ),
                             ],
                           ),

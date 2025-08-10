@@ -15,6 +15,10 @@ abstract class AppState with _$AppState {
     // selected student
     Student? selectedStudent,
 
+    // schools
+    @Default([]) List<School> schools,
+    School? currentSchool,
+
     // alert
     @Default('') String alertMessage,
     @Default(false) bool alertTriggerer, // just for trigger the alert

@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/modules/login_module.dart';
 import 'package:nutrikid_app/modules/main_module.dart';
+import 'package:nutrikid_app/screens/introduction/introduction_screen.dart';
 import 'package:nutrikid_app/screens/splash/splash_screen.dart';
 import 'package:nutrikid_app/services/auth_service.dart';
 
@@ -18,6 +19,12 @@ class AppModule extends Module {
   @override
   void routes(RouteManager r) {
     r.child('/', child: (context) => SplashScreen());
+
+    r.child(
+      '/introduction',
+      child: (context) => IntroductionScreen(),
+      transition: TransitionType.upToDown,
+    );
 
     r.module(
       '/login',

@@ -4,9 +4,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
+import 'package:nutrikid_app/blocs/student_bloc/student_bloc.dart';
 import 'package:nutrikid_app/entities/profile/profile.dart';
+import 'package:nutrikid_app/entities/school/school.dart';
 import 'package:nutrikid_app/entities/student/student.dart';
 import 'package:nutrikid_app/services/auth_service.dart';
+import 'package:nutrikid_app/services/school_service.dart';
 import 'package:nutrikid_app/services/student_service.dart';
 
 part 'app_events.dart';
@@ -54,12 +57,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       if (event is _SelectStudent) {
         await Modular.get<StudentService>().setStudentId(event.student.id);
 
+        emit(state.copyWith(selectedStudent: event.student));
+
         Modular.get<HomeBloc>().add(HomeEvent.loadStudent());
         Modular.get<HistoryBloc>().add(
           HistoryEvent.loadMeasurement(isReset: true),
         );
 
-        emit(state.copyWith(selectedStudent: event.student));
+        Future.delayed(Duration(milliseconds: 300), () {
+          Modular.get<StudentBloc>().add(StudentEvent.load());
+        });
       }
 
       if (event is _LoadProfile) {
@@ -107,6 +114,35 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
       if (event is _SetProfile) {
         emit(state.copyWith(profile: event.profile));
+      }
+
+      if (event is _LoadSchool) {
+        final result = await SchoolService.getSchools();
+
+        final currentSchool = await SchoolService.getCurrentSchool();
+
+        try {
+          emit(
+            state.copyWith(
+              currentSchool: result.firstWhere(
+                (sch) => sch.id == currentSchool?.id,
+              ),
+            ),
+          );
+        } catch (err) {
+          // do nothing
+        }
+
+        if (result.isNotEmpty && state.currentSchool == null) {
+          SchoolService.setCurrentSchool(result.first);
+        }
+
+        emit(state.copyWith(schools: result));
+      }
+
+      if (event is _SelectSchool) {
+        SchoolService.setCurrentSchool(event.school);
+        emit(state.copyWith(currentSchool: event.school));
       }
     });
   }

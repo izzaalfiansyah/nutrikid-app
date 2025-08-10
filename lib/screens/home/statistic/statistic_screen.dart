@@ -113,16 +113,16 @@ class _StatisticScreenState extends State<StatisticScreen> {
                           trackballBehavior: trackballBehavior,
                           // tooltipBehavior: tooltipBehavior,
                           series: <CartesianSeries>[
-                            LineSeries<StatisticChart, String>(
-                              dataSource: statistics,
-                              xValueMapper:
-                                  (StatisticChart data, _) => data.label,
-                              yValueMapper:
-                                  (StatisticChart data, _) => data.zScore,
-                              color: Colors.green,
-                              markerSettings: markerSettings,
-                              name: "Z-Score",
-                            ),
+                            // LineSeries<StatisticChart, String>(
+                            //   dataSource: statistics,
+                            //   xValueMapper:
+                            //       (StatisticChart data, _) => data.label,
+                            //   yValueMapper:
+                            //       (StatisticChart data, _) => data.zScore,
+                            //   color: Colors.green,
+                            //   markerSettings: markerSettings,
+                            //   name: "Z-Score",
+                            // ),
                             LineSeries<StatisticChart, String>(
                               dataSource: statistics,
                               xValueMapper:
@@ -133,49 +133,49 @@ class _StatisticScreenState extends State<StatisticScreen> {
                               markerSettings: markerSettings,
                               name: "BMI",
                             ),
-                            LineSeries<StatisticChart, String>(
-                              dataSource: statistics,
-                              xValueMapper:
-                                  (StatisticChart data, _) => data.label,
-                              yValueMapper:
-                                  (StatisticChart data, _) => data.height,
-                              color: Colors.orange,
-                              markerSettings: markerSettings,
-                              name: "Tinggi",
-                            ),
-                            LineSeries<StatisticChart, String>(
-                              dataSource: statistics,
-                              xValueMapper:
-                                  (StatisticChart data, _) => data.label,
-                              yValueMapper:
-                                  (StatisticChart data, _) => data.weight,
-                              color: Colors.red,
-                              markerSettings: markerSettings,
-                              name: "Berat",
-                            ),
+                            // LineSeries<StatisticChart, String>(
+                            //   dataSource: statistics,
+                            //   xValueMapper:
+                            //       (StatisticChart data, _) => data.label,
+                            //   yValueMapper:
+                            //       (StatisticChart data, _) => data.height,
+                            //   color: Colors.orange,
+                            //   markerSettings: markerSettings,
+                            //   name: "Tinggi",
+                            // ),
+                            // LineSeries<StatisticChart, String>(
+                            //   dataSource: statistics,
+                            //   xValueMapper:
+                            //       (StatisticChart data, _) => data.label,
+                            //   yValueMapper:
+                            //       (StatisticChart data, _) => data.weight,
+                            //   color: Colors.red,
+                            //   markerSettings: markerSettings,
+                            //   name: "Berat",
+                            // ),
                           ],
                         );
                       },
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(top: 14),
-                    child: Panel(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            chartLegend(label: 'Z-Score', color: Colors.green),
-                            chartLegend(label: "BMI", color: Colors.blue),
-                            chartLegend(label: "Tinggi", color: Colors.orange),
-                            chartLegend(label: "Berat", color: Colors.red),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   margin: EdgeInsets.only(top: 14),
+                  //   child: Panel(
+                  //     child: Padding(
+                  //       padding: EdgeInsets.symmetric(horizontal: 5),
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           chartLegend(label: 'Z-Score', color: Colors.green),
+                  //           chartLegend(label: "BMI", color: Colors.blue),
+                  //           chartLegend(label: "Tinggi", color: Colors.orange),
+                  //           chartLegend(label: "Berat", color: Colors.red),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               );
             },

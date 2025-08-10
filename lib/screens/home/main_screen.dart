@@ -80,6 +80,7 @@ class _MainScreenState extends State<MainScreen> {
       listenWhen: (previous, current) => current.alertMessage.isNotEmpty,
       listener: (context, state) {
         showAlert(state.alertMessage);
+        appBloc.add(AppEvent.showAlert(message: ""));
       },
       child: BlocBuilder<AppBloc, AppState>(
         bloc: appBloc,
@@ -127,11 +128,16 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ];
                     },
-                    child: CircleAvatar(
-                      radius: 18,
-                      backgroundColor: VariantColor.muted.withAlpha(50),
-                      child: Text(letterName(state.profile?.name ?? '')),
-                    ),
+                    child:
+                        (state.profile != null)
+                            ? CircleAvatar(
+                              radius: 18,
+                              backgroundColor: VariantColor.muted.withAlpha(50),
+                              child: Text(
+                                letterName(state.profile?.name ?? ''),
+                              ),
+                            )
+                            : SizedBox(width: 0),
                   ),
                 ),
               ],

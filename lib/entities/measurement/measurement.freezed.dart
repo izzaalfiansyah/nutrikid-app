@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Measurement {
 
- int get id;@JsonKey(name: 'student_id') int? get studentId; Student? get student;@JsonKey(name: 'student_age') int get studentAge;@JsonKey(name: 'student_weight') double get studentWeight;@JsonKey(name: 'student_height') double get studentHeight;@JsonKey(name: 'student_bmi') double get studentBmi;@JsonKey(name: 'creator_id') int? get creatorId; Profile? get creator;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'deleted_at') DateTime? get deltedAt;
+ int get id;@JsonKey(name: 'student_id') int? get studentId; Student? get student;@JsonKey(name: 'student_age') int get studentAge;@JsonKey(name: 'student_weight') double get studentWeight;@JsonKey(name: 'student_height') double get studentHeight;@JsonKey(name: 'student_bmi') double get studentBmi;@JsonKey(name: 'creator_id') int? get creatorId; Profile? get creator;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'deleted_at') DateTime? get deltedAt;@JsonKey(name: 'z_score') double get zScore; MeasurementStatus get status;
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $MeasurementCopyWith<Measurement> get copyWith => _$MeasurementCopyWithImpl<Meas
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt)&&(identical(other.zScore, zScore) || other.zScore == zScore)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt);
+int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt,zScore,status);
 
 @override
 String toString() {
-  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt)';
+  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt, zScore: $zScore, status: $status)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $MeasurementCopyWith<$Res>  {
   factory $MeasurementCopyWith(Measurement value, $Res Function(Measurement) _then) = _$MeasurementCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt
+ int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt,@JsonKey(name: 'z_score') double zScore, MeasurementStatus status
 });
 
 
@@ -65,7 +65,7 @@ class _$MeasurementCopyWithImpl<$Res>
 
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,Object? zScore = null,Object? status = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,studentId: freezed == studentId ? _self.studentId : studentId // ignore: cast_nullable_to_non_nullable
@@ -78,7 +78,9 @@ as double,creatorId: freezed == creatorId ? _self.creatorId : creatorId // ignor
 as int?,creator: freezed == creator ? _self.creator : creator // ignore: cast_nullable_to_non_nullable
 as Profile?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,deltedAt: freezed == deltedAt ? _self.deltedAt : deltedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,zScore: null == zScore ? _self.zScore : zScore // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as MeasurementStatus,
   ));
 }
 /// Create a copy of Measurement
@@ -187,10 +189,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore,  MeasurementStatus status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Measurement() when $default != null:
-return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt);case _:
+return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.status);case _:
   return orElse();
 
 }
@@ -208,10 +210,10 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore,  MeasurementStatus status)  $default,) {final _that = this;
 switch (_that) {
 case _Measurement():
-return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt);case _:
+return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.status);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -228,10 +230,10 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore,  MeasurementStatus status)?  $default,) {final _that = this;
 switch (_that) {
 case _Measurement() when $default != null:
-return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt);case _:
+return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.status);case _:
   return null;
 
 }
@@ -242,8 +244,8 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// @nodoc
 @JsonSerializable()
 
-class _Measurement extends Measurement {
-  const _Measurement({this.id = 0, @JsonKey(name: 'student_id') this.studentId, this.student, @JsonKey(name: 'student_age') this.studentAge = 0, @JsonKey(name: 'student_weight') this.studentWeight = 0, @JsonKey(name: 'student_height') this.studentHeight = 0, @JsonKey(name: 'student_bmi') this.studentBmi = 0, @JsonKey(name: 'creator_id') this.creatorId, this.creator, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'deleted_at') this.deltedAt}): super._();
+class _Measurement implements Measurement {
+  const _Measurement({this.id = 0, @JsonKey(name: 'student_id') this.studentId, this.student, @JsonKey(name: 'student_age') this.studentAge = 0, @JsonKey(name: 'student_weight') this.studentWeight = 0, @JsonKey(name: 'student_height') this.studentHeight = 0, @JsonKey(name: 'student_bmi') this.studentBmi = 0, @JsonKey(name: 'creator_id') this.creatorId, this.creator, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'deleted_at') this.deltedAt, @JsonKey(name: 'z_score') this.zScore = 0, this.status = MeasurementStatus.normal});
   factory _Measurement.fromJson(Map<String, dynamic> json) => _$MeasurementFromJson(json);
 
 @override@JsonKey() final  int id;
@@ -257,6 +259,8 @@ class _Measurement extends Measurement {
 @override final  Profile? creator;
 @override@JsonKey(name: 'created_at') final  DateTime? createdAt;
 @override@JsonKey(name: 'deleted_at') final  DateTime? deltedAt;
+@override@JsonKey(name: 'z_score') final  double zScore;
+@override@JsonKey() final  MeasurementStatus status;
 
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
@@ -271,16 +275,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt)&&(identical(other.zScore, zScore) || other.zScore == zScore)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt);
+int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt,zScore,status);
 
 @override
 String toString() {
-  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt)';
+  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt, zScore: $zScore, status: $status)';
 }
 
 
@@ -291,7 +295,7 @@ abstract mixin class _$MeasurementCopyWith<$Res> implements $MeasurementCopyWith
   factory _$MeasurementCopyWith(_Measurement value, $Res Function(_Measurement) _then) = __$MeasurementCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt
+ int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt,@JsonKey(name: 'z_score') double zScore, MeasurementStatus status
 });
 
 
@@ -308,7 +312,7 @@ class __$MeasurementCopyWithImpl<$Res>
 
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,Object? zScore = null,Object? status = null,}) {
   return _then(_Measurement(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,studentId: freezed == studentId ? _self.studentId : studentId // ignore: cast_nullable_to_non_nullable
@@ -321,7 +325,9 @@ as double,creatorId: freezed == creatorId ? _self.creatorId : creatorId // ignor
 as int?,creator: freezed == creator ? _self.creator : creator // ignore: cast_nullable_to_non_nullable
 as Profile?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,deltedAt: freezed == deltedAt ? _self.deltedAt : deltedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,zScore: null == zScore ? _self.zScore : zScore // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as MeasurementStatus,
   ));
 }
 

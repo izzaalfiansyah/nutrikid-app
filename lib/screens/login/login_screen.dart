@@ -49,10 +49,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   spacing: 14,
                   children: [
                     Input(
-                      placeholder: "Email",
+                      placeholder: "Username",
                       onChanged: (value) {
                         loginCubit.changeParams(
-                          state.params.copyWith(email: value),
+                          state.params.copyWith(username: value),
                         );
                       },
                     ),

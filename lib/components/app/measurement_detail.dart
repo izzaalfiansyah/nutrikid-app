@@ -111,9 +111,9 @@ class MeasurementDetail extends StatelessWidget {
             ),
             measurementRow(
               label: "Status",
-              value: measurement?.statusName ?? "Belum diukur",
+              value: measurement?.status.name ?? "Belum diukur",
               style: TextStyle(
-                color: measurement?.statusColor,
+                color: measurement?.status.color,
                 fontWeight: FontWeight.w600,
               ),
             ),

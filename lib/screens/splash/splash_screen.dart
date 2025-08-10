@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
+import 'package:nutrikid_app/services/introduction_service.dart';
 import 'package:nutrikid_app/shared/env.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
 import 'package:nutrikid_app/shared/variant.dart';
@@ -17,12 +18,20 @@ class _SplashScreenState extends State<SplashScreen> {
   final appBloc = Modular.get<AppBloc>();
 
   getProfile() async {
+    final isIntroductionShowed = await IntroductionService.shown();
+    appBloc.add(AppEvent.loadSchool());
+
     appBloc.add(
       AppEvent.loadProfile(
         callback: (profile) {
           var redirect = '/login';
-          if (profile != null) {
-            redirect = '/main';
+
+          if (!isIntroductionShowed) {
+            redirect = '/introduction';
+          } else {
+            if (profile != null) {
+              redirect = '/main';
+            }
           }
 
           Future.delayed(Duration(seconds: 1), () {

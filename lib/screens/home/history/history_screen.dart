@@ -184,9 +184,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   ),
                   SizedBox(height: 3),
                   Text(
-                    measurement.statusName.toUpperCase(),
+                    measurement.status.name.toUpperCase(),
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: measurement.statusColor,
+                      color: measurement.status.color,
                     ),
                   ),
                 ],

@@ -7,4 +7,7 @@ part of 'login_params.dart';
 // **************************************************************************
 
 Map<String, dynamic> _$LoginParamsToJson(_LoginParams instance) =>
-    <String, dynamic>{'email': instance.email, 'password': instance.password};
+    <String, dynamic>{
+      'username': instance.username,
+      'password': instance.password,
+    };

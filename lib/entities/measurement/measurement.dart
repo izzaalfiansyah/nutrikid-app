@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/entities/profile/profile.dart';
@@ -7,6 +5,39 @@ import 'package:nutrikid_app/entities/student/student.dart';
 
 part 'measurement.freezed.dart';
 part 'measurement.g.dart';
+
+enum MeasurementStatus {
+  thinnes,
+  normal,
+  overweight,
+  obese;
+
+  String get name {
+    switch (this) {
+      case MeasurementStatus.thinnes:
+        return 'Gizi Kurang';
+      case MeasurementStatus.normal:
+        return 'Gizi Baik';
+      case MeasurementStatus.overweight:
+        return 'Gizi Lebih';
+      case MeasurementStatus.obese:
+        return 'Obesitas';
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case MeasurementStatus.thinnes:
+        return Colors.orange;
+      case MeasurementStatus.normal:
+        return Colors.green;
+      case MeasurementStatus.overweight:
+        return Colors.orange;
+      case MeasurementStatus.obese:
+        return Colors.red;
+    }
+  }
+}
 
 @freezed
 abstract class Measurement with _$Measurement {
@@ -22,49 +53,9 @@ abstract class Measurement with _$Measurement {
     Profile? creator,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'deleted_at') DateTime? deltedAt,
+    @JsonKey(name: 'z_score') @Default(0) double zScore,
+    @Default(MeasurementStatus.normal) MeasurementStatus status,
   }) = _Measurement;
-
-  const Measurement._();
-
-  double get zScore {
-    final bmi = studentBmi == 0 ? calculatedBmi : studentBmi;
-
-    return (bmi - 16.2) / 3.67 + (0.23 * studentAge) / 10;
-  }
-
-  double get calculatedBmi {
-    return studentWeight / pow(studentHeight / 100, 2);
-  }
-
-  String get status {
-    if (zScore < -2) {
-      return "wasted";
-    } else if (zScore <= 1) {
-      return "normal";
-    } else if (zScore <= 3) {
-      return "overweight";
-    } else {
-      return "obese";
-    }
-  }
-
-  String get statusName {
-    return {
-      'wasted': "Kurus",
-      'normal': "Normal",
-      'overweight': "Gemuk",
-      'obese': "Obesitas",
-    }[status]!;
-  }
-
-  Color get statusColor {
-    return {
-      'wasted': Colors.red,
-      'normal': Colors.green,
-      'overweight': Colors.orange,
-      'obese': Colors.red,
-    }[status]!;
-  }
 
   factory Measurement.fromJson(Map<String, dynamic> json) =>
       _$MeasurementFromJson(json);

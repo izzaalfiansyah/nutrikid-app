@@ -14,15 +14,18 @@ _Student _$StudentFromJson(Map<String, dynamic> json) => _Student(
           ? null
           : DateTime.parse(json['birth_date'] as String),
   gender: $enumDecodeNullable(_$GenderEnumMap, json['gender']) ?? Gender.l,
-  parentId: (json['parent_id'] as num?)?.toInt(),
-  parent:
-      json['parent'] == null
+  schoolId: (json['school_id'] as num?)?.toInt(),
+  school:
+      json['school'] == null
           ? null
-          : Profile.fromJson(json['parent'] as Map<String, dynamic>),
+          : School.fromJson(json['school'] as Map<String, dynamic>),
   measurement:
       json['measurement'] == null
           ? null
           : Measurement.fromJson(json['measurement'] as Map<String, dynamic>),
+  age: (json['age'] as num?)?.toInt() ?? 0,
+  ageMonth: (json['age_month'] as num?)?.toInt() ?? 0,
+  ageMonthTotal: (json['age_month_total'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$StudentToJson(_Student instance) => <String, dynamic>{
@@ -30,9 +33,12 @@ Map<String, dynamic> _$StudentToJson(_Student instance) => <String, dynamic>{
   'name': instance.name,
   'birth_date': instance.birthDate?.toIso8601String(),
   'gender': _$GenderEnumMap[instance.gender]!,
-  'parent_id': instance.parentId,
-  'parent': instance.parent,
+  'school_id': instance.schoolId,
+  'school': instance.school,
   'measurement': instance.measurement,
+  'age': instance.age,
+  'age_month': instance.ageMonth,
+  'age_month_total': instance.ageMonthTotal,
 };
 
 const _$GenderEnumMap = {Gender.l: 'l', Gender.p: 'p'};

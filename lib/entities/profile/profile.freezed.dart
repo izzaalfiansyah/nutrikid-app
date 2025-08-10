@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Profile {
 
- int get id; String get name;@JsonKey(name: 'user_id') String get userId; String get email; String get phone; ProfileRole get role;@JsonKey(name: 'created_at') DateTime? get createdAt;
+ int get id; String get name; String get username; String get phone; ProfileRole get role;@JsonKey(name: 'school_id') int? get schoolId; School? get school;@JsonKey(name: 'created_at') DateTime? get createdAt;
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ProfileCopyWith<Profile> get copyWith => _$ProfileCopyWithImpl<Profile>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.role, role) || other.role == role)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.username, username) || other.username == username)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.role, role) || other.role == role)&&(identical(other.schoolId, schoolId) || other.schoolId == schoolId)&&(identical(other.school, school) || other.school == school)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,userId,email,phone,role,createdAt);
+int get hashCode => Object.hash(runtimeType,id,name,username,phone,role,schoolId,school,createdAt);
 
 @override
 String toString() {
-  return 'Profile(id: $id, name: $name, userId: $userId, email: $email, phone: $phone, role: $role, createdAt: $createdAt)';
+  return 'Profile(id: $id, name: $name, username: $username, phone: $phone, role: $role, schoolId: $schoolId, school: $school, createdAt: $createdAt)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $ProfileCopyWith<$Res>  {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) _then) = _$ProfileCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'user_id') String userId, String email, String phone, ProfileRole role,@JsonKey(name: 'created_at') DateTime? createdAt
+ int id, String name, String username, String phone, ProfileRole role,@JsonKey(name: 'school_id') int? schoolId, School? school,@JsonKey(name: 'created_at') DateTime? createdAt
 });
 
 
-
+$SchoolCopyWith<$Res>? get school;
 
 }
 /// @nodoc
@@ -65,19 +65,32 @@ class _$ProfileCopyWithImpl<$Res>
 
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? userId = null,Object? email = null,Object? phone = null,Object? role = null,Object? createdAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? username = null,Object? phone = null,Object? role = null,Object? schoolId = freezed,Object? school = freezed,Object? createdAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as ProfileRole,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as ProfileRole,schoolId: freezed == schoolId ? _self.schoolId : schoolId // ignore: cast_nullable_to_non_nullable
+as int?,school: freezed == school ? _self.school : school // ignore: cast_nullable_to_non_nullable
+as School?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
 }
+/// Create a copy of Profile
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SchoolCopyWith<$Res>? get school {
+    if (_self.school == null) {
+    return null;
+  }
 
+  return $SchoolCopyWith<$Res>(_self.school!, (value) {
+    return _then(_self.copyWith(school: value));
+  });
+}
 }
 
 
@@ -159,10 +172,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'user_id')  String userId,  String email,  String phone,  ProfileRole role, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String username,  String phone,  ProfileRole role, @JsonKey(name: 'school_id')  int? schoolId,  School? school, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Profile() when $default != null:
-return $default(_that.id,_that.name,_that.userId,_that.email,_that.phone,_that.role,_that.createdAt);case _:
+return $default(_that.id,_that.name,_that.username,_that.phone,_that.role,_that.schoolId,_that.school,_that.createdAt);case _:
   return orElse();
 
 }
@@ -180,10 +193,10 @@ return $default(_that.id,_that.name,_that.userId,_that.email,_that.phone,_that.r
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'user_id')  String userId,  String email,  String phone,  ProfileRole role, @JsonKey(name: 'created_at')  DateTime? createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String username,  String phone,  ProfileRole role, @JsonKey(name: 'school_id')  int? schoolId,  School? school, @JsonKey(name: 'created_at')  DateTime? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _Profile():
-return $default(_that.id,_that.name,_that.userId,_that.email,_that.phone,_that.role,_that.createdAt);case _:
+return $default(_that.id,_that.name,_that.username,_that.phone,_that.role,_that.schoolId,_that.school,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +213,10 @@ return $default(_that.id,_that.name,_that.userId,_that.email,_that.phone,_that.r
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'user_id')  String userId,  String email,  String phone,  ProfileRole role, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String username,  String phone,  ProfileRole role, @JsonKey(name: 'school_id')  int? schoolId,  School? school, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Profile() when $default != null:
-return $default(_that.id,_that.name,_that.userId,_that.email,_that.phone,_that.role,_that.createdAt);case _:
+return $default(_that.id,_that.name,_that.username,_that.phone,_that.role,_that.schoolId,_that.school,_that.createdAt);case _:
   return null;
 
 }
@@ -215,15 +228,16 @@ return $default(_that.id,_that.name,_that.userId,_that.email,_that.phone,_that.r
 @JsonSerializable()
 
 class _Profile extends Profile {
-  const _Profile({this.id = 0, this.name = '', @JsonKey(name: 'user_id') this.userId = '', this.email = '', this.phone = '', this.role = ProfileRole.teacher, @JsonKey(name: 'created_at') this.createdAt}): super._();
+  const _Profile({this.id = 0, this.name = '', this.username = '', this.phone = '', this.role = ProfileRole.teacher, @JsonKey(name: 'school_id') this.schoolId, this.school, @JsonKey(name: 'created_at') this.createdAt}): super._();
   factory _Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
 
 @override@JsonKey() final  int id;
 @override@JsonKey() final  String name;
-@override@JsonKey(name: 'user_id') final  String userId;
-@override@JsonKey() final  String email;
+@override@JsonKey() final  String username;
 @override@JsonKey() final  String phone;
 @override@JsonKey() final  ProfileRole role;
+@override@JsonKey(name: 'school_id') final  int? schoolId;
+@override final  School? school;
 @override@JsonKey(name: 'created_at') final  DateTime? createdAt;
 
 /// Create a copy of Profile
@@ -239,16 +253,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.role, role) || other.role == role)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Profile&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.username, username) || other.username == username)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.role, role) || other.role == role)&&(identical(other.schoolId, schoolId) || other.schoolId == schoolId)&&(identical(other.school, school) || other.school == school)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,userId,email,phone,role,createdAt);
+int get hashCode => Object.hash(runtimeType,id,name,username,phone,role,schoolId,school,createdAt);
 
 @override
 String toString() {
-  return 'Profile(id: $id, name: $name, userId: $userId, email: $email, phone: $phone, role: $role, createdAt: $createdAt)';
+  return 'Profile(id: $id, name: $name, username: $username, phone: $phone, role: $role, schoolId: $schoolId, school: $school, createdAt: $createdAt)';
 }
 
 
@@ -259,11 +273,11 @@ abstract mixin class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   factory _$ProfileCopyWith(_Profile value, $Res Function(_Profile) _then) = __$ProfileCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'user_id') String userId, String email, String phone, ProfileRole role,@JsonKey(name: 'created_at') DateTime? createdAt
+ int id, String name, String username, String phone, ProfileRole role,@JsonKey(name: 'school_id') int? schoolId, School? school,@JsonKey(name: 'created_at') DateTime? createdAt
 });
 
 
-
+@override $SchoolCopyWith<$Res>? get school;
 
 }
 /// @nodoc
@@ -276,20 +290,33 @@ class __$ProfileCopyWithImpl<$Res>
 
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? userId = null,Object? email = null,Object? phone = null,Object? role = null,Object? createdAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? username = null,Object? phone = null,Object? role = null,Object? schoolId = freezed,Object? school = freezed,Object? createdAt = freezed,}) {
   return _then(_Profile(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as ProfileRole,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as ProfileRole,schoolId: freezed == schoolId ? _self.schoolId : schoolId // ignore: cast_nullable_to_non_nullable
+as int?,school: freezed == school ? _self.school : school // ignore: cast_nullable_to_non_nullable
+as School?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
 }
 
+/// Create a copy of Profile
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SchoolCopyWith<$Res>? get school {
+    if (_self.school == null) {
+    return null;
+  }
 
+  return $SchoolCopyWith<$Res>(_self.school!, (value) {
+    return _then(_self.copyWith(school: value));
+  });
+}
 }
 
 // dart format on

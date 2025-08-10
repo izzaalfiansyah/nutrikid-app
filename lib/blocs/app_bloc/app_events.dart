@@ -15,4 +15,8 @@ class AppEvent with _$AppEvent {
   const factory AppEvent.showAlert({required String message}) = _ShowAlert;
 
   const factory AppEvent.setProfile(Profile profile) = _SetProfile;
+
+  const factory AppEvent.loadSchool() = _LoadSchool;
+
+  const factory AppEvent.selectSchool(School school) = _SelectSchool;
 }

@@ -1,1 +1,1 @@
-enum ProfileRole { admin, teacher, parent, expert }
+enum ProfileRole { admin, teacher, expert }

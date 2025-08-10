@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/entities/role/role.dart';
+import 'package:nutrikid_app/entities/school/school.dart';
 
 part 'profile.freezed.dart';
 part 'profile.g.dart';
@@ -9,10 +10,11 @@ abstract class Profile with _$Profile {
   const factory Profile({
     @Default(0) int id,
     @Default('') String name,
-    @JsonKey(name: 'user_id') @Default('') String userId,
-    @Default('') String email,
+    @Default('') String username,
     @Default('') String phone,
     @Default(ProfileRole.teacher) ProfileRole role,
+    @JsonKey(name: 'school_id') int? schoolId,
+    School? school,
     @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = _Profile;
 
@@ -22,7 +24,7 @@ abstract class Profile with _$Profile {
 
   bool get isExpert => role == ProfileRole.expert || role == ProfileRole.admin;
 
-  bool get isParent => role == ProfileRole.parent;
+  bool get isParent => false;
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);

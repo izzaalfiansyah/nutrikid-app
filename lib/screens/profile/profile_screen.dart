@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             SizedBox(height: 14),
                             Text(
-                              profile.email,
+                              profile.username,
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ],
