@@ -13,6 +13,11 @@ class StudentService {
     await prefs.setInt(CURRENT_STUDENT_ID, id);
   }
 
+  Future<void> deleteStudentId() async {
+    final prefs = await sharedPreferences();
+    await prefs.remove(CURRENT_STUDENT_ID);
+  }
+
   Future<int?> getStudentId() async {
     final prefs = await sharedPreferences();
     final studentId = prefs.getInt(CURRENT_STUDENT_ID);

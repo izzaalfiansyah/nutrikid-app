@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/components/input.dart';
+import 'package:nutrikid_app/components/school_dropdown.dart';
 import 'package:nutrikid_app/entities/student/student.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
 import 'package:nutrikid_app/shared/env.dart';
@@ -21,9 +22,13 @@ class _AppDrawerState extends State<AppDrawer> {
   final appBloc = Modular.get<AppBloc>();
   String search = '';
 
+  loadStudents() {
+    appBloc.add(AppEvent.loadStudent());
+  }
+
   @override
   void initState() {
-    // appBloc.add(AppEvent.loadStudent());
+    loadStudents();
     super.initState();
   }
 
@@ -119,6 +124,21 @@ class _AppDrawerState extends State<AppDrawer> {
                           );
                         },
                       ),
+                    ),
+                    BlocBuilder<AppBloc, AppState>(
+                      bloc: Modular.get<AppBloc>(),
+                      builder: (context, state) {
+                        return SizedBox(
+                          width: double.infinity,
+                          child: SchoolDropdown(
+                            value: state.currentSchool,
+                            onChanged: (val) {
+                              appBloc.add(AppEvent.selectSchool(val));
+                              loadStudents();
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

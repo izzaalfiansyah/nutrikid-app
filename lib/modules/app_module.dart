@@ -18,7 +18,12 @@ class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/', child: (context) => SplashScreen());
+    r.child(
+      '/',
+      child: (context) => SplashScreen(),
+      transition: TransitionType.fadeIn,
+      duration: Duration(milliseconds: 0),
+    );
 
     r.child(
       '/introduction',

@@ -181,13 +181,11 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           IntroductionService.setShown();
           IntroductionService.setRole(role);
 
-          String redirect = '/login';
-
           if (role == 'parent') {
-            redirect = '/main';
+            Modular.to.pushReplacementNamed('/main');
+          } else {
+            Modular.to.pushNamed('/login');
           }
-
-          Modular.to.pushReplacementNamed(redirect);
         },
       ),
     );

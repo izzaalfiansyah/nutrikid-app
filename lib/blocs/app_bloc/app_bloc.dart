@@ -26,6 +26,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
         try {
           final result = await Modular.get<StudentService>().getStudents();
+          print('load student');
 
           final students = result.students;
 
@@ -93,13 +94,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
 
       if (event is _Logout) {
-        emit(state.copyWith(accessToken: "", refreshToken: ""));
+        emit(state.copyWith(accessToken: "", refreshToken: "", profile: null));
 
         if (event.redirect) {
+          await Modular.get<StudentService>().deleteStudentId();
           await Modular.get<AuthService>().deleteToken();
 
           Modular.to.popUntil(ModalRoute.withName('/'));
-          Modular.to.pushReplacementNamed('/login');
+          Modular.to.pushReplacementNamed('/');
         }
       }
 

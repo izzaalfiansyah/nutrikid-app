@@ -137,7 +137,13 @@ class _MainScreenState extends State<MainScreen> {
                                 letterName(state.profile?.name ?? ''),
                               ),
                             )
-                            : SizedBox(width: 0),
+                            : IconButton(
+                              onPressed: () {
+                                Modular.to.pushNamed('/login');
+                              },
+                              tooltip: "Login",
+                              icon: Icon(LucideIcons.logIn),
+                            ),
                   ),
                 ),
               ],

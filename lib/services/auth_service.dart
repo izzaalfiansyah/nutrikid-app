@@ -52,6 +52,8 @@ class AuthService {
     } catch (e) {
       rethrow;
     }
+
+    return null;
   }
 
   Future<Token?> refreshToken() async {
