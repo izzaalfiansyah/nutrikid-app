@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/blocs/measurement_suggestion_bloc/measurement_suggestion_bloc.dart';
+import 'package:nutrikid_app/components/app/measurement_detail/measurement_suggestion_advice_bottom_sheet.dart';
 import 'package:nutrikid_app/components/input.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
@@ -160,7 +161,7 @@ class _MeasurementSuggestionsWidgetState
                 BlocBuilder<AppBloc, AppState>(
                   bloc: Modular.get<AppBloc>(),
                   builder: (context, state) {
-                    if (state.profile?.isExpert == true) {
+                    if (state.profile != null) {
                       return Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -169,6 +170,7 @@ class _MeasurementSuggestionsWidgetState
                         ),
                         padding: EdgeInsets.all(14),
                         child: Row(
+                          spacing: 8,
                           children: [
                             Expanded(
                               child: Input(
@@ -180,6 +182,27 @@ class _MeasurementSuggestionsWidgetState
                                   });
                                 },
                               ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return MeasurementSuggestionAdviceBottomSheet(
+                                      suggestions:
+                                          widget.measurement.suggestionAdvices,
+                                      onSelected: (advice) {
+                                        setState(() {
+                                          adviceController.text = advice;
+                                        });
+
+                                        Navigator.pop(context);
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                              icon: Icon(LucideIcons.textQuote),
                             ),
                             BlocBuilder<
                               MeasurementSuggestionBloc,

@@ -31,6 +31,11 @@ _Measurement _$MeasurementFromJson(Map<String, dynamic> json) => _Measurement(
           ? null
           : DateTime.parse(json['deleted_at'] as String),
   zScore: (json['z_score'] as num?)?.toDouble() ?? 0,
+  suggestionAdvices:
+      (json['suggestion_advices'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
   status:
       $enumDecodeNullable(_$MeasurementStatusEnumMap, json['status']) ??
       MeasurementStatus.normal,
@@ -50,6 +55,7 @@ Map<String, dynamic> _$MeasurementToJson(_Measurement instance) =>
       'created_at': instance.createdAt?.toIso8601String(),
       'deleted_at': instance.deltedAt?.toIso8601String(),
       'z_score': instance.zScore,
+      'suggestion_advices': instance.suggestionAdvices,
       'status': _$MeasurementStatusEnumMap[instance.status]!,
     };
 

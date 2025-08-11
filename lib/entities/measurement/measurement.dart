@@ -54,6 +54,9 @@ abstract class Measurement with _$Measurement {
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'deleted_at') DateTime? deltedAt,
     @JsonKey(name: 'z_score') @Default(0) double zScore,
+    @Default([])
+    @JsonKey(name: 'suggestion_advices')
+    List<String> suggestionAdvices,
     @Default(MeasurementStatus.normal) MeasurementStatus status,
   }) = _Measurement;
 
