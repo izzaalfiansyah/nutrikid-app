@@ -128,6 +128,10 @@ class _AppDrawerState extends State<AppDrawer> {
                     BlocBuilder<AppBloc, AppState>(
                       bloc: Modular.get<AppBloc>(),
                       builder: (context, state) {
+                        if (state.profile != null) {
+                          return SizedBox(width: double.infinity);
+                        }
+
                         return SizedBox(
                           width: double.infinity,
                           child: SchoolDropdown(
