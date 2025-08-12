@@ -85,7 +85,13 @@ class _StatisticScreenState extends State<StatisticScreen> {
       );
     },
   );
-  final MarkerSettings markerSettings = MarkerSettings(isVisible: true);
+
+  final MarkerSettings markerSettings = MarkerSettings(
+    isVisible: true,
+    borderWidth: 3,
+    height: 10,
+    width: 10,
+  );
 
   loadData() async {
     if (historyBloc.state.measurements.isEmpty) {
@@ -121,6 +127,17 @@ class _StatisticScreenState extends State<StatisticScreen> {
 
                   return Column(
                     children: [
+                      if (historyState.measurements.isNotEmpty)
+                        SizedBox(
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("BMI", textAlign: TextAlign.left),
+                              SizedBox(height: 12),
+                            ],
+                          ),
+                        ),
                       Expanded(
                         child: BlocBuilder<StatisticBloc, StatisticState>(
                           bloc: statisticBloc,
@@ -162,13 +179,13 @@ class _StatisticScreenState extends State<StatisticScreen> {
                               series: <CartesianSeries>[
                                 ...List.generate(7, (index) {
                                   final colors = [
-                                    Colors.red.withAlpha(200),
-                                    Colors.orange.withAlpha(200),
-                                    Colors.lime.withAlpha(200),
-                                    Colors.green.withAlpha(200),
-                                    Colors.lime.withAlpha(200),
-                                    Colors.orange.withAlpha(200),
-                                    Colors.red.withAlpha(200),
+                                    Colors.red,
+                                    Colors.orange,
+                                    Colors.lime,
+                                    Colors.green,
+                                    Colors.lime,
+                                    Colors.orange,
+                                    Colors.red,
                                   ];
 
                                   final names = [
@@ -181,21 +198,34 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                     "+3",
                                   ];
 
-                                  return LineSeries<ZScore, String>(
-                                    dataSource: appState.defaultZScores,
+                                  final defaultZScores =
+                                      appState.defaultZScores
+                                          .where(
+                                            (zScore) => zScore.month <= 8 * 12,
+                                          )
+                                          .toList();
+
+                                  return RangeAreaSeries<ZScore, String>(
+                                    dataSource: defaultZScores,
                                     enableTrackball: false,
                                     xValueMapper:
                                         (data, _) => data.month.toString(),
-                                    yValueMapper:
+                                    lowValueMapper:
                                         (data, _) =>
                                             data.zScoresRange[index].min,
-                                    color: colors[index],
-                                    width: 1.5,
+                                    highValueMapper:
+                                        (data, _) =>
+                                            data.zScoresRange[index].max,
+                                    color: colors[index].withAlpha(75),
+                                    borderColor: colors[index],
+                                    borderDrawMode:
+                                        RangeAreaBorderMode.excludeSides,
+                                    borderWidth: 1.5,
                                     // markerSettings: markerSettings,
                                     name: "${names[index]} SD",
                                   );
                                 }),
-                                LineSeries<StatisticChart, String>(
+                                SplineSeries<StatisticChart, String>(
                                   dataSource: state.measurementData,
                                   xValueMapper:
                                       (data, _) => data.totalMonth.toString(),
@@ -209,7 +239,8 @@ class _StatisticScreenState extends State<StatisticScreen> {
                           },
                         ),
                       ),
-                      Text('Umur (Bulan)'),
+                      if (historyState.measurements.isNotEmpty)
+                        Text('Umur (Bulan)'),
                     ],
                   );
                 },
