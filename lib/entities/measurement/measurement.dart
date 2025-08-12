@@ -51,6 +51,10 @@ abstract class Measurement with _$Measurement {
     @JsonKey(name: 'student_id') int? studentId,
     Student? student,
     @JsonKey(name: 'student_age') @Default(0) int studentAge,
+    @JsonKey(name: 'student_age_month') @Default(0) int studentAgeMonth,
+    @JsonKey(name: 'student_age_month_total')
+    @Default(0)
+    int studentAgeMonthTotal,
     @JsonKey(name: 'student_weight') @Default(0) double studentWeight,
     @JsonKey(name: 'student_height') @Default(0) double studentHeight,
     @JsonKey(name: 'student_bmi') @Default(0) double studentBmi,

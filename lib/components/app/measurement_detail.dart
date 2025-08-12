@@ -89,7 +89,8 @@ class MeasurementDetail extends StatelessWidget {
             SizedBox(),
             measurementRow(
               label: "Umur",
-              value: "${measurement?.studentAge ?? 0} Tahun",
+              value:
+                  "${measurement?.studentAge ?? 0} Tahun ${measurement?.studentAgeMonth ?? 0} Bulan",
             ),
             measurementRow(
               label: "Tinggi (cm)",

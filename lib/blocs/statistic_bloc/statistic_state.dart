@@ -6,6 +6,10 @@ class StatisticChart {
   final double weight;
   final double bmi;
   final double zScore;
+  final MeasurementStatus status;
+  final int year;
+  final int month;
+  final int totalMonth;
 
   StatisticChart({
     required this.label,
@@ -13,6 +17,10 @@ class StatisticChart {
     required this.weight,
     required this.bmi,
     required this.zScore,
+    required this.status,
+    required this.year,
+    required this.month,
+    required this.totalMonth,
   });
 }
 

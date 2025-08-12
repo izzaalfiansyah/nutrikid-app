@@ -14,6 +14,8 @@ _Measurement _$MeasurementFromJson(Map<String, dynamic> json) => _Measurement(
           ? null
           : Student.fromJson(json['student'] as Map<String, dynamic>),
   studentAge: (json['student_age'] as num?)?.toInt() ?? 0,
+  studentAgeMonth: (json['student_age_month'] as num?)?.toInt() ?? 0,
+  studentAgeMonthTotal: (json['student_age_month_total'] as num?)?.toInt() ?? 0,
   studentWeight: (json['student_weight'] as num?)?.toDouble() ?? 0,
   studentHeight: (json['student_height'] as num?)?.toDouble() ?? 0,
   studentBmi: (json['student_bmi'] as num?)?.toDouble() ?? 0,
@@ -47,6 +49,8 @@ Map<String, dynamic> _$MeasurementToJson(_Measurement instance) =>
       'student_id': instance.studentId,
       'student': instance.student,
       'student_age': instance.studentAge,
+      'student_age_month': instance.studentAgeMonth,
+      'student_age_month_total': instance.studentAgeMonthTotal,
       'student_weight': instance.studentWeight,
       'student_height': instance.studentHeight,
       'student_bmi': instance.studentBmi,

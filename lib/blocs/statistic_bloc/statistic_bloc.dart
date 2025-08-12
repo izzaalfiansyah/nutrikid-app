@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
+import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/shared/format_date.dart';
 
 part 'statistic_events.dart';
@@ -28,6 +29,10 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
                     weight: measurement.studentWeight,
                     bmi: measurement.studentBmi,
                     zScore: measurement.zScore,
+                    year: measurement.studentAge,
+                    month: measurement.studentAgeMonth,
+                    totalMonth: measurement.studentAgeMonthTotal,
+                    status: measurement.status,
                   );
                 }).toList(),
           ),
