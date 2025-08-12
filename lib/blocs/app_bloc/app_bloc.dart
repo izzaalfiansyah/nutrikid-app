@@ -5,10 +5,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
 import 'package:nutrikid_app/blocs/student_bloc/student_bloc.dart';
+import 'package:nutrikid_app/entities/gender/gender.dart';
 import 'package:nutrikid_app/entities/profile/profile.dart';
 import 'package:nutrikid_app/entities/school/school.dart';
 import 'package:nutrikid_app/entities/student/student.dart';
 import 'package:nutrikid_app/services/auth_service.dart';
+import 'package:nutrikid_app/services/measurement_service.dart';
 import 'package:nutrikid_app/services/school_service.dart';
 import 'package:nutrikid_app/services/student_service.dart';
 
@@ -39,6 +41,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
               selectedStudent.id,
             );
           }
+
+          await MeasurementService.getMeasurementZScores(
+            gender: selectedStudent.gender == Gender.l ? "l" : "p",
+          );
 
           emit(
             state.copyWith(

@@ -60,6 +60,7 @@ Map<String, dynamic> _$MeasurementToJson(_Measurement instance) =>
     };
 
 const _$MeasurementStatusEnumMap = {
+  MeasurementStatus.emaciated: 'emaciated',
   MeasurementStatus.thinnes: 'thinnes',
   MeasurementStatus.normal: 'normal',
   MeasurementStatus.overweight: 'overweight',
