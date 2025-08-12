@@ -7,6 +7,7 @@ part 'measurement.freezed.dart';
 part 'measurement.g.dart';
 
 enum MeasurementStatus {
+  emaciated,
   thinnes,
   normal,
   overweight,
@@ -14,6 +15,8 @@ enum MeasurementStatus {
 
   String get name {
     switch (this) {
+      case MeasurementStatus.emaciated:
+        return "Gizi Buruk";
       case MeasurementStatus.thinnes:
         return 'Gizi Kurang';
       case MeasurementStatus.normal:
@@ -27,6 +30,8 @@ enum MeasurementStatus {
 
   Color get color {
     switch (this) {
+      case MeasurementStatus.emaciated:
+        return Colors.red;
       case MeasurementStatus.thinnes:
         return Colors.orange;
       case MeasurementStatus.normal:
