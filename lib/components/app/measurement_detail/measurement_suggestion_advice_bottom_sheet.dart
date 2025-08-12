@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class MeasurementSuggestionAdviceBottomSheet extends StatefulWidget {
   const MeasurementSuggestionAdviceBottomSheet({
@@ -24,21 +25,30 @@ class _MeasurementSuggestionAdviceBottomSheetState
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          spacing: 6,
-          children:
-              widget.suggestions.map((advice) {
-                final index = widget.suggestions.indexOf(advice);
-                final number = index + 1;
-
-                return ListTile(
-                  title: Text("$number. $advice"),
-                  onTap: () {
-                    if (widget.onSelected != null) {
-                      widget.onSelected!(advice);
-                    }
-                  },
-                );
-              }).toList(),
+          spacing: 20,
+          children: [
+            Text(
+              "Pilihan Saran",
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 6,
+              children:
+                  widget.suggestions.map((advice) {
+                    return ListTile(
+                      title: Text(advice),
+                      onTap: () {
+                        if (widget.onSelected != null) {
+                          widget.onSelected!(advice);
+                        }
+                      },
+                    );
+                  }).toList(),
+            ),
+          ],
         ),
       ),
     );

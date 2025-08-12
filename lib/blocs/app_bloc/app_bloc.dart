@@ -26,7 +26,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
         try {
           final result = await Modular.get<StudentService>().getStudents();
-          print('load student');
 
           final students = result.students;
 

@@ -14,6 +14,8 @@ class Input extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
+    this.maxLines,
+    this.minLines,
   });
 
   final String? placeholder;
@@ -25,6 +27,8 @@ class Input extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final TextInputType? keyboardType;
+  final int? maxLines;
+  final int? minLines;
 
   @override
   State<Input> createState() => _InputState();
@@ -85,6 +89,8 @@ class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: widget.maxLines ?? 1,
+      minLines: widget.minLines,
       keyboardType: widget.keyboardType,
       decoration: inputDecoration,
       obscureText: widget.isPassword == true ? !showPassword : false,

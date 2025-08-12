@@ -169,74 +169,103 @@ class _MeasurementSuggestionsWidgetState
                           borderRadius: BorderRadius.circular(11),
                         ),
                         padding: EdgeInsets.all(14),
-                        child: Row(
-                          spacing: 8,
+                        child: Column(
                           children: [
-                            Expanded(
-                              child: Input(
-                                placeholder: "Berikan saran...",
-                                controller: adviceController,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isCanSubmit = value.isNotEmpty;
-                                  });
-                                },
-                              ),
+                            Input(
+                              placeholder: "Berikan saran...",
+                              controller: adviceController,
+                              maxLines: 3,
+                              minLines: 1,
+                              onChanged: (value) {
+                                setState(() {
+                                  isCanSubmit = value.isNotEmpty;
+                                });
+                              },
                             ),
-                            IconButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: (context) {
-                                    return MeasurementSuggestionAdviceBottomSheet(
-                                      suggestions:
-                                          widget.measurement.suggestionAdvices,
-                                      onSelected: (advice) {
-                                        setState(() {
-                                          adviceController.text = advice;
-                                        });
+                            SizedBox(height: 10),
+                            Row(
+                              spacing: 8,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return MeasurementSuggestionAdviceBottomSheet(
+                                          suggestions:
+                                              widget
+                                                  .measurement
+                                                  .suggestionAdvices,
+                                          onSelected: (advice) {
+                                            setState(() {
+                                              adviceController.text = advice;
+                                            });
 
-                                        Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          },
+                                        );
                                       },
                                     );
                                   },
-                                );
-                              },
-                              icon: Icon(LucideIcons.textQuote),
-                            ),
-                            BlocBuilder<
-                              MeasurementSuggestionBloc,
-                              MeasurementSuggestionState
-                            >(
-                              bloc: suggestionBloc,
-                              builder: (context, state) {
-                                return IconButton(
-                                  onPressed:
-                                      adviceController.text.isEmpty ||
-                                              state.isSubmitting
-                                          ? null
-                                          : () {
-                                            suggestionBloc.add(
-                                              MeasurementSuggestionEvent.store(
-                                                measurementId:
-                                                    widget.measurement.id,
-                                                advice: adviceController.text,
-                                                callback: () {
-                                                  setState(() {
-                                                    isCanSubmit = false;
-                                                    adviceController.text = "";
-                                                  });
-                                                },
-                                              ),
-                                            );
-                                          },
                                   style: IconButton.styleFrom(
-                                    backgroundColor: VariantColor.primary,
-                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.black,
                                   ),
-                                  icon: Icon(Icons.send),
-                                );
-                              },
+                                  tooltip: "Template Saran",
+                                  icon: Icon(
+                                    Icons.message_outlined,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                BlocBuilder<
+                                  MeasurementSuggestionBloc,
+                                  MeasurementSuggestionState
+                                >(
+                                  bloc: suggestionBloc,
+                                  builder: (context, state) {
+                                    return FilledButton(
+                                      onPressed:
+                                          adviceController.text.isEmpty ||
+                                                  state.isSubmitting
+                                              ? null
+                                              : () {
+                                                suggestionBloc.add(
+                                                  MeasurementSuggestionEvent.store(
+                                                    measurementId:
+                                                        widget.measurement.id,
+                                                    advice:
+                                                        adviceController.text,
+                                                    callback: () {
+                                                      setState(() {
+                                                        isCanSubmit = false;
+                                                        adviceController.text =
+                                                            "";
+                                                      });
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                      style: FilledButton.styleFrom(
+                                        backgroundColor: VariantColor.primary,
+                                        foregroundColor: Colors.white,
+                                      ),
+                                      child: Row(
+                                        spacing: 10,
+                                        children: [
+                                          Text(
+                                            "Kirim",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          Icon(Icons.send, size: 16),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
                           ],
                         ),
