@@ -55,7 +55,7 @@ extension AppEventPatterns on AppEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadStudent value)?  loadStudent,TResult Function( _LoadProfile value)?  loadProfile,TResult Function( _Logout value)?  logout,TResult Function( _SelectStudent value)?  selectStudent,TResult Function( _ShowAlert value)?  showAlert,TResult Function( _SetProfile value)?  setProfile,TResult Function( _LoadSchool value)?  loadSchool,TResult Function( _SelectSchool value)?  selectSchool,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadStudent value)?  loadStudent,TResult Function( _LoadProfile value)?  loadProfile,TResult Function( _Logout value)?  logout,TResult Function( _SelectStudent value)?  selectStudent,TResult Function( _ShowAlert value)?  showAlert,TResult Function( _SetProfile value)?  setProfile,TResult Function( _LoadSchool value)?  loadSchool,TResult Function( _SelectSchool value)?  selectSchool,TResult Function( _LoadDefaultZscore value)?  loadDefaultZScore,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
@@ -66,7 +66,8 @@ return selectStudent(_that);case _ShowAlert() when showAlert != null:
 return showAlert(_that);case _SetProfile() when setProfile != null:
 return setProfile(_that);case _LoadSchool() when loadSchool != null:
 return loadSchool(_that);case _SelectSchool() when selectSchool != null:
-return selectSchool(_that);case _:
+return selectSchool(_that);case _LoadDefaultZscore() when loadDefaultZScore != null:
+return loadDefaultZScore(_that);case _:
   return orElse();
 
 }
@@ -84,7 +85,7 @@ return selectSchool(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadStudent value)  loadStudent,required TResult Function( _LoadProfile value)  loadProfile,required TResult Function( _Logout value)  logout,required TResult Function( _SelectStudent value)  selectStudent,required TResult Function( _ShowAlert value)  showAlert,required TResult Function( _SetProfile value)  setProfile,required TResult Function( _LoadSchool value)  loadSchool,required TResult Function( _SelectSchool value)  selectSchool,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadStudent value)  loadStudent,required TResult Function( _LoadProfile value)  loadProfile,required TResult Function( _Logout value)  logout,required TResult Function( _SelectStudent value)  selectStudent,required TResult Function( _ShowAlert value)  showAlert,required TResult Function( _SetProfile value)  setProfile,required TResult Function( _LoadSchool value)  loadSchool,required TResult Function( _SelectSchool value)  selectSchool,required TResult Function( _LoadDefaultZscore value)  loadDefaultZScore,}){
 final _that = this;
 switch (_that) {
 case _LoadStudent():
@@ -95,7 +96,8 @@ return selectStudent(_that);case _ShowAlert():
 return showAlert(_that);case _SetProfile():
 return setProfile(_that);case _LoadSchool():
 return loadSchool(_that);case _SelectSchool():
-return selectSchool(_that);case _:
+return selectSchool(_that);case _LoadDefaultZscore():
+return loadDefaultZScore(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -112,7 +114,7 @@ return selectSchool(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadStudent value)?  loadStudent,TResult? Function( _LoadProfile value)?  loadProfile,TResult? Function( _Logout value)?  logout,TResult? Function( _SelectStudent value)?  selectStudent,TResult? Function( _ShowAlert value)?  showAlert,TResult? Function( _SetProfile value)?  setProfile,TResult? Function( _LoadSchool value)?  loadSchool,TResult? Function( _SelectSchool value)?  selectSchool,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadStudent value)?  loadStudent,TResult? Function( _LoadProfile value)?  loadProfile,TResult? Function( _Logout value)?  logout,TResult? Function( _SelectStudent value)?  selectStudent,TResult? Function( _ShowAlert value)?  showAlert,TResult? Function( _SetProfile value)?  setProfile,TResult? Function( _LoadSchool value)?  loadSchool,TResult? Function( _SelectSchool value)?  selectSchool,TResult? Function( _LoadDefaultZscore value)?  loadDefaultZScore,}){
 final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
@@ -123,7 +125,8 @@ return selectStudent(_that);case _ShowAlert() when showAlert != null:
 return showAlert(_that);case _SetProfile() when setProfile != null:
 return setProfile(_that);case _LoadSchool() when loadSchool != null:
 return loadSchool(_that);case _SelectSchool() when selectSchool != null:
-return selectSchool(_that);case _:
+return selectSchool(_that);case _LoadDefaultZscore() when loadDefaultZScore != null:
+return loadDefaultZScore(_that);case _:
   return null;
 
 }
@@ -140,7 +143,7 @@ return selectSchool(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function( bool redirect)?  logout,TResult Function( Student student)?  selectStudent,TResult Function( String message)?  showAlert,TResult Function( Profile profile)?  setProfile,TResult Function()?  loadSchool,TResult Function( School school)?  selectSchool,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadStudent,TResult Function( void Function(Profile? profile)? callback)?  loadProfile,TResult Function( bool redirect)?  logout,TResult Function( Student student)?  selectStudent,TResult Function( String message)?  showAlert,TResult Function( Profile profile)?  setProfile,TResult Function()?  loadSchool,TResult Function( School school)?  selectSchool,TResult Function()?  loadDefaultZScore,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
@@ -150,7 +153,8 @@ return selectStudent(_that.student);case _ShowAlert() when showAlert != null:
 return showAlert(_that.message);case _SetProfile() when setProfile != null:
 return setProfile(_that.profile);case _LoadSchool() when loadSchool != null:
 return loadSchool();case _SelectSchool() when selectSchool != null:
-return selectSchool(_that.school);case _:
+return selectSchool(_that.school);case _LoadDefaultZscore() when loadDefaultZScore != null:
+return loadDefaultZScore();case _:
   return orElse();
 
 }
@@ -168,7 +172,7 @@ return selectSchool(_that.school);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function( bool redirect)  logout,required TResult Function( Student student)  selectStudent,required TResult Function( String message)  showAlert,required TResult Function( Profile profile)  setProfile,required TResult Function()  loadSchool,required TResult Function( School school)  selectSchool,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadStudent,required TResult Function( void Function(Profile? profile)? callback)  loadProfile,required TResult Function( bool redirect)  logout,required TResult Function( Student student)  selectStudent,required TResult Function( String message)  showAlert,required TResult Function( Profile profile)  setProfile,required TResult Function()  loadSchool,required TResult Function( School school)  selectSchool,required TResult Function()  loadDefaultZScore,}) {final _that = this;
 switch (_that) {
 case _LoadStudent():
 return loadStudent();case _LoadProfile():
@@ -178,7 +182,8 @@ return selectStudent(_that.student);case _ShowAlert():
 return showAlert(_that.message);case _SetProfile():
 return setProfile(_that.profile);case _LoadSchool():
 return loadSchool();case _SelectSchool():
-return selectSchool(_that.school);case _:
+return selectSchool(_that.school);case _LoadDefaultZscore():
+return loadDefaultZScore();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,7 +200,7 @@ return selectSchool(_that.school);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function( bool redirect)?  logout,TResult? Function( Student student)?  selectStudent,TResult? Function( String message)?  showAlert,TResult? Function( Profile profile)?  setProfile,TResult? Function()?  loadSchool,TResult? Function( School school)?  selectSchool,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadStudent,TResult? Function( void Function(Profile? profile)? callback)?  loadProfile,TResult? Function( bool redirect)?  logout,TResult? Function( Student student)?  selectStudent,TResult? Function( String message)?  showAlert,TResult? Function( Profile profile)?  setProfile,TResult? Function()?  loadSchool,TResult? Function( School school)?  selectSchool,TResult? Function()?  loadDefaultZScore,}) {final _that = this;
 switch (_that) {
 case _LoadStudent() when loadStudent != null:
 return loadStudent();case _LoadProfile() when loadProfile != null:
@@ -205,7 +210,8 @@ return selectStudent(_that.student);case _ShowAlert() when showAlert != null:
 return showAlert(_that.message);case _SetProfile() when setProfile != null:
 return setProfile(_that.profile);case _LoadSchool() when loadSchool != null:
 return loadSchool();case _SelectSchool() when selectSchool != null:
-return selectSchool(_that.school);case _:
+return selectSchool(_that.school);case _LoadDefaultZscore() when loadDefaultZScore != null:
+return loadDefaultZScore();case _:
   return null;
 
 }
@@ -701,12 +707,45 @@ $SchoolCopyWith<$Res> get school {
 }
 
 /// @nodoc
+
+
+class _LoadDefaultZscore implements AppEvent {
+  const _LoadDefaultZscore();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadDefaultZscore);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AppEvent.loadDefaultZScore()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$AppState {
 
  List<Student> get students; int get studentTotal; bool get isStudentLoading;// role
  String get accessToken; String get refreshToken; Profile? get profile;// selected student
  Student? get selectedStudent;// schools
- List<School> get schools; School? get currentSchool;// alert
+ List<School> get schools; School? get currentSchool;// default z scores
+ List<ZScore> get defaultZScores;// alert
  String get alertMessage; bool get alertTriggerer;
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
@@ -718,16 +757,16 @@ $AppStateCopyWith<AppState> get copyWith => _$AppStateCopyWithImpl<AppState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&const DeepCollectionEquality().equals(other.schools, schools)&&(identical(other.currentSchool, currentSchool) || other.currentSchool == currentSchool)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage)&&(identical(other.alertTriggerer, alertTriggerer) || other.alertTriggerer == alertTriggerer));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&const DeepCollectionEquality().equals(other.students, students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&const DeepCollectionEquality().equals(other.schools, schools)&&(identical(other.currentSchool, currentSchool) || other.currentSchool == currentSchool)&&const DeepCollectionEquality().equals(other.defaultZScores, defaultZScores)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage)&&(identical(other.alertTriggerer, alertTriggerer) || other.alertTriggerer == alertTriggerer));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,const DeepCollectionEquality().hash(schools),currentSchool,alertMessage,alertTriggerer);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,const DeepCollectionEquality().hash(schools),currentSchool,const DeepCollectionEquality().hash(defaultZScores),alertMessage,alertTriggerer);
 
 @override
 String toString() {
-  return 'AppState(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, schools: $schools, currentSchool: $currentSchool, alertMessage: $alertMessage, alertTriggerer: $alertTriggerer)';
+  return 'AppState(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, schools: $schools, currentSchool: $currentSchool, defaultZScores: $defaultZScores, alertMessage: $alertMessage, alertTriggerer: $alertTriggerer)';
 }
 
 
@@ -738,7 +777,7 @@ abstract mixin class $AppStateCopyWith<$Res>  {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) _then) = _$AppStateCopyWithImpl;
 @useResult
 $Res call({
- List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, List<School> schools, School? currentSchool, String alertMessage, bool alertTriggerer
+ List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, List<School> schools, School? currentSchool, List<ZScore> defaultZScores, String alertMessage, bool alertTriggerer
 });
 
 
@@ -755,7 +794,7 @@ class _$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? schools = null,Object? currentSchool = freezed,Object? alertMessage = null,Object? alertTriggerer = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? schools = null,Object? currentSchool = freezed,Object? defaultZScores = null,Object? alertMessage = null,Object? alertTriggerer = null,}) {
   return _then(_self.copyWith(
 students: null == students ? _self.students : students // ignore: cast_nullable_to_non_nullable
 as List<Student>,studentTotal: null == studentTotal ? _self.studentTotal : studentTotal // ignore: cast_nullable_to_non_nullable
@@ -766,7 +805,8 @@ as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_
 as Profile?,selectedStudent: freezed == selectedStudent ? _self.selectedStudent : selectedStudent // ignore: cast_nullable_to_non_nullable
 as Student?,schools: null == schools ? _self.schools : schools // ignore: cast_nullable_to_non_nullable
 as List<School>,currentSchool: freezed == currentSchool ? _self.currentSchool : currentSchool // ignore: cast_nullable_to_non_nullable
-as School?,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
+as School?,defaultZScores: null == defaultZScores ? _self.defaultZScores : defaultZScores // ignore: cast_nullable_to_non_nullable
+as List<ZScore>,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
 as String,alertTriggerer: null == alertTriggerer ? _self.alertTriggerer : alertTriggerer // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -889,10 +929,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  List<School> schools,  School? currentSchool,  String alertMessage,  bool alertTriggerer)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  List<School> schools,  School? currentSchool,  List<ZScore> defaultZScores,  String alertMessage,  bool alertTriggerer)?  initial,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppState() when initial != null:
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.schools,_that.currentSchool,_that.alertMessage,_that.alertTriggerer);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.schools,_that.currentSchool,_that.defaultZScores,_that.alertMessage,_that.alertTriggerer);case _:
   return orElse();
 
 }
@@ -910,10 +950,10 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  List<School> schools,  School? currentSchool,  String alertMessage,  bool alertTriggerer)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  List<School> schools,  School? currentSchool,  List<ZScore> defaultZScores,  String alertMessage,  bool alertTriggerer)  initial,}) {final _that = this;
 switch (_that) {
 case _AppState():
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.schools,_that.currentSchool,_that.alertMessage,_that.alertTriggerer);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.schools,_that.currentSchool,_that.defaultZScores,_that.alertMessage,_that.alertTriggerer);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -930,10 +970,10 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  List<School> schools,  School? currentSchool,  String alertMessage,  bool alertTriggerer)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<Student> students,  int studentTotal,  bool isStudentLoading,  String accessToken,  String refreshToken,  Profile? profile,  Student? selectedStudent,  List<School> schools,  School? currentSchool,  List<ZScore> defaultZScores,  String alertMessage,  bool alertTriggerer)?  initial,}) {final _that = this;
 switch (_that) {
 case _AppState() when initial != null:
-return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.schools,_that.currentSchool,_that.alertMessage,_that.alertTriggerer);case _:
+return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.accessToken,_that.refreshToken,_that.profile,_that.selectedStudent,_that.schools,_that.currentSchool,_that.defaultZScores,_that.alertMessage,_that.alertTriggerer);case _:
   return null;
 
 }
@@ -945,7 +985,7 @@ return initial(_that.students,_that.studentTotal,_that.isStudentLoading,_that.ac
 
 
 class _AppState implements AppState {
-  const _AppState({final  List<Student> students = const [], this.studentTotal = 0, this.isStudentLoading = true, this.accessToken = '', this.refreshToken = '', this.profile, this.selectedStudent, final  List<School> schools = const [], this.currentSchool, this.alertMessage = '', this.alertTriggerer = false}): _students = students,_schools = schools;
+  const _AppState({final  List<Student> students = const [], this.studentTotal = 0, this.isStudentLoading = true, this.accessToken = '', this.refreshToken = '', this.profile, this.selectedStudent, final  List<School> schools = const [], this.currentSchool, final  List<ZScore> defaultZScores = const [], this.alertMessage = '', this.alertTriggerer = false}): _students = students,_schools = schools,_defaultZScores = defaultZScores;
   
 
  final  List<Student> _students;
@@ -973,6 +1013,15 @@ class _AppState implements AppState {
 }
 
 @override final  School? currentSchool;
+// default z scores
+ final  List<ZScore> _defaultZScores;
+// default z scores
+@override@JsonKey() List<ZScore> get defaultZScores {
+  if (_defaultZScores is EqualUnmodifiableListView) return _defaultZScores;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_defaultZScores);
+}
+
 // alert
 @override@JsonKey() final  String alertMessage;
 @override@JsonKey() final  bool alertTriggerer;
@@ -987,16 +1036,16 @@ _$AppStateCopyWith<_AppState> get copyWith => __$AppStateCopyWithImpl<_AppState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&const DeepCollectionEquality().equals(other._schools, _schools)&&(identical(other.currentSchool, currentSchool) || other.currentSchool == currentSchool)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage)&&(identical(other.alertTriggerer, alertTriggerer) || other.alertTriggerer == alertTriggerer));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&const DeepCollectionEquality().equals(other._students, _students)&&(identical(other.studentTotal, studentTotal) || other.studentTotal == studentTotal)&&(identical(other.isStudentLoading, isStudentLoading) || other.isStudentLoading == isStudentLoading)&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.profile, profile) || other.profile == profile)&&(identical(other.selectedStudent, selectedStudent) || other.selectedStudent == selectedStudent)&&const DeepCollectionEquality().equals(other._schools, _schools)&&(identical(other.currentSchool, currentSchool) || other.currentSchool == currentSchool)&&const DeepCollectionEquality().equals(other._defaultZScores, _defaultZScores)&&(identical(other.alertMessage, alertMessage) || other.alertMessage == alertMessage)&&(identical(other.alertTriggerer, alertTriggerer) || other.alertTriggerer == alertTriggerer));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,const DeepCollectionEquality().hash(_schools),currentSchool,alertMessage,alertTriggerer);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_students),studentTotal,isStudentLoading,accessToken,refreshToken,profile,selectedStudent,const DeepCollectionEquality().hash(_schools),currentSchool,const DeepCollectionEquality().hash(_defaultZScores),alertMessage,alertTriggerer);
 
 @override
 String toString() {
-  return 'AppState.initial(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, schools: $schools, currentSchool: $currentSchool, alertMessage: $alertMessage, alertTriggerer: $alertTriggerer)';
+  return 'AppState.initial(students: $students, studentTotal: $studentTotal, isStudentLoading: $isStudentLoading, accessToken: $accessToken, refreshToken: $refreshToken, profile: $profile, selectedStudent: $selectedStudent, schools: $schools, currentSchool: $currentSchool, defaultZScores: $defaultZScores, alertMessage: $alertMessage, alertTriggerer: $alertTriggerer)';
 }
 
 
@@ -1007,7 +1056,7 @@ abstract mixin class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res>
   factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) _then) = __$AppStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, List<School> schools, School? currentSchool, String alertMessage, bool alertTriggerer
+ List<Student> students, int studentTotal, bool isStudentLoading, String accessToken, String refreshToken, Profile? profile, Student? selectedStudent, List<School> schools, School? currentSchool, List<ZScore> defaultZScores, String alertMessage, bool alertTriggerer
 });
 
 
@@ -1024,7 +1073,7 @@ class __$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? schools = null,Object? currentSchool = freezed,Object? alertMessage = null,Object? alertTriggerer = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? students = null,Object? studentTotal = null,Object? isStudentLoading = null,Object? accessToken = null,Object? refreshToken = null,Object? profile = freezed,Object? selectedStudent = freezed,Object? schools = null,Object? currentSchool = freezed,Object? defaultZScores = null,Object? alertMessage = null,Object? alertTriggerer = null,}) {
   return _then(_AppState(
 students: null == students ? _self._students : students // ignore: cast_nullable_to_non_nullable
 as List<Student>,studentTotal: null == studentTotal ? _self.studentTotal : studentTotal // ignore: cast_nullable_to_non_nullable
@@ -1035,7 +1084,8 @@ as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_
 as Profile?,selectedStudent: freezed == selectedStudent ? _self.selectedStudent : selectedStudent // ignore: cast_nullable_to_non_nullable
 as Student?,schools: null == schools ? _self._schools : schools // ignore: cast_nullable_to_non_nullable
 as List<School>,currentSchool: freezed == currentSchool ? _self.currentSchool : currentSchool // ignore: cast_nullable_to_non_nullable
-as School?,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
+as School?,defaultZScores: null == defaultZScores ? _self._defaultZScores : defaultZScores // ignore: cast_nullable_to_non_nullable
+as List<ZScore>,alertMessage: null == alertMessage ? _self.alertMessage : alertMessage // ignore: cast_nullable_to_non_nullable
 as String,alertTriggerer: null == alertTriggerer ? _self.alertTriggerer : alertTriggerer // ignore: cast_nullable_to_non_nullable
 as bool,
   ));

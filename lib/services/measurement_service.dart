@@ -139,9 +139,9 @@ class MeasurementService {
     }
 
     try {
-      final zScore = await getZScore("l");
+      final zScores = await getZScore("l");
 
-      return zScore;
+      return zScores;
     } catch (err) {
       print(err);
       rethrow;

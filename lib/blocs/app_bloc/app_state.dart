@@ -19,6 +19,9 @@ abstract class AppState with _$AppState {
     @Default([]) List<School> schools,
     School? currentSchool,
 
+    // default z scores
+    @Default([]) List<ZScore> defaultZScores,
+
     // alert
     @Default('') String alertMessage,
     @Default(false) bool alertTriggerer, // just for trigger the alert

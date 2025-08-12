@@ -19,4 +19,6 @@ class AppEvent with _$AppEvent {
   const factory AppEvent.loadSchool() = _LoadSchool;
 
   const factory AppEvent.selectSchool(School school) = _SelectSchool;
+
+  const factory AppEvent.loadDefaultZScore() = _LoadDefaultZscore;
 }

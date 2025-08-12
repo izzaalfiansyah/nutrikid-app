@@ -9,6 +9,7 @@ import 'package:nutrikid_app/entities/gender/gender.dart';
 import 'package:nutrikid_app/entities/profile/profile.dart';
 import 'package:nutrikid_app/entities/school/school.dart';
 import 'package:nutrikid_app/entities/student/student.dart';
+import 'package:nutrikid_app/entities/z_score/z_score.dart';
 import 'package:nutrikid_app/services/auth_service.dart';
 import 'package:nutrikid_app/services/measurement_service.dart';
 import 'package:nutrikid_app/services/school_service.dart';
@@ -42,9 +43,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             );
           }
 
-          await MeasurementService.getMeasurementZScores(
-            gender: selectedStudent.gender == Gender.l ? "l" : "p",
-          );
+          add(AppEvent.loadDefaultZScore());
 
           emit(
             state.copyWith(
@@ -69,6 +68,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         Modular.get<HistoryBloc>().add(
           HistoryEvent.loadMeasurement(isReset: true),
         );
+
+        add(AppEvent.loadDefaultZScore());
 
         Future.delayed(Duration(milliseconds: 300), () {
           Modular.get<StudentBloc>().add(StudentEvent.load());
@@ -150,6 +151,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       if (event is _SelectSchool) {
         SchoolService.setCurrentSchool(event.school);
         emit(state.copyWith(currentSchool: event.school));
+      }
+
+      if (event is _LoadDefaultZscore) {
+        final zScores = await MeasurementService.getMeasurementZScores(
+          gender: state.selectedStudent?.gender == Gender.l ? "l" : "p",
+        );
+
+        emit(state.copyWith(defaultZScores: zScores));
       }
     });
   }
