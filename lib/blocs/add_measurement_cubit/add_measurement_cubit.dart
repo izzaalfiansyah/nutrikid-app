@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
+import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
 import 'package:nutrikid_app/services/measurement_service.dart';
 
@@ -14,6 +15,7 @@ class AddMeasurementCubit extends Cubit<AddMeasurementState> {
 
   final appBloc = Modular.get<AppBloc>();
   final homeBloc = Modular.get<HomeBloc>();
+  final historyBloc = Modular.get<HistoryBloc>();
 
   void changeState(AddMeasurementState state) {
     emit(state);
@@ -29,6 +31,7 @@ class AddMeasurementCubit extends Cubit<AddMeasurementState> {
       );
 
       homeBloc.add(HomeEvent.loadStudent());
+      historyBloc.add(HistoryEvent.loadMeasurement(isReset: true));
 
       appBloc.add(
         AppEvent.showAlert(message: "Berhasil menyimpan data pengukuran"),
