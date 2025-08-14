@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
+import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/blocs/measurement_suggestion_bloc/measurement_suggestion_bloc.dart';
 import 'package:nutrikid_app/components/app/measurement_detail/measurement_suggestion_advice_bottom_sheet.dart';
 import 'package:nutrikid_app/components/input.dart';
@@ -26,15 +27,16 @@ class MeasurementSuggestionsWidget extends StatefulWidget {
 class _MeasurementSuggestionsWidgetState
     extends State<MeasurementSuggestionsWidget> {
   final suggestionBloc = Modular.get<MeasurementSuggestionBloc>();
+  final historyBloc = Modular.get<HistoryBloc>();
 
   final adviceController = TextEditingController();
   bool isCanSubmit = false;
 
   @override
   void initState() {
-    suggestionBloc.add(
-      MeasurementSuggestionEvent.load(measurementId: widget.measurement.id),
-    );
+    // suggestionBloc.add(
+    //   MeasurementSuggestionEvent.load(measurementId: widget.measurement.id),
+    // );
     super.initState();
   }
 
@@ -53,6 +55,11 @@ class _MeasurementSuggestionsWidgetState
       child: BlocBuilder<MeasurementSuggestionBloc, MeasurementSuggestionState>(
         bloc: suggestionBloc,
         builder: (context, state) {
+          final suggestions =
+              widget.measurement.suggestions.isNotEmpty
+                  ? widget.measurement.suggestions
+                  : state.suggestions;
+
           return SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -72,7 +79,7 @@ class _MeasurementSuggestionsWidgetState
                       ),
                     ),
                   )
-                else if (state.suggestions.isEmpty)
+                else if (suggestions.isEmpty)
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +104,7 @@ class _MeasurementSuggestionsWidgetState
                       child: Column(
                         spacing: 10,
                         children:
-                            state.suggestions.map((suggestion) {
+                            suggestions.map((suggestion) {
                               return Panel(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,6 +244,14 @@ class _MeasurementSuggestionsWidgetState
                                                     advice:
                                                         adviceController.text,
                                                     callback: () {
+                                                      historyBloc.add(
+                                                        HistoryEvent.loadMeasurementDetail(
+                                                          id:
+                                                              widget
+                                                                  .measurement
+                                                                  .id,
+                                                        ),
+                                                      );
                                                       setState(() {
                                                         isCanSubmit = false;
                                                         adviceController.text =

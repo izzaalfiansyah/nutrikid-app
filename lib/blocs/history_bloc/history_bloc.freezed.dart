@@ -55,13 +55,14 @@ extension HistoryEventPatterns on HistoryEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurement value)?  loadMeasurement,TResult Function( _DeleteMeasurement value)?  deleteMeasurement,TResult Function( _AddMeasurement value)?  addMeasurement,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMeasurement value)?  loadMeasurement,TResult Function( _DeleteMeasurement value)?  deleteMeasurement,TResult Function( _AddMeasurement value)?  addMeasurement,TResult Function( _LoadMeasurementDetail value)?  loadMeasurementDetail,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that);case _DeleteMeasurement() when deleteMeasurement != null:
 return deleteMeasurement(_that);case _AddMeasurement() when addMeasurement != null:
-return addMeasurement(_that);case _:
+return addMeasurement(_that);case _LoadMeasurementDetail() when loadMeasurementDetail != null:
+return loadMeasurementDetail(_that);case _:
   return orElse();
 
 }
@@ -79,13 +80,14 @@ return addMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurement value)  loadMeasurement,required TResult Function( _DeleteMeasurement value)  deleteMeasurement,required TResult Function( _AddMeasurement value)  addMeasurement,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMeasurement value)  loadMeasurement,required TResult Function( _DeleteMeasurement value)  deleteMeasurement,required TResult Function( _AddMeasurement value)  addMeasurement,required TResult Function( _LoadMeasurementDetail value)  loadMeasurementDetail,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement():
 return loadMeasurement(_that);case _DeleteMeasurement():
 return deleteMeasurement(_that);case _AddMeasurement():
-return addMeasurement(_that);case _:
+return addMeasurement(_that);case _LoadMeasurementDetail():
+return loadMeasurementDetail(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +104,14 @@ return addMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurement value)?  loadMeasurement,TResult? Function( _DeleteMeasurement value)?  deleteMeasurement,TResult? Function( _AddMeasurement value)?  addMeasurement,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMeasurement value)?  loadMeasurement,TResult? Function( _DeleteMeasurement value)?  deleteMeasurement,TResult? Function( _AddMeasurement value)?  addMeasurement,TResult? Function( _LoadMeasurementDetail value)?  loadMeasurementDetail,}){
 final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that);case _DeleteMeasurement() when deleteMeasurement != null:
 return deleteMeasurement(_that);case _AddMeasurement() when addMeasurement != null:
-return addMeasurement(_that);case _:
+return addMeasurement(_that);case _LoadMeasurementDetail() when loadMeasurementDetail != null:
+return loadMeasurementDetail(_that);case _:
   return null;
 
 }
@@ -125,12 +128,13 @@ return addMeasurement(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? page,  bool? isReset)?  loadMeasurement,TResult Function( int id)?  deleteMeasurement,TResult Function( int height,  int weight)?  addMeasurement,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? page,  bool? isReset)?  loadMeasurement,TResult Function( int id)?  deleteMeasurement,TResult Function( int height,  int weight)?  addMeasurement,TResult Function( int id)?  loadMeasurementDetail,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement() when deleteMeasurement != null:
 return deleteMeasurement(_that.id);case _AddMeasurement() when addMeasurement != null:
-return addMeasurement(_that.height,_that.weight);case _:
+return addMeasurement(_that.height,_that.weight);case _LoadMeasurementDetail() when loadMeasurementDetail != null:
+return loadMeasurementDetail(_that.id);case _:
   return orElse();
 
 }
@@ -148,12 +152,13 @@ return addMeasurement(_that.height,_that.weight);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? page,  bool? isReset)  loadMeasurement,required TResult Function( int id)  deleteMeasurement,required TResult Function( int height,  int weight)  addMeasurement,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? page,  bool? isReset)  loadMeasurement,required TResult Function( int id)  deleteMeasurement,required TResult Function( int height,  int weight)  addMeasurement,required TResult Function( int id)  loadMeasurementDetail,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement():
 return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement():
 return deleteMeasurement(_that.id);case _AddMeasurement():
-return addMeasurement(_that.height,_that.weight);case _:
+return addMeasurement(_that.height,_that.weight);case _LoadMeasurementDetail():
+return loadMeasurementDetail(_that.id);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +175,13 @@ return addMeasurement(_that.height,_that.weight);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? page,  bool? isReset)?  loadMeasurement,TResult? Function( int id)?  deleteMeasurement,TResult? Function( int height,  int weight)?  addMeasurement,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? page,  bool? isReset)?  loadMeasurement,TResult? Function( int id)?  deleteMeasurement,TResult? Function( int height,  int weight)?  addMeasurement,TResult? Function( int id)?  loadMeasurementDetail,}) {final _that = this;
 switch (_that) {
 case _LoadMeasurement() when loadMeasurement != null:
 return loadMeasurement(_that.page,_that.isReset);case _DeleteMeasurement() when deleteMeasurement != null:
 return deleteMeasurement(_that.id);case _AddMeasurement() when addMeasurement != null:
-return addMeasurement(_that.height,_that.weight);case _:
+return addMeasurement(_that.height,_that.weight);case _LoadMeasurementDetail() when loadMeasurementDetail != null:
+return loadMeasurementDetail(_that.id);case _:
   return null;
 
 }
@@ -386,9 +392,75 @@ as int,
 }
 
 /// @nodoc
+
+
+class _LoadMeasurementDetail implements HistoryEvent {
+  const _LoadMeasurementDetail({required this.id});
+  
+
+ final  int id;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoadMeasurementDetailCopyWith<_LoadMeasurementDetail> get copyWith => __$LoadMeasurementDetailCopyWithImpl<_LoadMeasurementDetail>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadMeasurementDetail&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'HistoryEvent.loadMeasurementDetail(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LoadMeasurementDetailCopyWith<$Res> implements $HistoryEventCopyWith<$Res> {
+  factory _$LoadMeasurementDetailCopyWith(_LoadMeasurementDetail value, $Res Function(_LoadMeasurementDetail) _then) = __$LoadMeasurementDetailCopyWithImpl;
+@useResult
+$Res call({
+ int id
+});
+
+
+
+
+}
+/// @nodoc
+class __$LoadMeasurementDetailCopyWithImpl<$Res>
+    implements _$LoadMeasurementDetailCopyWith<$Res> {
+  __$LoadMeasurementDetailCopyWithImpl(this._self, this._then);
+
+  final _LoadMeasurementDetail _self;
+  final $Res Function(_LoadMeasurementDetail) _then;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(_LoadMeasurementDetail(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$HistoryState {
 
- int get total; List<Measurement> get measurements; int get page; bool get isLoading;
+ int get total; List<Measurement> get measurements; Measurement? get currentMeasurement; int get page; bool get isLoading; bool get isCurrentLoading;
 /// Create a copy of HistoryState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -399,16 +471,16 @@ $HistoryStateCopyWith<HistoryState> get copyWith => _$HistoryStateCopyWithImpl<H
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryState&&(identical(other.total, total) || other.total == total)&&const DeepCollectionEquality().equals(other.measurements, measurements)&&(identical(other.page, page) || other.page == page)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryState&&(identical(other.total, total) || other.total == total)&&const DeepCollectionEquality().equals(other.measurements, measurements)&&(identical(other.currentMeasurement, currentMeasurement) || other.currentMeasurement == currentMeasurement)&&(identical(other.page, page) || other.page == page)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isCurrentLoading, isCurrentLoading) || other.isCurrentLoading == isCurrentLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,total,const DeepCollectionEquality().hash(measurements),page,isLoading);
+int get hashCode => Object.hash(runtimeType,total,const DeepCollectionEquality().hash(measurements),currentMeasurement,page,isLoading,isCurrentLoading);
 
 @override
 String toString() {
-  return 'HistoryState(total: $total, measurements: $measurements, page: $page, isLoading: $isLoading)';
+  return 'HistoryState(total: $total, measurements: $measurements, currentMeasurement: $currentMeasurement, page: $page, isLoading: $isLoading, isCurrentLoading: $isCurrentLoading)';
 }
 
 
@@ -419,11 +491,11 @@ abstract mixin class $HistoryStateCopyWith<$Res>  {
   factory $HistoryStateCopyWith(HistoryState value, $Res Function(HistoryState) _then) = _$HistoryStateCopyWithImpl;
 @useResult
 $Res call({
- int total, List<Measurement> measurements, int page, bool isLoading
+ int total, List<Measurement> measurements, Measurement? currentMeasurement, int page, bool isLoading, bool isCurrentLoading
 });
 
 
-
+$MeasurementCopyWith<$Res>? get currentMeasurement;
 
 }
 /// @nodoc
@@ -436,16 +508,30 @@ class _$HistoryStateCopyWithImpl<$Res>
 
 /// Create a copy of HistoryState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? total = null,Object? measurements = null,Object? page = null,Object? isLoading = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? total = null,Object? measurements = null,Object? currentMeasurement = freezed,Object? page = null,Object? isLoading = null,Object? isCurrentLoading = null,}) {
   return _then(_self.copyWith(
 total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as int,measurements: null == measurements ? _self.measurements : measurements // ignore: cast_nullable_to_non_nullable
-as List<Measurement>,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as List<Measurement>,currentMeasurement: freezed == currentMeasurement ? _self.currentMeasurement : currentMeasurement // ignore: cast_nullable_to_non_nullable
+as Measurement?,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,isCurrentLoading: null == isCurrentLoading ? _self.isCurrentLoading : isCurrentLoading // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
+/// Create a copy of HistoryState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MeasurementCopyWith<$Res>? get currentMeasurement {
+    if (_self.currentMeasurement == null) {
+    return null;
+  }
 
+  return $MeasurementCopyWith<$Res>(_self.currentMeasurement!, (value) {
+    return _then(_self.copyWith(currentMeasurement: value));
+  });
+}
 }
 
 
@@ -527,10 +613,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int total,  List<Measurement> measurements,  int page,  bool isLoading)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int total,  List<Measurement> measurements,  Measurement? currentMeasurement,  int page,  bool isLoading,  bool isCurrentLoading)?  initial,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HistoryState() when initial != null:
-return initial(_that.total,_that.measurements,_that.page,_that.isLoading);case _:
+return initial(_that.total,_that.measurements,_that.currentMeasurement,_that.page,_that.isLoading,_that.isCurrentLoading);case _:
   return orElse();
 
 }
@@ -548,10 +634,10 @@ return initial(_that.total,_that.measurements,_that.page,_that.isLoading);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int total,  List<Measurement> measurements,  int page,  bool isLoading)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int total,  List<Measurement> measurements,  Measurement? currentMeasurement,  int page,  bool isLoading,  bool isCurrentLoading)  initial,}) {final _that = this;
 switch (_that) {
 case _HistoryState():
-return initial(_that.total,_that.measurements,_that.page,_that.isLoading);case _:
+return initial(_that.total,_that.measurements,_that.currentMeasurement,_that.page,_that.isLoading,_that.isCurrentLoading);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -568,10 +654,10 @@ return initial(_that.total,_that.measurements,_that.page,_that.isLoading);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int total,  List<Measurement> measurements,  int page,  bool isLoading)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int total,  List<Measurement> measurements,  Measurement? currentMeasurement,  int page,  bool isLoading,  bool isCurrentLoading)?  initial,}) {final _that = this;
 switch (_that) {
 case _HistoryState() when initial != null:
-return initial(_that.total,_that.measurements,_that.page,_that.isLoading);case _:
+return initial(_that.total,_that.measurements,_that.currentMeasurement,_that.page,_that.isLoading,_that.isCurrentLoading);case _:
   return null;
 
 }
@@ -583,7 +669,7 @@ return initial(_that.total,_that.measurements,_that.page,_that.isLoading);case _
 
 
 class _HistoryState implements HistoryState {
-  const _HistoryState({this.total = 0, final  List<Measurement> measurements = const [], this.page = 1, this.isLoading = false}): _measurements = measurements;
+  const _HistoryState({this.total = 0, final  List<Measurement> measurements = const [], this.currentMeasurement, this.page = 1, this.isLoading = false, this.isCurrentLoading = false}): _measurements = measurements;
   
 
 @override@JsonKey() final  int total;
@@ -594,8 +680,10 @@ class _HistoryState implements HistoryState {
   return EqualUnmodifiableListView(_measurements);
 }
 
+@override final  Measurement? currentMeasurement;
 @override@JsonKey() final  int page;
 @override@JsonKey() final  bool isLoading;
+@override@JsonKey() final  bool isCurrentLoading;
 
 /// Create a copy of HistoryState
 /// with the given fields replaced by the non-null parameter values.
@@ -607,16 +695,16 @@ _$HistoryStateCopyWith<_HistoryState> get copyWith => __$HistoryStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoryState&&(identical(other.total, total) || other.total == total)&&const DeepCollectionEquality().equals(other._measurements, _measurements)&&(identical(other.page, page) || other.page == page)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoryState&&(identical(other.total, total) || other.total == total)&&const DeepCollectionEquality().equals(other._measurements, _measurements)&&(identical(other.currentMeasurement, currentMeasurement) || other.currentMeasurement == currentMeasurement)&&(identical(other.page, page) || other.page == page)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isCurrentLoading, isCurrentLoading) || other.isCurrentLoading == isCurrentLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,total,const DeepCollectionEquality().hash(_measurements),page,isLoading);
+int get hashCode => Object.hash(runtimeType,total,const DeepCollectionEquality().hash(_measurements),currentMeasurement,page,isLoading,isCurrentLoading);
 
 @override
 String toString() {
-  return 'HistoryState.initial(total: $total, measurements: $measurements, page: $page, isLoading: $isLoading)';
+  return 'HistoryState.initial(total: $total, measurements: $measurements, currentMeasurement: $currentMeasurement, page: $page, isLoading: $isLoading, isCurrentLoading: $isCurrentLoading)';
 }
 
 
@@ -627,11 +715,11 @@ abstract mixin class _$HistoryStateCopyWith<$Res> implements $HistoryStateCopyWi
   factory _$HistoryStateCopyWith(_HistoryState value, $Res Function(_HistoryState) _then) = __$HistoryStateCopyWithImpl;
 @override @useResult
 $Res call({
- int total, List<Measurement> measurements, int page, bool isLoading
+ int total, List<Measurement> measurements, Measurement? currentMeasurement, int page, bool isLoading, bool isCurrentLoading
 });
 
 
-
+@override $MeasurementCopyWith<$Res>? get currentMeasurement;
 
 }
 /// @nodoc
@@ -644,17 +732,31 @@ class __$HistoryStateCopyWithImpl<$Res>
 
 /// Create a copy of HistoryState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? total = null,Object? measurements = null,Object? page = null,Object? isLoading = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? total = null,Object? measurements = null,Object? currentMeasurement = freezed,Object? page = null,Object? isLoading = null,Object? isCurrentLoading = null,}) {
   return _then(_HistoryState(
 total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as int,measurements: null == measurements ? _self._measurements : measurements // ignore: cast_nullable_to_non_nullable
-as List<Measurement>,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as List<Measurement>,currentMeasurement: freezed == currentMeasurement ? _self.currentMeasurement : currentMeasurement // ignore: cast_nullable_to_non_nullable
+as Measurement?,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,isCurrentLoading: null == isCurrentLoading ? _self.isCurrentLoading : isCurrentLoading // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
 
+/// Create a copy of HistoryState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MeasurementCopyWith<$Res>? get currentMeasurement {
+    if (_self.currentMeasurement == null) {
+    return null;
+  }
 
+  return $MeasurementCopyWith<$Res>(_self.currentMeasurement!, (value) {
+    return _then(_self.copyWith(currentMeasurement: value));
+  });
+}
 }
 
 // dart format on

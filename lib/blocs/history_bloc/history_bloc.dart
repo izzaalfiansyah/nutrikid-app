@@ -76,6 +76,21 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
           );
         }
       }
+
+      if (event is _LoadMeasurementDetail) {
+        emit(state.copyWith(isCurrentLoading: true));
+        try {
+          final result = await Modular.get<MeasurementService>()
+              .getMeasurementDetail(event.id);
+
+          emit(state.copyWith(currentMeasurement: result));
+        } catch (err) {
+          appBloc.add(
+            AppEvent.showAlert(message: "Gagal mengambil data pengukuran"),
+          );
+        }
+        emit(state.copyWith(isCurrentLoading: false));
+      }
     });
   }
 }

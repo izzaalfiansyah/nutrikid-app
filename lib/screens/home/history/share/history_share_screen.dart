@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:introduction_screen/introduction_screen.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
@@ -148,7 +150,7 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                                 shareItem(
                                   label: "BMI",
                                   value: measurement.studentBmi.toStringAsFixed(
-                                    22,
+                                    2,
                                   ),
                                 ),
                                 shareItem(
@@ -179,39 +181,49 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    spacing: 8,
-                                    children: List.generate(
-                                      measurement.suggestions.length,
-                                      (index) {
-                                        final suggestion =
-                                            measurement.suggestions[index];
-                                        return Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: 24,
-                                              child: Text(
-                                                "${index + 1}.",
-                                                style: TextStyle(
-                                                  color: VariantColor.muted,
+                                  if (measurement.suggestions.isEmpty)
+                                    Center(
+                                      child: Text(
+                                        "Tidak ada saran kesehatan",
+                                        style: TextStyle(
+                                          color: VariantColor.muted,
+                                        ),
+                                      ),
+                                    )
+                                  else
+                                    Column(
+                                      spacing: 8,
+                                      children: List.generate(
+                                        measurement.suggestions.length,
+                                        (index) {
+                                          final suggestion =
+                                              measurement.suggestions[index];
+                                          return Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                width: 24,
+                                                child: Text(
+                                                  "${index + 1}.",
+                                                  style: TextStyle(
+                                                    color: VariantColor.muted,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Flexible(
-                                              child: Text(
-                                                suggestion.advice,
-                                                style: TextStyle(
-                                                  color: VariantColor.muted,
+                                              Flexible(
+                                                child: Text(
+                                                  suggestion.advice,
+                                                  style: TextStyle(
+                                                    color: VariantColor.muted,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        );
-                                      },
+                                            ],
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -235,6 +247,30 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                       ],
                     ),
                   ],
+                ),
+              ),
+            ),
+            Positioned(
+              left: 10,
+              top: 10,
+              child: SafeArea(
+                child: IconButton(
+                  onPressed: () {
+                    Modular.to.pop();
+                  },
+                  icon: Icon(LucideIcons.arrowLeft, color: Colors.white),
+                ),
+              ),
+            ),
+            Positioned(
+              right: 10,
+              top: 10,
+              child: SafeArea(
+                child: IconButton(
+                  onPressed: () {
+                    Modular.to.pop();
+                  },
+                  icon: Icon(LucideIcons.share2, color: Colors.white),
                 ),
               ),
             ),

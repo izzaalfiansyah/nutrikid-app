@@ -12,4 +12,7 @@ abstract class HistoryEvent with _$HistoryEvent {
     required int height,
     required int weight,
   }) = _AddMeasurement;
+
+  const factory HistoryEvent.loadMeasurementDetail({required int id}) =
+      _LoadMeasurementDetail;
 }

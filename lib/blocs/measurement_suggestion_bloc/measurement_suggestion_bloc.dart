@@ -40,12 +40,28 @@ class MeasurementSuggestionBloc
         emit(state.copyWith(isSubmitting: true));
 
         try {
+          final appBloc = Modular.get<AppBloc>();
+          final creator = appBloc.state.profile;
           final result = await measurementService.storeSuggestion(
             advice: event.advice,
             measurementId: event.measurementId,
           );
 
           if (result) {
+            emit(
+              state.copyWith(
+                suggestions: [
+                  ...state.suggestions,
+                  MeasurementSuggestion(
+                    measurementId: event.measurementId,
+                    creator: creator,
+                    creatorId: creator!.id,
+                    advice: event.advice,
+                    createdAt: DateTime.now().toUtc(),
+                  ),
+                ],
+              ),
+            );
             add(
               MeasurementSuggestionEvent.load(
                 measurementId: event.measurementId,

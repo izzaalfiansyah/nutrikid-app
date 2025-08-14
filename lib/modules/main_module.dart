@@ -43,7 +43,7 @@ class MainModule extends Module {
     r.child(
       '/share-measurement',
       child: (context) => HistoryShareScreen(),
-      transition: TransitionType.fadeIn,
+      transition: TransitionType.downToUp,
     );
 
     super.routes(r);
