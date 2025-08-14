@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Measurement {
 
- int get id;@JsonKey(name: 'student_id') int? get studentId; Student? get student;@JsonKey(name: 'student_age') int get studentAge;@JsonKey(name: 'student_age_month') int get studentAgeMonth;@JsonKey(name: 'student_age_month_total') int get studentAgeMonthTotal;@JsonKey(name: 'student_weight') double get studentWeight;@JsonKey(name: 'student_height') double get studentHeight;@JsonKey(name: 'student_bmi') double get studentBmi;@JsonKey(name: 'creator_id') int? get creatorId; Profile? get creator;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'deleted_at') DateTime? get deltedAt;@JsonKey(name: 'z_score') double get zScore;@JsonKey(name: 'suggestion_advices') List<String> get suggestionAdvices; MeasurementStatus get status;
+ int get id;@JsonKey(name: 'student_id') int? get studentId; Student? get student;@JsonKey(name: 'student_age') int get studentAge;@JsonKey(name: 'student_age_month') int get studentAgeMonth;@JsonKey(name: 'student_age_month_total') int get studentAgeMonthTotal;@JsonKey(name: 'student_weight') double get studentWeight;@JsonKey(name: 'student_height') double get studentHeight;@JsonKey(name: 'student_bmi') double get studentBmi;@JsonKey(name: 'creator_id') int? get creatorId; Profile? get creator;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'deleted_at') DateTime? get deltedAt;@JsonKey(name: 'z_score') double get zScore;@JsonKey(name: 'suggestion_advices') List<String> get suggestionAdvices; MeasurementStatus get status;@JsonKey(name: 'suggestions') List<MeasurementSuggestion> get suggestions;
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $MeasurementCopyWith<Measurement> get copyWith => _$MeasurementCopyWithImpl<Meas
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentAgeMonth, studentAgeMonth) || other.studentAgeMonth == studentAgeMonth)&&(identical(other.studentAgeMonthTotal, studentAgeMonthTotal) || other.studentAgeMonthTotal == studentAgeMonthTotal)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt)&&(identical(other.zScore, zScore) || other.zScore == zScore)&&const DeepCollectionEquality().equals(other.suggestionAdvices, suggestionAdvices)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentAgeMonth, studentAgeMonth) || other.studentAgeMonth == studentAgeMonth)&&(identical(other.studentAgeMonthTotal, studentAgeMonthTotal) || other.studentAgeMonthTotal == studentAgeMonthTotal)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt)&&(identical(other.zScore, zScore) || other.zScore == zScore)&&const DeepCollectionEquality().equals(other.suggestionAdvices, suggestionAdvices)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.suggestions, suggestions));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentAgeMonth,studentAgeMonthTotal,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt,zScore,const DeepCollectionEquality().hash(suggestionAdvices),status);
+int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentAgeMonth,studentAgeMonthTotal,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt,zScore,const DeepCollectionEquality().hash(suggestionAdvices),status,const DeepCollectionEquality().hash(suggestions));
 
 @override
 String toString() {
-  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentAgeMonth: $studentAgeMonth, studentAgeMonthTotal: $studentAgeMonthTotal, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt, zScore: $zScore, suggestionAdvices: $suggestionAdvices, status: $status)';
+  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentAgeMonth: $studentAgeMonth, studentAgeMonthTotal: $studentAgeMonthTotal, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt, zScore: $zScore, suggestionAdvices: $suggestionAdvices, status: $status, suggestions: $suggestions)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $MeasurementCopyWith<$Res>  {
   factory $MeasurementCopyWith(Measurement value, $Res Function(Measurement) _then) = _$MeasurementCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_age_month') int studentAgeMonth,@JsonKey(name: 'student_age_month_total') int studentAgeMonthTotal,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt,@JsonKey(name: 'z_score') double zScore,@JsonKey(name: 'suggestion_advices') List<String> suggestionAdvices, MeasurementStatus status
+ int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_age_month') int studentAgeMonth,@JsonKey(name: 'student_age_month_total') int studentAgeMonthTotal,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt,@JsonKey(name: 'z_score') double zScore,@JsonKey(name: 'suggestion_advices') List<String> suggestionAdvices, MeasurementStatus status,@JsonKey(name: 'suggestions') List<MeasurementSuggestion> suggestions
 });
 
 
@@ -65,7 +65,7 @@ class _$MeasurementCopyWithImpl<$Res>
 
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentAgeMonth = null,Object? studentAgeMonthTotal = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,Object? zScore = null,Object? suggestionAdvices = null,Object? status = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentAgeMonth = null,Object? studentAgeMonthTotal = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,Object? zScore = null,Object? suggestionAdvices = null,Object? status = null,Object? suggestions = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,studentId: freezed == studentId ? _self.studentId : studentId // ignore: cast_nullable_to_non_nullable
@@ -83,7 +83,8 @@ as DateTime?,deltedAt: freezed == deltedAt ? _self.deltedAt : deltedAt // ignore
 as DateTime?,zScore: null == zScore ? _self.zScore : zScore // ignore: cast_nullable_to_non_nullable
 as double,suggestionAdvices: null == suggestionAdvices ? _self.suggestionAdvices : suggestionAdvices // ignore: cast_nullable_to_non_nullable
 as List<String>,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as MeasurementStatus,
+as MeasurementStatus,suggestions: null == suggestions ? _self.suggestions : suggestions // ignore: cast_nullable_to_non_nullable
+as List<MeasurementSuggestion>,
   ));
 }
 /// Create a copy of Measurement
@@ -192,10 +193,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_age_month')  int studentAgeMonth, @JsonKey(name: 'student_age_month_total')  int studentAgeMonthTotal, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore, @JsonKey(name: 'suggestion_advices')  List<String> suggestionAdvices,  MeasurementStatus status)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_age_month')  int studentAgeMonth, @JsonKey(name: 'student_age_month_total')  int studentAgeMonthTotal, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore, @JsonKey(name: 'suggestion_advices')  List<String> suggestionAdvices,  MeasurementStatus status, @JsonKey(name: 'suggestions')  List<MeasurementSuggestion> suggestions)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Measurement() when $default != null:
-return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentAgeMonth,_that.studentAgeMonthTotal,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.suggestionAdvices,_that.status);case _:
+return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentAgeMonth,_that.studentAgeMonthTotal,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.suggestionAdvices,_that.status,_that.suggestions);case _:
   return orElse();
 
 }
@@ -213,10 +214,10 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_age_month')  int studentAgeMonth, @JsonKey(name: 'student_age_month_total')  int studentAgeMonthTotal, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore, @JsonKey(name: 'suggestion_advices')  List<String> suggestionAdvices,  MeasurementStatus status)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_age_month')  int studentAgeMonth, @JsonKey(name: 'student_age_month_total')  int studentAgeMonthTotal, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore, @JsonKey(name: 'suggestion_advices')  List<String> suggestionAdvices,  MeasurementStatus status, @JsonKey(name: 'suggestions')  List<MeasurementSuggestion> suggestions)  $default,) {final _that = this;
 switch (_that) {
 case _Measurement():
-return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentAgeMonth,_that.studentAgeMonthTotal,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.suggestionAdvices,_that.status);case _:
+return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentAgeMonth,_that.studentAgeMonthTotal,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.suggestionAdvices,_that.status,_that.suggestions);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -233,10 +234,10 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_age_month')  int studentAgeMonth, @JsonKey(name: 'student_age_month_total')  int studentAgeMonthTotal, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore, @JsonKey(name: 'suggestion_advices')  List<String> suggestionAdvices,  MeasurementStatus status)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'student_id')  int? studentId,  Student? student, @JsonKey(name: 'student_age')  int studentAge, @JsonKey(name: 'student_age_month')  int studentAgeMonth, @JsonKey(name: 'student_age_month_total')  int studentAgeMonthTotal, @JsonKey(name: 'student_weight')  double studentWeight, @JsonKey(name: 'student_height')  double studentHeight, @JsonKey(name: 'student_bmi')  double studentBmi, @JsonKey(name: 'creator_id')  int? creatorId,  Profile? creator, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'deleted_at')  DateTime? deltedAt, @JsonKey(name: 'z_score')  double zScore, @JsonKey(name: 'suggestion_advices')  List<String> suggestionAdvices,  MeasurementStatus status, @JsonKey(name: 'suggestions')  List<MeasurementSuggestion> suggestions)?  $default,) {final _that = this;
 switch (_that) {
 case _Measurement() when $default != null:
-return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentAgeMonth,_that.studentAgeMonthTotal,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.suggestionAdvices,_that.status);case _:
+return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.studentAgeMonth,_that.studentAgeMonthTotal,_that.studentWeight,_that.studentHeight,_that.studentBmi,_that.creatorId,_that.creator,_that.createdAt,_that.deltedAt,_that.zScore,_that.suggestionAdvices,_that.status,_that.suggestions);case _:
   return null;
 
 }
@@ -248,7 +249,7 @@ return $default(_that.id,_that.studentId,_that.student,_that.studentAge,_that.st
 @JsonSerializable()
 
 class _Measurement implements Measurement {
-  const _Measurement({this.id = 0, @JsonKey(name: 'student_id') this.studentId, this.student, @JsonKey(name: 'student_age') this.studentAge = 0, @JsonKey(name: 'student_age_month') this.studentAgeMonth = 0, @JsonKey(name: 'student_age_month_total') this.studentAgeMonthTotal = 0, @JsonKey(name: 'student_weight') this.studentWeight = 0, @JsonKey(name: 'student_height') this.studentHeight = 0, @JsonKey(name: 'student_bmi') this.studentBmi = 0, @JsonKey(name: 'creator_id') this.creatorId, this.creator, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'deleted_at') this.deltedAt, @JsonKey(name: 'z_score') this.zScore = 0, @JsonKey(name: 'suggestion_advices') final  List<String> suggestionAdvices = const [], this.status = MeasurementStatus.normal}): _suggestionAdvices = suggestionAdvices;
+  const _Measurement({this.id = 0, @JsonKey(name: 'student_id') this.studentId, this.student, @JsonKey(name: 'student_age') this.studentAge = 0, @JsonKey(name: 'student_age_month') this.studentAgeMonth = 0, @JsonKey(name: 'student_age_month_total') this.studentAgeMonthTotal = 0, @JsonKey(name: 'student_weight') this.studentWeight = 0, @JsonKey(name: 'student_height') this.studentHeight = 0, @JsonKey(name: 'student_bmi') this.studentBmi = 0, @JsonKey(name: 'creator_id') this.creatorId, this.creator, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'deleted_at') this.deltedAt, @JsonKey(name: 'z_score') this.zScore = 0, @JsonKey(name: 'suggestion_advices') final  List<String> suggestionAdvices = const [], this.status = MeasurementStatus.normal, @JsonKey(name: 'suggestions') final  List<MeasurementSuggestion> suggestions = const []}): _suggestionAdvices = suggestionAdvices,_suggestions = suggestions;
   factory _Measurement.fromJson(Map<String, dynamic> json) => _$MeasurementFromJson(json);
 
 @override@JsonKey() final  int id;
@@ -273,6 +274,13 @@ class _Measurement implements Measurement {
 }
 
 @override@JsonKey() final  MeasurementStatus status;
+ final  List<MeasurementSuggestion> _suggestions;
+@override@JsonKey(name: 'suggestions') List<MeasurementSuggestion> get suggestions {
+  if (_suggestions is EqualUnmodifiableListView) return _suggestions;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_suggestions);
+}
+
 
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
@@ -287,16 +295,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentAgeMonth, studentAgeMonth) || other.studentAgeMonth == studentAgeMonth)&&(identical(other.studentAgeMonthTotal, studentAgeMonthTotal) || other.studentAgeMonthTotal == studentAgeMonthTotal)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt)&&(identical(other.zScore, zScore) || other.zScore == zScore)&&const DeepCollectionEquality().equals(other._suggestionAdvices, _suggestionAdvices)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Measurement&&(identical(other.id, id) || other.id == id)&&(identical(other.studentId, studentId) || other.studentId == studentId)&&(identical(other.student, student) || other.student == student)&&(identical(other.studentAge, studentAge) || other.studentAge == studentAge)&&(identical(other.studentAgeMonth, studentAgeMonth) || other.studentAgeMonth == studentAgeMonth)&&(identical(other.studentAgeMonthTotal, studentAgeMonthTotal) || other.studentAgeMonthTotal == studentAgeMonthTotal)&&(identical(other.studentWeight, studentWeight) || other.studentWeight == studentWeight)&&(identical(other.studentHeight, studentHeight) || other.studentHeight == studentHeight)&&(identical(other.studentBmi, studentBmi) || other.studentBmi == studentBmi)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creator, creator) || other.creator == creator)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deltedAt, deltedAt) || other.deltedAt == deltedAt)&&(identical(other.zScore, zScore) || other.zScore == zScore)&&const DeepCollectionEquality().equals(other._suggestionAdvices, _suggestionAdvices)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._suggestions, _suggestions));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentAgeMonth,studentAgeMonthTotal,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt,zScore,const DeepCollectionEquality().hash(_suggestionAdvices),status);
+int get hashCode => Object.hash(runtimeType,id,studentId,student,studentAge,studentAgeMonth,studentAgeMonthTotal,studentWeight,studentHeight,studentBmi,creatorId,creator,createdAt,deltedAt,zScore,const DeepCollectionEquality().hash(_suggestionAdvices),status,const DeepCollectionEquality().hash(_suggestions));
 
 @override
 String toString() {
-  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentAgeMonth: $studentAgeMonth, studentAgeMonthTotal: $studentAgeMonthTotal, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt, zScore: $zScore, suggestionAdvices: $suggestionAdvices, status: $status)';
+  return 'Measurement(id: $id, studentId: $studentId, student: $student, studentAge: $studentAge, studentAgeMonth: $studentAgeMonth, studentAgeMonthTotal: $studentAgeMonthTotal, studentWeight: $studentWeight, studentHeight: $studentHeight, studentBmi: $studentBmi, creatorId: $creatorId, creator: $creator, createdAt: $createdAt, deltedAt: $deltedAt, zScore: $zScore, suggestionAdvices: $suggestionAdvices, status: $status, suggestions: $suggestions)';
 }
 
 
@@ -307,7 +315,7 @@ abstract mixin class _$MeasurementCopyWith<$Res> implements $MeasurementCopyWith
   factory _$MeasurementCopyWith(_Measurement value, $Res Function(_Measurement) _then) = __$MeasurementCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_age_month') int studentAgeMonth,@JsonKey(name: 'student_age_month_total') int studentAgeMonthTotal,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt,@JsonKey(name: 'z_score') double zScore,@JsonKey(name: 'suggestion_advices') List<String> suggestionAdvices, MeasurementStatus status
+ int id,@JsonKey(name: 'student_id') int? studentId, Student? student,@JsonKey(name: 'student_age') int studentAge,@JsonKey(name: 'student_age_month') int studentAgeMonth,@JsonKey(name: 'student_age_month_total') int studentAgeMonthTotal,@JsonKey(name: 'student_weight') double studentWeight,@JsonKey(name: 'student_height') double studentHeight,@JsonKey(name: 'student_bmi') double studentBmi,@JsonKey(name: 'creator_id') int? creatorId, Profile? creator,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'deleted_at') DateTime? deltedAt,@JsonKey(name: 'z_score') double zScore,@JsonKey(name: 'suggestion_advices') List<String> suggestionAdvices, MeasurementStatus status,@JsonKey(name: 'suggestions') List<MeasurementSuggestion> suggestions
 });
 
 
@@ -324,7 +332,7 @@ class __$MeasurementCopyWithImpl<$Res>
 
 /// Create a copy of Measurement
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentAgeMonth = null,Object? studentAgeMonthTotal = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,Object? zScore = null,Object? suggestionAdvices = null,Object? status = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? studentId = freezed,Object? student = freezed,Object? studentAge = null,Object? studentAgeMonth = null,Object? studentAgeMonthTotal = null,Object? studentWeight = null,Object? studentHeight = null,Object? studentBmi = null,Object? creatorId = freezed,Object? creator = freezed,Object? createdAt = freezed,Object? deltedAt = freezed,Object? zScore = null,Object? suggestionAdvices = null,Object? status = null,Object? suggestions = null,}) {
   return _then(_Measurement(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,studentId: freezed == studentId ? _self.studentId : studentId // ignore: cast_nullable_to_non_nullable
@@ -342,7 +350,8 @@ as DateTime?,deltedAt: freezed == deltedAt ? _self.deltedAt : deltedAt // ignore
 as DateTime?,zScore: null == zScore ? _self.zScore : zScore // ignore: cast_nullable_to_non_nullable
 as double,suggestionAdvices: null == suggestionAdvices ? _self._suggestionAdvices : suggestionAdvices // ignore: cast_nullable_to_non_nullable
 as List<String>,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as MeasurementStatus,
+as MeasurementStatus,suggestions: null == suggestions ? _self._suggestions : suggestions // ignore: cast_nullable_to_non_nullable
+as List<MeasurementSuggestion>,
   ));
 }
 

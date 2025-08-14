@@ -5,6 +5,7 @@ import 'package:nutrikid_app/blocs/measurement_suggestion_bloc/measurement_sugge
 import 'package:nutrikid_app/blocs/statistic_bloc/statistic_bloc.dart';
 import 'package:nutrikid_app/blocs/student_bloc/student_bloc.dart';
 import 'package:nutrikid_app/modules/profile_module.dart';
+import 'package:nutrikid_app/screens/home/history/share/history_share_screen.dart';
 import 'package:nutrikid_app/screens/home/main_screen.dart';
 
 import '../services/measurement_service.dart';
@@ -37,6 +38,12 @@ class MainModule extends Module {
       '/profile',
       module: ProfileModule(),
       transition: TransitionType.downToUp,
+    );
+
+    r.child(
+      '/share-measurement',
+      child: (context) => HistoryShareScreen(),
+      transition: TransitionType.fadeIn,
     );
 
     super.routes(r);

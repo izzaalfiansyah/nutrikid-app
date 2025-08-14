@@ -8,6 +8,7 @@ import 'package:nutrikid_app/components/app/measurement_detail/measurement_sugge
 import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/components/delete_dialog.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
+import 'package:nutrikid_app/screens/home/history/share/history_share_screen.dart';
 import 'package:nutrikid_app/shared/format_date.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 
@@ -79,6 +80,17 @@ class MeasurementDetail extends StatelessWidget {
                               style: TextStyle(color: VariantColor.destructive),
                             ),
                           ),
+
+                        PopupMenuItem(
+                          onTap:
+                              () => Modular.to.pushNamed(
+                                '/main/share-measurement',
+                                arguments: HistoryShareScreenArgs(
+                                  measurement: measurement!,
+                                ),
+                              ),
+                          child: Text("Bagikan"),
+                        ),
                       ];
                     },
                     icon: Icon(LucideIcons.moreHorizontal, size: 20),

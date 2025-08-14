@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nutrikid_app/entities/measurement_suggestion/measurement_suggestion.dart';
 import 'package:nutrikid_app/entities/profile/profile.dart';
 import 'package:nutrikid_app/entities/student/student.dart';
 
@@ -67,6 +68,9 @@ abstract class Measurement with _$Measurement {
     @JsonKey(name: 'suggestion_advices')
     List<String> suggestionAdvices,
     @Default(MeasurementStatus.normal) MeasurementStatus status,
+    @Default([])
+    @JsonKey(name: 'suggestions')
+    List<MeasurementSuggestion> suggestions,
   }) = _Measurement;
 
   factory Measurement.fromJson(Map<String, dynamic> json) =>

@@ -41,6 +41,13 @@ _Measurement _$MeasurementFromJson(Map<String, dynamic> json) => _Measurement(
   status:
       $enumDecodeNullable(_$MeasurementStatusEnumMap, json['status']) ??
       MeasurementStatus.normal,
+  suggestions:
+      (json['suggestions'] as List<dynamic>?)
+          ?.map(
+            (e) => MeasurementSuggestion.fromJson(e as Map<String, dynamic>),
+          )
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$MeasurementToJson(_Measurement instance) =>
@@ -61,6 +68,7 @@ Map<String, dynamic> _$MeasurementToJson(_Measurement instance) =>
       'z_score': instance.zScore,
       'suggestion_advices': instance.suggestionAdvices,
       'status': _$MeasurementStatusEnumMap[instance.status]!,
+      'suggestions': instance.suggestions,
     };
 
 const _$MeasurementStatusEnumMap = {
