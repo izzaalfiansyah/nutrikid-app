@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
-import 'package:nutrikid_app/components/app/measurement_detail/measurement_suggestions_widget.dart';
 import 'package:nutrikid_app/components/delete_dialog.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/screens/home/history/share/history_share_screen.dart';
@@ -25,9 +24,12 @@ class _MeasurementDetailState extends State<MeasurementDetail> {
 
   @override
   void initState() {
-    historyBloc.add(
-      HistoryEvent.loadMeasurementDetail(id: widget.measurement!.id),
-    );
+    if (widget.measurement != null) {
+      historyBloc.add(
+        HistoryEvent.loadMeasurementDetail(id: widget.measurement!.id),
+      );
+    }
+
     super.initState();
   }
 
@@ -71,51 +73,66 @@ class _MeasurementDetailState extends State<MeasurementDetail> {
                       ),
                     ),
                     if (measurement != null)
-                      PopupMenuButton(
-                        itemBuilder: (context) {
-                          return [
-                            PopupMenuItem(
-                              onTap: () async {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  useRootNavigator: true,
-                                  builder: (context) {
-                                    return MeasurementSuggestionsWidget(
-                                      measurement: measurement,
-                                    );
-                                  },
-                                );
-                              },
-                              child: Text('Saran'),
+                      IconButton(
+                        onPressed: () {
+                          Modular.to.pushNamed(
+                            '/main/share-measurement',
+                            arguments: HistoryShareScreenArgs(
+                              measurement: measurement,
                             ),
-                            if (appState.profile?.isTeacher == true ||
-                                appState.profile?.isExpert == true)
-                              PopupMenuItem(
-                                onTap:
-                                    () => handleDelete(context, measurement.id),
-                                child: Text(
-                                  'Hapus',
-                                  style: TextStyle(
-                                    color: VariantColor.destructive,
-                                  ),
-                                ),
-                              ),
-
-                            PopupMenuItem(
-                              onTap:
-                                  () => Modular.to.pushNamed(
-                                    '/main/share-measurement',
-                                    arguments: HistoryShareScreenArgs(
-                                      measurement: measurement,
-                                    ),
-                                  ),
-                              child: Text("Bagikan"),
-                            ),
-                          ];
+                          );
                         },
-                        icon: Icon(LucideIcons.moreHorizontal, size: 20),
+                        icon: Icon(
+                          LucideIcons.share2,
+                          size: 20,
+                          color: VariantColor.muted,
+                        ),
                       ),
+                    // PopupMenuButton(
+                    //   itemBuilder: (context) {
+                    //     return [
+                    //       // PopupMenuItem(
+                    //       //   onTap: () async {
+                    //       //     showModalBottomSheet(
+                    //       //       context: context,
+                    //       //       isScrollControlled: true,
+                    //       //       useRootNavigator: true,
+                    //       //       builder: (context) {
+                    //       //         return MeasurementSuggestionsWidget(
+                    //       //           measurement: measurement,
+                    //       //         );
+                    //       //       },
+                    //       //     );
+                    //       //   },
+                    //       //   child: Text('Saran'),
+                    //       // ),
+                    //       if (appState.profile?.isTeacher == true ||
+                    //           appState.profile?.isExpert == true)
+                    //         PopupMenuItem(
+                    //           onTap:
+                    //               () => handleDelete(context, measurement.id),
+                    //           child: Text(
+                    //             'Hapus',
+                    //             style: TextStyle(
+                    //               color: VariantColor.destructive,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //
+                    //       PopupMenuItem(
+                    //         onTap:
+                    //             () => Modular.to.pushNamed(
+                    //               '/main/share-measurement',
+                    //               arguments: HistoryShareScreenArgs(
+                    //                 measurement: measurement,
+                    //               ),
+                    //             ),
+                    //         child: Text("Bagikan"),
+                    //       ),
+                    //     ];
+                    //   },
+                    //   icon: Icon(LucideIcons.moreHorizontal, size: 20),
+                    // ),
                   ],
                 ),
                 SizedBox(),
@@ -166,27 +183,51 @@ class _MeasurementDetailState extends State<MeasurementDetail> {
                           : "-",
                 ),
                 SizedBox(height: 10),
-                // if (measurement != null)
-                //   Button(
-                //     onPressed:
-                //         measurement == null
-                //             ? null
-                //             : () {
-                //               print('download');
-                //             },
-                //     full: true,
-                //     child:
-                //         measurement == null
-                //             ? Text('Belum ada pengukuran')
-                //             : Row(
-                //               spacing: 14,
-                //               mainAxisAlignment: MainAxisAlignment.center,
-                //               children: [
-                //                 Icon(LucideIcons.downloadCloud),
-                //                 Text('Download'),
-                //               ],
-                //             ),
-                //   ),
+                if (measurement != null)
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(color: VariantColor.border),
+                      ),
+                    ),
+                    padding: EdgeInsets.only(top: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 14,
+                      children: [
+                        Text(
+                          "Saran kesehatan:",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        Column(
+                          spacing: 14,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:
+                              measurement.suggestionAdvices.map((advice) {
+                                final index = measurement.suggestionAdvices
+                                    .indexOf(advice);
+                                final number = index + 1;
+
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 30,
+                                      child: Text(
+                                        "$number.",
+                                        style: TextStyle(
+                                          color: VariantColor.muted,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(child: Text(advice)),
+                                  ],
+                                );
+                              }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             );
           },

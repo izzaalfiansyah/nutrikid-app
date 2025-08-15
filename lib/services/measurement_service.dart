@@ -38,6 +38,7 @@ class MeasurementService {
   Future<bool> addMeasurement({
     required double height,
     required double weight,
+    DateTime? createdAt,
   }) async {
     try {
       final student = Modular.get<AppBloc>().state.selectedStudent;
@@ -51,6 +52,7 @@ class MeasurementService {
           'student_height': height,
           'student_weight': weight,
           'student_age': studentAge,
+          'created_at': createdAt?.toUtc().toIso8601String(),
         },
       );
 

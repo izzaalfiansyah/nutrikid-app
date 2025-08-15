@@ -16,6 +16,8 @@ class Input extends StatefulWidget {
     this.keyboardType,
     this.maxLines,
     this.minLines,
+    this.readOnly = false,
+    this.onTap,
   });
 
   final String? placeholder;
@@ -29,6 +31,8 @@ class Input extends StatefulWidget {
   final TextInputType? keyboardType;
   final int? maxLines;
   final int? minLines;
+  final bool readOnly;
+  final void Function()? onTap;
 
   @override
   State<Input> createState() => _InputState();
@@ -97,6 +101,8 @@ class _InputState extends State<Input> {
       controller: widget.controller,
       onChanged: widget.onChanged,
       initialValue: widget.initialValue,
+      readOnly: widget.readOnly,
+      onTap: widget.onTap,
     );
   }
 }

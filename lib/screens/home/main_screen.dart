@@ -152,7 +152,7 @@ class _MainScreenState extends State<MainScreen> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton:
-                state.profile?.isParent == true
+                state.profile == null
                     ? null
                     : Padding(
                       padding: EdgeInsets.only(bottom: 44),

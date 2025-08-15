@@ -128,13 +128,22 @@ class _HistoryScreenState extends State<HistoryScreen> {
           useRootNavigator: true,
           builder: (context) {
             return Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              constraints: BoxConstraints(
+                maxHeight: SizeConfig.screenHeight! * .75,
               ),
-              padding: EdgeInsets.all(30),
-              child: SafeArea(
-                child: MeasurementDetail(measurement: measurement),
+              child: SingleChildScrollView(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),
+                  padding: EdgeInsets.all(30),
+                  child: SafeArea(
+                    child: MeasurementDetail(measurement: measurement),
+                  ),
+                ),
               ),
             );
           },

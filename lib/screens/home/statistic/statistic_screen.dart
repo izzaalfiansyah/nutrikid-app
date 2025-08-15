@@ -173,7 +173,8 @@ class _StatisticScreenState extends State<StatisticScreen> {
                             }
 
                             return SfCartesianChart(
-                              primaryXAxis: CategoryAxis(),
+                              primaryXAxis: CategoryAxis(interval: 6),
+                              primaryYAxis: NumericAxis(minimum: 10),
                               trackballBehavior: trackballBehavior,
                               // tooltipBehavior: tooltipBehavior,
                               series: <CartesianSeries>[

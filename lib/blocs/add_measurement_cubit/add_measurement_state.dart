@@ -6,6 +6,7 @@ abstract class AddMeasurementState with _$AddMeasurementState {
     @Default(false) bool isLoading,
     @Default(0.0) double height,
     @Default(0.0) double weight,
+    DateTime? createdAt,
     @Default('') String errorMessage,
   }) = _AddMeasurementState;
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
 import 'package:nutrikid_app/blocs/student_bloc/student_bloc.dart';
 import 'package:nutrikid_app/components/panel.dart';

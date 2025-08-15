@@ -22,6 +22,19 @@ part 'app_bloc.freezed.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc() : super(AppState.initial()) {
     on<AppEvent>((event, emit) async {
+      void loadStudent() {
+        Modular.get<HomeBloc>().add(HomeEvent.loadStudent());
+        Modular.get<HistoryBloc>().add(
+          HistoryEvent.loadMeasurement(isReset: true),
+        );
+
+        add(AppEvent.loadDefaultZScore());
+
+        Future.delayed(Duration(milliseconds: 300), () {
+          Modular.get<StudentBloc>().add(StudentEvent.load());
+        });
+      }
+
       if (event is _LoadStudent) {
         emit(state.copyWith(isStudentLoading: true));
         final selectedStudentId =
@@ -41,6 +54,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             await Modular.get<StudentService>().setStudentId(
               selectedStudent.id,
             );
+
+            loadStudent();
           }
 
           add(AppEvent.loadDefaultZScore());
@@ -64,16 +79,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
         emit(state.copyWith(selectedStudent: event.student));
 
-        Modular.get<HomeBloc>().add(HomeEvent.loadStudent());
-        Modular.get<HistoryBloc>().add(
-          HistoryEvent.loadMeasurement(isReset: true),
-        );
-
-        add(AppEvent.loadDefaultZScore());
-
-        Future.delayed(Duration(milliseconds: 300), () {
-          Modular.get<StudentBloc>().add(StudentEvent.load());
-        });
+        loadStudent();
       }
 
       if (event is _LoadProfile) {
@@ -149,8 +155,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
 
       if (event is _SelectSchool) {
-        SchoolService.setCurrentSchool(event.school);
-        emit(state.copyWith(currentSchool: event.school));
+        emit(
+          state.copyWith(currentSchool: event.school, selectedStudent: null),
+        );
+
+        await Modular.get<StudentService>().deleteStudentId();
+
+        Future.delayed(Duration(milliseconds: 300), () {
+          SchoolService.setCurrentSchool(event.school);
+          add(AppEvent.loadStudent());
+        });
       }
 
       if (event is _LoadDefaultZscore) {

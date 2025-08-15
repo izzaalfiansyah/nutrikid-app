@@ -28,6 +28,7 @@ class AddMeasurementCubit extends Cubit<AddMeasurementState> {
       await Modular.get<MeasurementService>().addMeasurement(
         height: state.height,
         weight: state.weight,
+        createdAt: state.createdAt,
       );
 
       homeBloc.add(HomeEvent.loadStudent());

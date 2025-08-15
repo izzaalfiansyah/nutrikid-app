@@ -6,6 +6,7 @@ import 'package:nutrikid_app/blocs/add_measurement_cubit/add_measurement_cubit.d
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
 import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/components/input.dart';
+import 'package:nutrikid_app/shared/format_date.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 
 class AddMeasurementDialog extends StatefulWidget {
@@ -30,6 +31,8 @@ class _AddMeasurementDialogState extends State<AddMeasurementDialog> {
   late final weightController = TextEditingController(
     text: studentWeight.toString(),
   );
+
+  DateTime createdAt = DateTime.now();
 
   @override
   void initState() {
@@ -97,26 +100,76 @@ class _AddMeasurementDialogState extends State<AddMeasurementDialog> {
               children: [
                 Text(
                   'Tambah Pengukuran',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 Column(
                   spacing: 14,
                   children: [
-                    Input(
-                      placeholder: "Tinggi Badan",
-                      suffixIcon: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text('cm')],
-                      ),
-                      controller: heightController,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 5,
+                      children: [
+                        Text('Tinggi Badan'),
+                        Input(
+                          placeholder: "Masukkan Tinggi Badan",
+                          suffixIcon: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [Text('cm')],
+                          ),
+                          controller: heightController,
+                        ),
+                      ],
                     ),
-                    Input(
-                      placeholder: "Berat Badan",
-                      suffixIcon: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text('kg')],
-                      ),
-                      controller: weightController,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 5,
+                      children: [
+                        Text('Berat Badan'),
+                        Input(
+                          placeholder: "Masukkan Berat Badan",
+                          suffixIcon: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [Text('kg')],
+                          ),
+                          controller: weightController,
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 5,
+                      children: [
+                        Text("Tanggal Pengukuran"),
+                        Input(
+                          placeholder: formatDate(createdAt),
+                          readOnly: true,
+                          prefixIcon: Icon(LucideIcons.calendar),
+                          onTap: () async {
+                            final result = await showDatePicker(
+                              initialEntryMode:
+                                  DatePickerEntryMode.calendarOnly,
+                              context: context,
+                              firstDate: DateTime.now().subtract(
+                                Duration(days: 365 * 10),
+                              ),
+                              initialDate: createdAt,
+                              lastDate: DateTime.now(),
+                            );
+
+                            if (result != null) {
+                              addMeasurementCubit.changeState(
+                                state.copyWith(createdAt: result),
+                              );
+
+                              setState(() {
+                                createdAt = result;
+                              });
+                            }
+                          },
+                        ),
+                      ],
                     ),
                     if (state.errorMessage.isNotEmpty)
                       Center(

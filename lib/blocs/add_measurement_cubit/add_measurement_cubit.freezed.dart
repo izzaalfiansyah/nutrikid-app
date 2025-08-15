@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AddMeasurementState {
 
- bool get isLoading; double get height; double get weight; String get errorMessage;
+ bool get isLoading; double get height; double get weight; DateTime? get createdAt; String get errorMessage;
 /// Create a copy of AddMeasurementState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AddMeasurementStateCopyWith<AddMeasurementState> get copyWith => _$AddMeasureme
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddMeasurementState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddMeasurementState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,height,weight,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,height,weight,createdAt,errorMessage);
 
 @override
 String toString() {
-  return 'AddMeasurementState(isLoading: $isLoading, height: $height, weight: $weight, errorMessage: $errorMessage)';
+  return 'AddMeasurementState(isLoading: $isLoading, height: $height, weight: $weight, createdAt: $createdAt, errorMessage: $errorMessage)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AddMeasurementStateCopyWith<$Res>  {
   factory $AddMeasurementStateCopyWith(AddMeasurementState value, $Res Function(AddMeasurementState) _then) = _$AddMeasurementStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, double height, double weight, String errorMessage
+ bool isLoading, double height, double weight, DateTime? createdAt, String errorMessage
 });
 
 
@@ -62,12 +62,13 @@ class _$AddMeasurementStateCopyWithImpl<$Res>
 
 /// Create a copy of AddMeasurementState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? height = null,Object? weight = null,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? height = null,Object? weight = null,Object? createdAt = freezed,Object? errorMessage = null,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
 as double,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
-as double,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as double,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -153,10 +154,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isLoading,  double height,  double weight,  String errorMessage)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isLoading,  double height,  double weight,  DateTime? createdAt,  String errorMessage)?  initial,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddMeasurementState() when initial != null:
-return initial(_that.isLoading,_that.height,_that.weight,_that.errorMessage);case _:
+return initial(_that.isLoading,_that.height,_that.weight,_that.createdAt,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return initial(_that.isLoading,_that.height,_that.weight,_that.errorMessage);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isLoading,  double height,  double weight,  String errorMessage)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isLoading,  double height,  double weight,  DateTime? createdAt,  String errorMessage)  initial,}) {final _that = this;
 switch (_that) {
 case _AddMeasurementState():
-return initial(_that.isLoading,_that.height,_that.weight,_that.errorMessage);case _:
+return initial(_that.isLoading,_that.height,_that.weight,_that.createdAt,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return initial(_that.isLoading,_that.height,_that.weight,_that.errorMessage);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isLoading,  double height,  double weight,  String errorMessage)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isLoading,  double height,  double weight,  DateTime? createdAt,  String errorMessage)?  initial,}) {final _that = this;
 switch (_that) {
 case _AddMeasurementState() when initial != null:
-return initial(_that.isLoading,_that.height,_that.weight,_that.errorMessage);case _:
+return initial(_that.isLoading,_that.height,_that.weight,_that.createdAt,_that.errorMessage);case _:
   return null;
 
 }
@@ -209,12 +210,13 @@ return initial(_that.isLoading,_that.height,_that.weight,_that.errorMessage);cas
 
 
 class _AddMeasurementState implements AddMeasurementState {
-  const _AddMeasurementState({this.isLoading = false, this.height = 0.0, this.weight = 0.0, this.errorMessage = ''});
+  const _AddMeasurementState({this.isLoading = false, this.height = 0.0, this.weight = 0.0, this.createdAt, this.errorMessage = ''});
   
 
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  double height;
 @override@JsonKey() final  double weight;
+@override final  DateTime? createdAt;
 @override@JsonKey() final  String errorMessage;
 
 /// Create a copy of AddMeasurementState
@@ -227,16 +229,16 @@ _$AddMeasurementStateCopyWith<_AddMeasurementState> get copyWith => __$AddMeasur
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddMeasurementState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddMeasurementState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,height,weight,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,height,weight,createdAt,errorMessage);
 
 @override
 String toString() {
-  return 'AddMeasurementState.initial(isLoading: $isLoading, height: $height, weight: $weight, errorMessage: $errorMessage)';
+  return 'AddMeasurementState.initial(isLoading: $isLoading, height: $height, weight: $weight, createdAt: $createdAt, errorMessage: $errorMessage)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$AddMeasurementStateCopyWith<$Res> implements $AddMeasurem
   factory _$AddMeasurementStateCopyWith(_AddMeasurementState value, $Res Function(_AddMeasurementState) _then) = __$AddMeasurementStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, double height, double weight, String errorMessage
+ bool isLoading, double height, double weight, DateTime? createdAt, String errorMessage
 });
 
 
@@ -264,12 +266,13 @@ class __$AddMeasurementStateCopyWithImpl<$Res>
 
 /// Create a copy of AddMeasurementState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? height = null,Object? weight = null,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? height = null,Object? weight = null,Object? createdAt = freezed,Object? errorMessage = null,}) {
   return _then(_AddMeasurementState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
 as double,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
-as double,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as double,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
