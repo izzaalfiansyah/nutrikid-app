@@ -116,7 +116,7 @@ class MeasurementService {
 
       final encodedZScores = prefs.getString(key);
 
-      if (encodedZScores != null) {
+      if (encodedZScores != null && false) {
         return List<ZScore>.from(
           jsonDecode(encodedZScores).map((z) {
             return ZScore.fromJson(z);

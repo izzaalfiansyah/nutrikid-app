@@ -180,11 +180,11 @@ class _StatisticScreenState extends State<StatisticScreen> {
                               series: <CartesianSeries>[
                                 ...List.generate(7, (index) {
                                   final colors = [
-                                    Colors.red,
                                     Colors.orange,
-                                    Colors.lime,
+                                    Colors.yellow,
                                     Colors.green,
-                                    Colors.lime,
+                                    Colors.green,
+                                    Colors.yellow,
                                     Colors.orange,
                                     Colors.red,
                                   ];
@@ -217,8 +217,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                     highValueMapper:
                                         (data, _) =>
                                             data.zScoresRange[index].max,
-                                    color: colors[index].withAlpha(75),
-                                    borderColor: colors[index],
+                                    color: colors[index].withAlpha(100),
                                     borderDrawMode:
                                         RangeAreaBorderMode.excludeSides,
                                     borderWidth: 1.5,
