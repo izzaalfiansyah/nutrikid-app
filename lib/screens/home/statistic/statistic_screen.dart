@@ -68,7 +68,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
               ).textTheme.bodyMedium!.copyWith(color: Colors.white),
             ),
             Text(
-              'Z-Score : ${data.zScore.toInt()}',
+              'Z-Score : ${data.zScore.toStringAsFixed(2)}',
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(color: Colors.white),
