@@ -42,13 +42,15 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
       }
 
       final directory = await getApplicationDocumentsDirectory();
-      final file = await File("{$directory.path}/share_screen").create();
+      final file = await File("{$directory.path}/statistic.png").create();
 
       await file.writeAsBytes(image);
 
       await SharePlus.instance.share(
         ShareParams(text: "Statistik Siswa", files: [XFile(file.path)]),
       );
+
+      await file.delete();
     });
   }
 
