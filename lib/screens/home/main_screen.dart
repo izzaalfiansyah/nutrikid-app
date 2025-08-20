@@ -88,19 +88,26 @@ class _MainScreenState extends State<MainScreen> {
           return Scaffold(
             drawer: AppDrawer(),
             appBar: AppBar(
-              backgroundColor: Colors.white,
-              surfaceTintColor: Colors.white,
+              backgroundColor: VariantColor.primary,
+              foregroundColor: Colors.white,
+              surfaceTintColor: VariantColor.primary,
               centerTitle: true,
               title: Row(
                 spacing: 10,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Assets.favicon.image(width: 20),
+                  ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                    child: Assets.favicon.image(width: 20),
+                  ),
                   Text(
                     Env.APP_NAME,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: VariantColor.primary,
+                      color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -173,9 +180,9 @@ class _MainScreenState extends State<MainScreen> {
             body: PersistentTabView(
               context,
               decoration: NavBarDecoration(
-                colorBehindNavBar: VariantColor.background,
+                colorBehindNavBar: VariantColor.card,
               ),
-              backgroundColor: Colors.white,
+              backgroundColor: VariantColor.card,
               controller: _controller,
               screens: [
                 HomeScreen(),
@@ -186,7 +193,7 @@ class _MainScreenState extends State<MainScreen> {
               items: _navbarItems(),
               resizeToAvoidBottomInset: true,
               hideNavigationBarWhenKeyboardAppears: true,
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: 10),
               isVisible: true,
               animationSettings: const NavBarAnimationSettings(
                 navBarItemAnimation: ItemAnimationSettings(

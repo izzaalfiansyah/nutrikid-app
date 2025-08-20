@@ -50,8 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          // color: VariantColor.primary,
+                          color: VariantColor.card,
                           borderRadius: BorderRadius.vertical(
                             bottom: Radius.circular(70),
                           ),

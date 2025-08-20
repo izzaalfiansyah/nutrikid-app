@@ -171,11 +171,12 @@ class _AppDrawerState extends State<AppDrawer> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
+                width: isSelected ? 2 : 1,
                 color: isSelected ? VariantColor.primary : VariantColor.border,
               ),
               color:
                   isSelected
-                      ? VariantColor.primary.withAlpha(10)
+                      ? VariantColor.primary.withAlpha(200)
                       : Colors.white,
             ),
             child: Row(
@@ -192,7 +193,10 @@ class _AppDrawerState extends State<AppDrawer> {
                               child: Icon(
                                 student.gender.icon,
                                 size: 18,
-                                color: student.gender.color,
+                                color:
+                                    isSelected
+                                        ? Colors.white
+                                        : student.gender.color,
                               ),
                             ),
                             TextSpan(text: '  '),
@@ -202,7 +206,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 context,
                               ).textTheme.titleMedium!.copyWith(
                                 fontWeight: FontWeight.w600,
-                                color: isSelected ? VariantColor.primary : null,
+                                color: isSelected ? Colors.white : null,
                               ),
                             ),
                           ],
@@ -212,10 +216,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       Text(
                         "${student.age} tahun (${student.gender.name})",
                         style: TextStyle(
-                          color:
-                              isSelected
-                                  ? VariantColor.primary
-                                  : VariantColor.muted,
+                          color: isSelected ? Colors.white : VariantColor.muted,
                         ),
                       ),
                     ],
@@ -223,8 +224,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
                 Icon(
                   isSelected ? LucideIcons.circleDot : LucideIcons.circle,
-                  color:
-                      isSelected ? VariantColor.primary : VariantColor.border,
+                  color: isSelected ? Colors.white : VariantColor.border,
                 ),
               ],
             ),

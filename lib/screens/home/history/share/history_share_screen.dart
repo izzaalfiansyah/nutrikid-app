@@ -192,7 +192,8 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                                   ),
                                   shareItem(
                                     label: "Z-Score",
-                                    value: "${measurement.zScore} SD",
+                                    value:
+                                        "${measurement.zScore.toStringAsFixed(2)} SD",
                                   ),
                                   shareItem(
                                     label: "Status",
@@ -264,7 +265,6 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                                   ],
                                 ),
                               ),
-                              Divider(color: VariantColor.border),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [Text('Statistik :')],
