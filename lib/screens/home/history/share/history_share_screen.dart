@@ -35,11 +35,17 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
 
   final screenshotController = ScreenshotController();
 
+  bool screenshotTriggered = false;
+
   handleShareScreen() {
     screenshotController.capture().then((image) async {
       if (image == null) {
         return;
       }
+
+      setState(() {
+        screenshotTriggered = true;
+      });
 
       final directory = await getApplicationDocumentsDirectory();
       final file = await File("{$directory.path}/statistic.png").create();
@@ -51,6 +57,10 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
       );
 
       await file.delete();
+
+      setState(() {
+        screenshotTriggered = false;
+      });
     });
   }
 
@@ -58,280 +68,267 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Screenshot(
-              controller: screenshotController,
-              child: Stack(
+    return Screenshot(
+      controller: screenshotController,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: SizeConfig.screenHeight! * .35,
-                        decoration: BoxDecoration(color: VariantColor.primary),
-                      ),
-                      Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: VariantColor.primary,
-                          borderRadius: BorderRadius.vertical(
-                            bottom: Radius.circular(100),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Container(
+                    height: SizeConfig.screenHeight! * .35,
+                    decoration: BoxDecoration(color: VariantColor.primary),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: SafeArea(
-                      child: Column(
-                        spacing: 20,
-                        children: [
-                          Column(
-                            spacing: 14,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withAlpha(50),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 44,
-                                  child: Text(
-                                    letterName(measurement.student?.name ?? ""),
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.titleLarge!.copyWith(
-                                      color: VariantColor.primary,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                measurement.student?.name ?? "",
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.bodyLarge!.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Panel(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Column(
-                                spacing: 14,
-                                children: [
-                                  Column(
-                                    spacing: 22,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Umur Siswa',
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.bodySmall!.copyWith(
-                                              color: VariantColor.muted,
-                                              fontSize: 11,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${measurement.studentAge} Tahun ${measurement.studentAgeMonth} Bulan',
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.bodyLarge!.copyWith(
-                                              color: VariantColor.primary,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      shareItem(
-                                        label: "Tgl. Pengukuran",
-                                        value: formatDate(
-                                          measurement.createdAt ??
-                                              DateTime.now(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Divider(color: VariantColor.border),
-                                  Column(
-                                    spacing: 10,
-                                    children: [
-                                      shareItem(
-                                        label: "Tinggi Badan",
-                                        value:
-                                            "${measurement.studentHeight.toStringAsFixed(1)} cm",
-                                      ),
-                                      shareItem(
-                                        label: "Berat Badan",
-                                        value:
-                                            "${measurement.studentWeight.toStringAsFixed(1)} kg",
-                                      ),
-                                      shareItem(
-                                        label: "BMI",
-                                        value: measurement.studentBmi
-                                            .toStringAsFixed(2),
-                                      ),
-                                      shareItem(
-                                        label: "Z-Score",
-                                        value: "${measurement.zScore} SD",
-                                      ),
-                                      shareItem(
-                                        label: "Status",
-                                        value: measurement.status.name,
-                                        color: measurement.status.color,
-                                      ),
-                                    ],
-                                  ),
-                                  Divider(color: VariantColor.border),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [Text("Saran Kesehatan :")],
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(16),
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: VariantColor.border.withAlpha(
-                                          30,
-                                        ),
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        if (measurement.suggestions.isEmpty)
-                                          Center(
-                                            child: Text(
-                                              "Tidak ada saran kesehatan",
-                                              style: TextStyle(
-                                                color: VariantColor.muted,
-                                              ),
-                                            ),
-                                          )
-                                        else
-                                          Column(
-                                            spacing: 8,
-                                            children: List.generate(
-                                              measurement.suggestions.length,
-                                              (index) {
-                                                final suggestion =
-                                                    measurement
-                                                        .suggestions[index];
-                                                return Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 24,
-                                                      child: Text(
-                                                        "${index + 1}.",
-                                                        style: TextStyle(
-                                                          color:
-                                                              VariantColor
-                                                                  .muted,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Flexible(
-                                                      child: Text(
-                                                        suggestion.advice,
-                                                        style: TextStyle(
-                                                          color:
-                                                              VariantColor
-                                                                  .muted,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(color: VariantColor.border),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [Text('Statistik :')],
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(16),
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: VariantColor.border.withAlpha(
-                                          30,
-                                        ),
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: StatisticChartWidget(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Assets.favicon.image(width: 14),
-                              SizedBox(height: 5),
-                              Text(
-                                Env.APP_NAME,
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall!.copyWith(
-                                  color: VariantColor.muted.withAlpha(150),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                  Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: VariantColor.primary,
+                      borderRadius: BorderRadius.vertical(
+                        bottom: Radius.circular(100),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-            Positioned(
-              left: 10,
-              top: 10,
-              child: SafeArea(
-                child: IconButton(
-                  onPressed: () {
-                    Modular.to.pop();
-                  },
-                  icon: Icon(LucideIcons.arrowLeft, color: Colors.white),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: SafeArea(
+                  child: Column(
+                    spacing: 20,
+                    children: [
+                      Column(
+                        spacing: 14,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withAlpha(50),
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 44,
+                              child: Text(
+                                letterName(measurement.student?.name ?? ""),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleLarge!.copyWith(
+                                  color: VariantColor.primary,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            measurement.student?.name ?? "",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge!.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Panel(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            spacing: 14,
+                            children: [
+                              Column(
+                                spacing: 22,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'Umur Siswa',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodySmall!.copyWith(
+                                          color: VariantColor.muted,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                      Text(
+                                        '${measurement.studentAge} Tahun ${measurement.studentAgeMonth} Bulan',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge!.copyWith(
+                                          color: VariantColor.primary,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  shareItem(
+                                    label: "Tgl. Pengukuran",
+                                    value: formatDate(
+                                      measurement.createdAt ?? DateTime.now(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(color: VariantColor.border),
+                              Column(
+                                spacing: 10,
+                                children: [
+                                  shareItem(
+                                    label: "Tinggi Badan",
+                                    value:
+                                        "${measurement.studentHeight.toStringAsFixed(1)} cm",
+                                  ),
+                                  shareItem(
+                                    label: "Berat Badan",
+                                    value:
+                                        "${measurement.studentWeight.toStringAsFixed(1)} kg",
+                                  ),
+                                  shareItem(
+                                    label: "BMI",
+                                    value: measurement.studentBmi
+                                        .toStringAsFixed(2),
+                                  ),
+                                  shareItem(
+                                    label: "Z-Score",
+                                    value: "${measurement.zScore} SD",
+                                  ),
+                                  shareItem(
+                                    label: "Status",
+                                    value: measurement.status.name,
+                                    color: measurement.status.color,
+                                  ),
+                                ],
+                              ),
+                              Divider(color: VariantColor.border),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [Text("Saran Kesehatan :")],
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(16),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: VariantColor.border.withAlpha(30),
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (measurement.suggestions.isEmpty)
+                                      Center(
+                                        child: Text(
+                                          "Tidak ada saran kesehatan",
+                                          style: TextStyle(
+                                            color: VariantColor.muted,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      Column(
+                                        spacing: 8,
+                                        children: List.generate(
+                                          measurement.suggestions.length,
+                                          (index) {
+                                            final suggestion =
+                                                measurement.suggestions[index];
+                                            return Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: 24,
+                                                  child: Text(
+                                                    "${index + 1}.",
+                                                    style: TextStyle(
+                                                      color: VariantColor.muted,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Flexible(
+                                                  child: Text(
+                                                    suggestion.advice,
+                                                    style: TextStyle(
+                                                      color: VariantColor.muted,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              Divider(color: VariantColor.border),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [Text('Statistik :')],
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(16),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: VariantColor.border.withAlpha(30),
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: StatisticChartWidget(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Assets.favicon.image(width: 14),
+                          SizedBox(height: 5),
+                          Text(
+                            Env.APP_NAME,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodySmall!.copyWith(
+                              color: VariantColor.muted.withAlpha(150),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              right: 10,
-              top: 10,
-              child: SafeArea(
-                child: IconButton(
-                  onPressed: handleShareScreen,
-                  icon: Icon(LucideIcons.share2, color: Colors.white),
+              if (!screenshotTriggered)
+                Positioned(
+                  left: 10,
+                  top: 10,
+                  child: SafeArea(
+                    child: IconButton(
+                      onPressed: () {
+                        Modular.to.pop();
+                      },
+                      icon: Icon(LucideIcons.arrowLeft, color: Colors.white),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
+              if (!screenshotTriggered)
+                Positioned(
+                  right: 10,
+                  top: 10,
+                  child: SafeArea(
+                    child: IconButton(
+                      onPressed: handleShareScreen,
+                      icon: Icon(LucideIcons.share2, color: Colors.white),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
