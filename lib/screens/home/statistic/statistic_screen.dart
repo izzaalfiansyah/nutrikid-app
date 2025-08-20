@@ -22,6 +22,78 @@ class _StatisticScreenState extends State<StatisticScreen> {
   final historyBloc = Modular.get<HistoryBloc>();
   final appBloc = Modular.get<AppBloc>();
 
+  loadData() async {
+    if (historyBloc.state.measurements.isEmpty) {
+      historyBloc.add(HistoryEvent.loadMeasurement(isReset: true));
+    }
+  }
+
+  @override
+  initState() {
+    loadData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(14),
+        child: Panel(
+          child: BlocBuilder<AppBloc, AppState>(
+            bloc: appBloc,
+            builder: (context, appState) {
+              return BlocBuilder<HistoryBloc, HistoryState>(
+                bloc: historyBloc,
+                builder: (context, historyState) {
+                  if (historyState.isLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: VariantColor.primary,
+                      ),
+                    );
+                  }
+
+                  return Column(
+                    children: [
+                      if (historyState.measurements.isNotEmpty)
+                        SizedBox(
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("BMI", textAlign: TextAlign.left),
+                              SizedBox(height: 12),
+                            ],
+                          ),
+                        ),
+                      Expanded(child: StatisticChartWidget()),
+                      if (historyState.measurements.isNotEmpty)
+                        Text('Umur (Bulan)'),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget chartLegend({required Color color, required String label}) {
+    return Row(
+      spacing: 5,
+      children: [CircleAvatar(radius: 5, backgroundColor: color), Text(label)],
+    );
+  }
+}
+
+class StatisticChartWidget extends StatelessWidget {
+  StatisticChartWidget({super.key});
+
+  final statisticBloc = Modular.get<StatisticBloc>();
+
   late final TrackballBehavior trackballBehavior = TrackballBehavior(
     enable: true,
     activationMode: ActivationMode.singleTap,
@@ -93,169 +165,91 @@ class _StatisticScreenState extends State<StatisticScreen> {
     width: 10,
   );
 
-  loadData() async {
-    if (historyBloc.state.measurements.isEmpty) {
-      historyBloc.add(HistoryEvent.loadMeasurement(isReset: true));
-    }
-  }
-
-  @override
-  initState() {
-    loadData();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(14),
-        child: Panel(
-          child: BlocBuilder<AppBloc, AppState>(
-            bloc: appBloc,
-            builder: (context, appState) {
-              return BlocBuilder<HistoryBloc, HistoryState>(
-                bloc: historyBloc,
-                builder: (context, historyState) {
-                  if (historyState.isLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: VariantColor.primary,
-                      ),
-                    );
-                  }
-
-                  return Column(
-                    children: [
-                      if (historyState.measurements.isNotEmpty)
-                        SizedBox(
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("BMI", textAlign: TextAlign.left),
-                              SizedBox(height: 12),
-                            ],
-                          ),
-                        ),
-                      Expanded(
-                        child: BlocBuilder<StatisticBloc, StatisticState>(
-                          bloc: statisticBloc,
-                          builder: (context, state) {
-                            if (state.isLoading) {
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  color: VariantColor.primary,
-                                ),
-                              );
-                            }
-
-                            if (state.measurementData.isEmpty) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    LucideIcons.barChart2,
-                                    size: 100,
-                                    color: VariantColor.border,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Belum ada data pengukuran',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(color: VariantColor.muted),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-
-                            return SfCartesianChart(
-                              primaryXAxis: CategoryAxis(interval: 6),
-                              primaryYAxis: NumericAxis(minimum: 10),
-                              trackballBehavior: trackballBehavior,
-                              // tooltipBehavior: tooltipBehavior,
-                              series: <CartesianSeries>[
-                                ...List.generate(7, (index) {
-                                  final colors = [
-                                    Colors.orange,
-                                    Colors.yellow,
-                                    Colors.green,
-                                    Colors.green,
-                                    Colors.yellow,
-                                    Colors.orange,
-                                    Colors.red,
-                                  ];
-
-                                  final names = [
-                                    '-3',
-                                    '-2',
-                                    '1',
-                                    '0',
-                                    '+1',
-                                    "+2",
-                                    "+3",
-                                  ];
-
-                                  final defaultZScores =
-                                      appState.defaultZScores
-                                          .where(
-                                            (zScore) => zScore.month <= 8 * 12,
-                                          )
-                                          .toList();
-
-                                  return RangeAreaSeries<ZScore, String>(
-                                    dataSource: defaultZScores,
-                                    enableTrackball: false,
-                                    xValueMapper:
-                                        (data, _) => data.month.toString(),
-                                    lowValueMapper:
-                                        (data, _) =>
-                                            data.zScoresRange[index].min,
-                                    highValueMapper:
-                                        (data, _) =>
-                                            data.zScoresRange[index].max,
-                                    color: colors[index].withAlpha(100),
-                                    borderDrawMode:
-                                        RangeAreaBorderMode.excludeSides,
-                                    borderWidth: 1.5,
-                                    // markerSettings: markerSettings,
-                                    name: "${names[index]} SD",
-                                  );
-                                }),
-                                SplineSeries<StatisticChart, String>(
-                                  dataSource: state.measurementData,
-                                  xValueMapper:
-                                      (data, _) => data.totalMonth.toString(),
-                                  yValueMapper: (data, _) => data.bmi,
-                                  color: VariantColor.primary,
-                                  markerSettings: markerSettings,
-                                  name: "IMT",
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      if (historyState.measurements.isNotEmpty)
-                        Text('Umur (Bulan)'),
-                    ],
-                  );
-                },
+    return BlocBuilder<AppBloc, AppState>(
+      bloc: Modular.get<AppBloc>(),
+      builder: (context, appState) {
+        return BlocBuilder<StatisticBloc, StatisticState>(
+          bloc: statisticBloc,
+          builder: (context, state) {
+            if (state.isLoading) {
+              return Center(
+                child: CircularProgressIndicator(color: VariantColor.primary),
               );
-            },
-          ),
-        ),
-      ),
-    );
-  }
+            }
 
-  Widget chartLegend({required Color color, required String label}) {
-    return Row(
-      spacing: 5,
-      children: [CircleAvatar(radius: 5, backgroundColor: color), Text(label)],
+            if (state.measurementData.isEmpty) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    LucideIcons.barChart2,
+                    size: 100,
+                    color: VariantColor.border,
+                  ),
+                  Center(
+                    child: Text(
+                      'Belum ada data pengukuran',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: VariantColor.muted,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            return SfCartesianChart(
+              primaryXAxis: CategoryAxis(interval: 6),
+              primaryYAxis: NumericAxis(minimum: 10),
+              trackballBehavior: trackballBehavior,
+              // tooltipBehavior: tooltipBehavior,
+              series: <CartesianSeries>[
+                ...List.generate(7, (index) {
+                  final colors = [
+                    Colors.orange,
+                    Colors.yellow,
+                    Colors.green,
+                    Colors.green,
+                    Colors.yellow,
+                    Colors.orange,
+                    Colors.red,
+                  ];
+
+                  final names = ['-3', '-2', '1', '0', '+1', "+2", "+3"];
+
+                  final defaultZScores =
+                      appState.defaultZScores
+                          .where((zScore) => zScore.month <= 8 * 12)
+                          .toList();
+
+                  return RangeAreaSeries<ZScore, String>(
+                    dataSource: defaultZScores,
+                    enableTrackball: false,
+                    xValueMapper: (data, _) => data.month.toString(),
+                    lowValueMapper: (data, _) => data.zScoresRange[index].min,
+                    highValueMapper: (data, _) => data.zScoresRange[index].max,
+                    color: colors[index].withAlpha(100),
+                    borderDrawMode: RangeAreaBorderMode.excludeSides,
+                    borderWidth: 1.5,
+                    // markerSettings: markerSettings,
+                    name: "${names[index]} SD",
+                  );
+                }),
+                SplineSeries<StatisticChart, String>(
+                  dataSource: state.measurementData,
+                  xValueMapper: (data, _) => data.totalMonth.toString(),
+                  yValueMapper: (data, _) => data.bmi,
+                  color: VariantColor.primary,
+                  markerSettings: markerSettings,
+                  name: "IMT",
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
+import 'package:nutrikid_app/screens/home/statistic/statistic_screen.dart';
 import 'package:nutrikid_app/shared/env.dart';
 import 'package:nutrikid_app/shared/format_date.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
@@ -226,6 +226,22 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                                     ),
                                 ],
                               ),
+                            ),
+                            Divider(color: VariantColor.border),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [Text('Statistik :')],
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(16),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: VariantColor.border.withAlpha(30),
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: StatisticChartWidget(),
                             ),
                           ],
                         ),
