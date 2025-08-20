@@ -48,7 +48,7 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
       });
 
       final directory = await getApplicationDocumentsDirectory();
-      final file = await File("{$directory.path}/statistic.png").create();
+      final file = await File("${directory.path}/statistic.png").create();
 
       await file.writeAsBytes(image);
 
