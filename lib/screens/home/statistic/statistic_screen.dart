@@ -200,29 +200,62 @@ class StatisticChartWidget extends StatelessWidget {
               );
             }
 
+            var defaultZScores =
+                appState.defaultZScores
+                    .where((zScore) => zScore.month <= 8 * 12)
+                    .map((zScore) {
+                      return zScore.copyWith(
+                        zScoresRange: [
+                          zScore.zScoresRange.first.copyWith(
+                            min: zScore.zScoresRange.first.min - .125,
+                            max: zScore.zScoresRange.first.min,
+                          ),
+                          ...zScore.zScoresRange,
+                          zScore.zScoresRange.last.copyWith(
+                            min: zScore.zScoresRange.last.max,
+                            max: zScore.zScoresRange.last.max + .125,
+                          ),
+                        ],
+                      );
+                    })
+                    .toList();
+
+            final names = [
+              '< -3',
+              '-3',
+              '-2',
+              '1',
+              '0',
+              '+1',
+              "+2",
+              "+3",
+              "> +3",
+            ];
+
+            final colors = [
+              Colors.red,
+              Colors.yellow,
+              Colors.green,
+              Colors.green,
+              Colors.green,
+              Colors.green,
+              Colors.yellow,
+              Colors.red,
+              Colors.red,
+            ];
+
             return SfCartesianChart(
-              primaryXAxis: CategoryAxis(interval: 6),
+              primaryXAxis: CategoryAxis(
+                interval: 6,
+                majorGridLines: MajorGridLines(color: Colors.transparent),
+              ),
               primaryYAxis: NumericAxis(minimum: 10),
               trackballBehavior: trackballBehavior,
               // tooltipBehavior: tooltipBehavior,
               series: <CartesianSeries>[
-                ...List.generate(7, (index) {
-                  final colors = [
-                    Colors.orange,
-                    Colors.yellow,
-                    Colors.green,
-                    Colors.green,
-                    Colors.yellow,
-                    Colors.orange,
-                    Colors.red,
-                  ];
-
-                  final names = ['-3', '-2', '1', '0', '+1', "+2", "+3"];
-
-                  final defaultZScores =
-                      appState.defaultZScores
-                          .where((zScore) => zScore.month <= 8 * 12)
-                          .toList();
+                ...List.generate(9, (index) {
+                  final name = names[index];
+                  final color = colors[index];
 
                   return RangeAreaSeries<ZScore, String>(
                     dataSource: defaultZScores,
@@ -230,11 +263,10 @@ class StatisticChartWidget extends StatelessWidget {
                     xValueMapper: (data, _) => data.month.toString(),
                     lowValueMapper: (data, _) => data.zScoresRange[index].min,
                     highValueMapper: (data, _) => data.zScoresRange[index].max,
-                    color: colors[index].withAlpha(100),
-                    borderDrawMode: RangeAreaBorderMode.excludeSides,
-                    borderWidth: 1.5,
+                    color: color.withAlpha(135),
+                    borderWidth: 0,
                     // markerSettings: markerSettings,
-                    name: "${names[index]} SD",
+                    name: "$name SD",
                   );
                 }),
                 SplineSeries<StatisticChart, String>(

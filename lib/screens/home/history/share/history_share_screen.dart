@@ -68,10 +68,10 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
-    return Screenshot(
-      controller: screenshotController,
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: Screenshot(
+        controller: screenshotController,
+        child: SingleChildScrollView(
           child: Stack(
             children: [
               Column(
@@ -219,7 +219,7 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if (measurement.suggestions.isEmpty)
+                                    if (measurement.suggestionAdvices.isEmpty)
                                       Center(
                                         child: Text(
                                           "Tidak ada saran kesehatan",
@@ -232,10 +232,12 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                                       Column(
                                         spacing: 8,
                                         children: List.generate(
-                                          measurement.suggestions.length,
+                                          measurement.suggestionAdvices.length,
                                           (index) {
                                             final suggestion =
-                                                measurement.suggestions[index];
+                                                measurement
+                                                    .suggestionAdvices[index];
+
                                             return Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -251,7 +253,7 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                                                 ),
                                                 Flexible(
                                                   child: Text(
-                                                    suggestion.advice,
+                                                    suggestion,
                                                     style: TextStyle(
                                                       color: VariantColor.muted,
                                                     ),
