@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 8,
           children: [
-            Assets.favicon.image(width: SizeConfig.blockSizeHorizontal! * 10),
+            Assets.favicon.image(width: SizeConfig.blockSizeHorizontal! * 14),
             Text(
               Env.APP_NAME,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(

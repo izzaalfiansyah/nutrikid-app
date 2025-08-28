@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
                       Colors.white,
                       BlendMode.srcIn,
                     ),
-                    child: Assets.favicon.image(width: 20),
+                    child: Assets.favicon.image(width: 24),
                   ),
                   Text(
                     Env.APP_NAME,

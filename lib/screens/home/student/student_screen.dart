@@ -65,7 +65,9 @@ class _StudentScreenState extends State<StudentScreen> {
                               ),
                               SizedBox(height: 14),
                               Text(
-                                state.student.name,
+                                state.student.name.isEmpty
+                                    ? "Tidak diketahui"
+                                    : state.student.name,
                                 style: Theme.of(context).textTheme.bodyLarge!
                                     .copyWith(fontWeight: FontWeight.w600),
                               ),
@@ -91,21 +93,34 @@ class _StudentScreenState extends State<StudentScreen> {
                               SizedBox(),
                               attributeRow(
                                 label: "Nama",
-                                value: state.student.name,
+                                value:
+                                    state.student.name.isEmpty
+                                        ? "-"
+                                        : state.student.name,
                               ),
                               attributeRow(
                                 label: "Tanggal Lahir",
-                                value: formatDate(
-                                  state.student.birthDate ?? DateTime.now(),
-                                ),
+                                value:
+                                    state.student.birthDate != null
+                                        ? formatDate(
+                                          state.student.birthDate ??
+                                              DateTime.now(),
+                                        )
+                                        : "-",
                               ),
                               attributeRow(
                                 label: "Umur",
-                                value: "${state.student.age.toString()} tahun",
+                                value:
+                                    state.student.name.isEmpty
+                                        ? "-"
+                                        : "${state.student.age.toString()} tahun ${state.student.ageMonth.toString()} bulan",
                               ),
                               attributeRow(
                                 label: "Gender",
-                                value: state.student.gender.name,
+                                value:
+                                    state.student.name.isEmpty
+                                        ? "-"
+                                        : state.student.gender.name,
                               ),
                             ],
                           ),

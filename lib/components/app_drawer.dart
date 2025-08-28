@@ -50,7 +50,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 spacing: 14,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Assets.favicon.image(width: 20),
+                  Assets.favicon.image(width: 24),
                   Text(
                     Env.APP_NAME,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(

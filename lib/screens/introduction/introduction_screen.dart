@@ -40,7 +40,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 context,
               ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
             ),
-            image: Assets.favicon.image(width: 60),
+            image: Assets.favicon.image(width: 70),
           ),
           intro.PageViewModel(
             title: "Pilih Role!",
