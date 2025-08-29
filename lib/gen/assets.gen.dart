@@ -16,9 +16,12 @@ class Assets {
 
   static const String aEnv = '.env';
   static const AssetGenImage favicon = AssetGenImage('assets/favicon.png');
+  static const AssetGenImage polijeCopyright = AssetGenImage(
+    'assets/polije-copyright.png',
+  );
 
   /// List of all assets
-  static List<dynamic> get values => [aEnv, favicon];
+  static List<dynamic> get values => [aEnv, favicon, polijeCopyright];
 }
 
 class AssetGenImage {

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:nutrikid_app/components/app/statistic_chart_widget.dart';
 import 'package:nutrikid_app/components/panel.dart';
 import 'package:nutrikid_app/entities/measurement/measurement.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
-import 'package:nutrikid_app/screens/home/statistic/statistic_screen.dart';
 import 'package:nutrikid_app/shared/env.dart';
 import 'package:nutrikid_app/shared/format_date.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
@@ -289,7 +289,7 @@ class _HistoryShareScreenState extends State<HistoryShareScreen> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Assets.favicon.image(width: 14),
+                          Assets.favicon.image(width: 20),
                           SizedBox(height: 5),
                           Text(
                             Env.APP_NAME,

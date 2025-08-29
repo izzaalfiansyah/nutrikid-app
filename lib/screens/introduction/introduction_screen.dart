@@ -33,12 +33,18 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         pages: [
           intro.PageViewModel(
             title: "Selamat datang!",
-            bodyWidget: Text(
-              Env.APP_DESCRIPTION,
-              textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
+            bodyWidget: Column(
+              children: [
+                Text(
+                  Env.APP_DESCRIPTION,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
+                ),
+                const SizedBox(height: 30),
+                Assets.polijeCopyright.image(height: 30),
+              ],
             ),
             image: Assets.favicon.image(width: 70),
           ),
