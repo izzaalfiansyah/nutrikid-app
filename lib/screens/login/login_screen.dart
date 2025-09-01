@@ -25,17 +25,17 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            left: 8,
-            child: SafeArea(
-              child: IconButton(
-                onPressed: () {
-                  Modular.to.pop();
-                },
-                icon: Icon(LucideIcons.arrowLeft, size: 24),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   left: 8,
+          //   child: SafeArea(
+          //     child: IconButton(
+          //       onPressed: () {
+          //         Modular.to.pop();
+          //       },
+          //       icon: Icon(LucideIcons.arrowLeft, size: 24),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(30),
             child: BlocBuilder<LoginCubit, LoginState>(
