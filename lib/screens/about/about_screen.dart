@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:nutrikid_app/blocs/team_bloc/team_bloc.dart';
+import 'package:nutrikid_app/entities/team/team.dart';
 import 'package:nutrikid_app/shared/variant.dart';
+import 'package:nutrikid_app/utils/letter_name.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -9,6 +14,15 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
+  final teamBloc = Modular.get<TeamBloc>();
+
+  @override
+  void initState() {
+    teamBloc.add(TeamEvent.load());
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +37,44 @@ class _AboutScreenState extends State<AboutScreen> {
         backgroundColor: VariantColor.primary,
         foregroundColor: Colors.white,
       ),
-      body: Center(child: Text("about page")),
+      body: BlocBuilder<TeamBloc, TeamState>(
+        bloc: teamBloc,
+        builder: (context, state) {
+          if (state.isLoading) {
+            return Center(
+              child: CircularProgressIndicator(color: VariantColor.primary),
+            );
+          }
+
+          return Column(
+            children:
+                state.teams.map((team) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(team.image),
+                      onBackgroundImageError:
+                          (e, _) => Text(
+                            letterName(team.image),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleMedium!.copyWith(
+                              color: VariantColor.primary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                    ),
+                    title: Text(team.name),
+                    subtitle: Text(
+                      "Jurusan Kesehatan",
+                      style: TextStyle(
+                        color: VariantColor.border.withAlpha(150),
+                      ),
+                    ),
+                  );
+                }).toList(),
+          );
+        },
+      ),
     );
   }
 }

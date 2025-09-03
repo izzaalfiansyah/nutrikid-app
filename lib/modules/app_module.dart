@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
+import 'package:nutrikid_app/blocs/team_bloc/team_bloc.dart';
 import 'package:nutrikid_app/modules/login_module.dart';
 import 'package:nutrikid_app/modules/main_module.dart';
 import 'package:nutrikid_app/screens/about/about_screen.dart';
@@ -13,6 +14,7 @@ class AppModule extends Module {
     i.addLazySingleton(AuthService.new);
 
     i.addLazySingleton(AppBloc.new);
+    i.addLazySingleton(TeamBloc.new);
 
     super.binds(i);
   }
