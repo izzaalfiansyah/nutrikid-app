@@ -87,6 +87,10 @@ class _AboutScreenState extends State<AboutScreen> {
                     );
                   }
 
+                  if (state.teams.isEmpty) {
+                    return ListTile(title: Text("Belum ada data tim."));
+                  }
+
                   return Column(
                     children:
                         state.teams.map((team) {
