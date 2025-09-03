@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               padding: EdgeInsets.all(10),
                               child: CircleAvatar(
-                                radius: 74,
+                                radius: 65,
                                 backgroundColor: VariantColor.muted.withAlpha(
                                   18,
                                 ),

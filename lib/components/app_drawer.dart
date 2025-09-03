@@ -47,15 +47,31 @@ class _AppDrawerState extends State<AppDrawer> {
             spacing: 30,
             children: [
               Row(
-                spacing: 14,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Assets.favicon.image(width: 24),
-                  Text(
-                    Env.APP_NAME,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  Row(
+                    spacing: 10,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Assets.favicon.image(width: 24),
+                      Text(
+                        Env.APP_NAME,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: VariantColor.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Modular.to.pushNamed('/about');
+                    },
+                    tooltip: "Tentang Kami",
+                    icon: Icon(
+                      LucideIcons.helpCircle,
                       color: VariantColor.primary,
-                      fontWeight: FontWeight.w600,
+                      size: 18,
                     ),
                   ),
                 ],
