@@ -7,7 +7,7 @@ class TeamService {
       final result = await http().get('/team');
 
       return List<Team>.from(
-        result.data['data'].map((json) {
+        result.data['data']['teams'].map((json) {
           return Team.fromJson(json);
         }),
       );
