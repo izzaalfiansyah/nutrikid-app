@@ -10,7 +10,9 @@ import 'package:nutrikid_app/shared/variant.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class StatisticChartWidget extends StatefulWidget {
-  StatisticChartWidget({super.key});
+  StatisticChartWidget({super.key, this.isLoad = true});
+
+  final bool isLoad;
 
   @override
   State<StatisticChartWidget> createState() => _StatisticChartWidgetState();
@@ -29,7 +31,9 @@ class _StatisticChartWidgetState extends State<StatisticChartWidget> {
 
   @override
   void initState() {
-    loadData();
+    if (widget.isLoad) {
+      loadData();
+    }
     super.initState();
   }
 

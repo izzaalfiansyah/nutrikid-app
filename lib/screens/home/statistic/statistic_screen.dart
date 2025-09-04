@@ -65,7 +65,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                             ],
                           ),
                         ),
-                      Expanded(child: StatisticChartWidget()),
+                      Expanded(child: StatisticChartWidget(isLoad: false)),
                       if (historyState.measurements.isNotEmpty)
                         Text('Umur (Bulan)'),
                     ],
