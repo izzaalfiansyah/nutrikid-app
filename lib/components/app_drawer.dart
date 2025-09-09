@@ -154,7 +154,6 @@ class _AppDrawerState extends State<AppDrawer> {
                             value: state.currentSchool,
                             onChanged: (val) {
                               appBloc.add(AppEvent.selectSchool(val));
-                              loadStudents();
                             },
                           ),
                         );

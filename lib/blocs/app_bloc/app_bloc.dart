@@ -133,7 +133,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       if (event is _LoadSchool) {
         final result = await SchoolService.getSchools();
 
-        final currentSchool = await SchoolService.getCurrentSchool();
+        var currentSchool = await SchoolService.getCurrentSchool();
+
+        if (currentSchool == null) {
+          add(AppEvent.selectSchool(result.first));
+          currentSchool = result.first;
+        }
 
         try {
           emit(
