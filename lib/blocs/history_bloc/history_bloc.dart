@@ -58,6 +58,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
                   state.measurements
                       .where((measurement) => measurement.id != event.id)
                       .toList(),
+              total: state.total - 1,
             ),
           );
 

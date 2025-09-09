@@ -73,66 +73,35 @@ class _MeasurementDetailState extends State<MeasurementDetail> {
                       ),
                     ),
                     if (measurement != null)
-                      IconButton(
-                        onPressed: () {
-                          Modular.to.pushNamed(
-                            '/main/share-measurement',
-                            arguments: HistoryShareScreenArgs(
-                              measurement: measurement,
+                      PopupMenuButton(
+                        itemBuilder: (context) {
+                          return [
+                            if (appState.profile?.isTeacher == true ||
+                                appState.profile?.isExpert == true)
+                              PopupMenuItem(
+                                onTap:
+                                    () => handleDelete(context, measurement.id),
+                                child: Text(
+                                  'Hapus',
+                                  style: TextStyle(
+                                    color: VariantColor.destructive,
+                                  ),
+                                ),
+                              ),
+                            PopupMenuItem(
+                              onTap:
+                                  () => Modular.to.pushNamed(
+                                    '/main/share-measurement',
+                                    arguments: HistoryShareScreenArgs(
+                                      measurement: measurement,
+                                    ),
+                                  ),
+                              child: Text("Bagikan"),
                             ),
-                          );
+                          ];
                         },
-                        icon: Icon(
-                          LucideIcons.share2,
-                          size: 20,
-                          color: VariantColor.muted,
-                        ),
+                        icon: Icon(LucideIcons.moreHorizontal, size: 20),
                       ),
-                    // PopupMenuButton(
-                    //   itemBuilder: (context) {
-                    //     return [
-                    //       // PopupMenuItem(
-                    //       //   onTap: () async {
-                    //       //     showModalBottomSheet(
-                    //       //       context: context,
-                    //       //       isScrollControlled: true,
-                    //       //       useRootNavigator: true,
-                    //       //       builder: (context) {
-                    //       //         return MeasurementSuggestionsWidget(
-                    //       //           measurement: measurement,
-                    //       //         );
-                    //       //       },
-                    //       //     );
-                    //       //   },
-                    //       //   child: Text('Saran'),
-                    //       // ),
-                    //       if (appState.profile?.isTeacher == true ||
-                    //           appState.profile?.isExpert == true)
-                    //         PopupMenuItem(
-                    //           onTap:
-                    //               () => handleDelete(context, measurement.id),
-                    //           child: Text(
-                    //             'Hapus',
-                    //             style: TextStyle(
-                    //               color: VariantColor.destructive,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //
-                    //       PopupMenuItem(
-                    //         onTap:
-                    //             () => Modular.to.pushNamed(
-                    //               '/main/share-measurement',
-                    //               arguments: HistoryShareScreenArgs(
-                    //                 measurement: measurement,
-                    //               ),
-                    //             ),
-                    //         child: Text("Bagikan"),
-                    //       ),
-                    //     ];
-                    //   },
-                    //   icon: Icon(LucideIcons.moreHorizontal, size: 20),
-                    // ),
                   ],
                 ),
                 SizedBox(),
