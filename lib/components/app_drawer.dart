@@ -34,8 +34,6 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
-
     return Drawer(
       backgroundColor: Colors.white,
       width: SizeConfig.screenWidth! * 0.9,
@@ -81,15 +79,82 @@ class _AppDrawerState extends State<AppDrawer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 10,
                   children: [
-                    Input(
-                      placeholder: "Cari Siswa...",
-                      variant: 'none',
-                      suffixIcon: Icon(LucideIcons.search),
-                      onChanged: (val) {
+                    GestureDetector(
+                      onTap: () async {
+                        final searchNotifier = ValueNotifier('');
+                        final reset = await showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return ValueListenableBuilder(
+                              valueListenable: searchNotifier,
+                              builder: (context, value, _) {
+                                return AlertDialog(
+                                  title: Text(
+                                    "Cari Siswa",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  content: Input(
+                                    placeholder: "Ketikkan Nama atau NIM",
+                                    variant: 'none',
+                                    suffixIcon: Icon(LucideIcons.search),
+                                    onChanged: (val) {
+                                      searchNotifier.value = val;
+                                    },
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text("Reset"),
+                                      onPressed: () {
+                                        Modular.to.pop(true);
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("Cari"),
+                                      onPressed: () {
+                                        Modular.to.pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
+
                         setState(() {
-                          search = val;
+                          search = reset == true ? '' : searchNotifier.value;
                         });
                       },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: VariantColor.border,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 14,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              search.isNotEmpty ? search : "Cari Siswa...",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            Icon(
+                              LucideIcons.search,
+                              size: 18,
+                              color: VariantColor.muted.withAlpha(100),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     SizedBox(),
                     Expanded(
@@ -144,17 +209,16 @@ class _AppDrawerState extends State<AppDrawer> {
                     BlocBuilder<AppBloc, AppState>(
                       bloc: Modular.get<AppBloc>(),
                       builder: (context, state) {
-                        if (state.profile != null) {
-                          return SizedBox(width: double.infinity);
-                        }
-
                         return SizedBox(
                           width: double.infinity,
                           child: SchoolDropdown(
-                            value: state.currentSchool,
-                            onChanged: (val) {
-                              appBloc.add(AppEvent.selectSchool(val));
-                            },
+                            value: state.profile?.school ?? state.currentSchool,
+                            onChanged:
+                                state.profile?.schoolId != null
+                                    ? null
+                                    : (val) {
+                                      appBloc.add(AppEvent.selectSchool(val));
+                                    },
                           ),
                         );
                       },

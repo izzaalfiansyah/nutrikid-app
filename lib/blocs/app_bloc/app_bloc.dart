@@ -36,6 +36,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
 
       if (event is _LoadStudent) {
+        if (state.isStudentLoading) return;
+
         emit(state.copyWith(isStudentLoading: true));
         final selectedStudentId =
             await Modular.get<StudentService>().getStudentId();
@@ -131,6 +133,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
 
       if (event is _LoadSchool) {
+        if (state.isSchoolLoading) {
+          return;
+        }
+
+        emit(state.copyWith(isSchoolLoading: true));
+
         final result = await SchoolService.getSchools();
 
         var currentSchool = await SchoolService.getCurrentSchool();
@@ -151,12 +159,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         } catch (err) {
           // do nothing
         }
-
         if (result.isNotEmpty && state.currentSchool == null) {
           SchoolService.setCurrentSchool(result.first);
         }
 
-        emit(state.copyWith(schools: result));
+        emit(state.copyWith(schools: result, isSchoolLoading: false));
       }
 
       if (event is _SelectSchool) {

@@ -5,7 +5,7 @@ abstract class AppState with _$AppState {
   const factory AppState.initial({
     @Default([]) List<Student> students,
     @Default(0) int studentTotal,
-    @Default(true) bool isStudentLoading,
+    @Default(false) bool isStudentLoading,
 
     // role
     @Default('') String accessToken,
@@ -17,6 +17,7 @@ abstract class AppState with _$AppState {
 
     // schools
     @Default([]) List<School> schools,
+    @Default(false) bool isSchoolLoading,
     School? currentSchool,
 
     // default z scores

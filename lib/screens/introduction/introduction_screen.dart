@@ -165,11 +165,11 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         showBackButton: true,
         showNextButton: true,
         next: Text(
-          'Selanjutnya'.toUpperCase(),
+          'Next'.toUpperCase(),
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
         back: Text(
-          'Kembali'.toUpperCase(),
+          'Prev'.toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.w600,
             color: Colors.grey.shade500,

@@ -36,7 +36,9 @@ class StudentService {
         queryParameters.addAll({'parent_id': profile?.id});
       }
 
-      if (profile == null && appBloc.state.currentSchool != null) {
+      print(appBloc.state.currentSchool);
+
+      if (appBloc.state.currentSchool != null) {
         queryParameters.addAll({'school_id': appBloc.state.currentSchool?.id});
       }
 
