@@ -206,7 +206,7 @@ String toString() {
 /// @nodoc
 mixin _$TeamState {
 
- bool get isLoading; List<Team> get teams;
+ bool get isLoading; List<Team> get teams; Team? get leader;
 /// Create a copy of TeamState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -217,16 +217,16 @@ $TeamStateCopyWith<TeamState> get copyWith => _$TeamStateCopyWithImpl<TeamState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TeamState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.teams, teams));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TeamState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.teams, teams)&&(identical(other.leader, leader) || other.leader == leader));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(teams));
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(teams),leader);
 
 @override
 String toString() {
-  return 'TeamState(isLoading: $isLoading, teams: $teams)';
+  return 'TeamState(isLoading: $isLoading, teams: $teams, leader: $leader)';
 }
 
 
@@ -237,11 +237,11 @@ abstract mixin class $TeamStateCopyWith<$Res>  {
   factory $TeamStateCopyWith(TeamState value, $Res Function(TeamState) _then) = _$TeamStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, List<Team> teams
+ bool isLoading, List<Team> teams, Team? leader
 });
 
 
-
+$TeamCopyWith<$Res>? get leader;
 
 }
 /// @nodoc
@@ -254,14 +254,27 @@ class _$TeamStateCopyWithImpl<$Res>
 
 /// Create a copy of TeamState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? teams = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? teams = null,Object? leader = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,teams: null == teams ? _self.teams : teams // ignore: cast_nullable_to_non_nullable
-as List<Team>,
+as List<Team>,leader: freezed == leader ? _self.leader : leader // ignore: cast_nullable_to_non_nullable
+as Team?,
   ));
 }
+/// Create a copy of TeamState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TeamCopyWith<$Res>? get leader {
+    if (_self.leader == null) {
+    return null;
+  }
 
+  return $TeamCopyWith<$Res>(_self.leader!, (value) {
+    return _then(_self.copyWith(leader: value));
+  });
+}
 }
 
 
@@ -343,10 +356,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isLoading,  List<Team> teams)?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isLoading,  List<Team> teams,  Team? leader)?  initial,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TeamState() when initial != null:
-return initial(_that.isLoading,_that.teams);case _:
+return initial(_that.isLoading,_that.teams,_that.leader);case _:
   return orElse();
 
 }
@@ -364,10 +377,10 @@ return initial(_that.isLoading,_that.teams);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isLoading,  List<Team> teams)  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isLoading,  List<Team> teams,  Team? leader)  initial,}) {final _that = this;
 switch (_that) {
 case _TeamState():
-return initial(_that.isLoading,_that.teams);case _:
+return initial(_that.isLoading,_that.teams,_that.leader);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -384,10 +397,10 @@ return initial(_that.isLoading,_that.teams);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isLoading,  List<Team> teams)?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isLoading,  List<Team> teams,  Team? leader)?  initial,}) {final _that = this;
 switch (_that) {
 case _TeamState() when initial != null:
-return initial(_that.isLoading,_that.teams);case _:
+return initial(_that.isLoading,_that.teams,_that.leader);case _:
   return null;
 
 }
@@ -399,7 +412,7 @@ return initial(_that.isLoading,_that.teams);case _:
 
 
 class _TeamState implements TeamState {
-  const _TeamState({this.isLoading = false, final  List<Team> teams = const []}): _teams = teams;
+  const _TeamState({this.isLoading = false, final  List<Team> teams = const [], this.leader}): _teams = teams;
   
 
 @override@JsonKey() final  bool isLoading;
@@ -410,6 +423,7 @@ class _TeamState implements TeamState {
   return EqualUnmodifiableListView(_teams);
 }
 
+@override final  Team? leader;
 
 /// Create a copy of TeamState
 /// with the given fields replaced by the non-null parameter values.
@@ -421,16 +435,16 @@ _$TeamStateCopyWith<_TeamState> get copyWith => __$TeamStateCopyWithImpl<_TeamSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TeamState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._teams, _teams));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TeamState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._teams, _teams)&&(identical(other.leader, leader) || other.leader == leader));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_teams));
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_teams),leader);
 
 @override
 String toString() {
-  return 'TeamState.initial(isLoading: $isLoading, teams: $teams)';
+  return 'TeamState.initial(isLoading: $isLoading, teams: $teams, leader: $leader)';
 }
 
 
@@ -441,11 +455,11 @@ abstract mixin class _$TeamStateCopyWith<$Res> implements $TeamStateCopyWith<$Re
   factory _$TeamStateCopyWith(_TeamState value, $Res Function(_TeamState) _then) = __$TeamStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, List<Team> teams
+ bool isLoading, List<Team> teams, Team? leader
 });
 
 
-
+@override $TeamCopyWith<$Res>? get leader;
 
 }
 /// @nodoc
@@ -458,15 +472,28 @@ class __$TeamStateCopyWithImpl<$Res>
 
 /// Create a copy of TeamState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? teams = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? teams = null,Object? leader = freezed,}) {
   return _then(_TeamState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,teams: null == teams ? _self._teams : teams // ignore: cast_nullable_to_non_nullable
-as List<Team>,
+as List<Team>,leader: freezed == leader ? _self.leader : leader // ignore: cast_nullable_to_non_nullable
+as Team?,
   ));
 }
 
+/// Create a copy of TeamState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TeamCopyWith<$Res>? get leader {
+    if (_self.leader == null) {
+    return null;
+  }
 
+  return $TeamCopyWith<$Res>(_self.leader!, (value) {
+    return _then(_self.copyWith(leader: value));
+  });
+}
 }
 
 // dart format on

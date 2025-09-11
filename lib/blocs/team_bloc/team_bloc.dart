@@ -15,9 +15,14 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
         emit(state.copyWith(isLoading: true));
 
         try {
-          final teams = await TeamService.get();
+          final teamResponse = await TeamService.get();
 
-          emit(state.copyWith(teams: teams));
+          emit(
+            state.copyWith(
+              teams: teamResponse.teams,
+              leader: teamResponse.leader,
+            ),
+          );
         } catch (err) {
           //
         }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nutrikid_app/blocs/team_bloc/team_bloc.dart';
+import 'package:nutrikid_app/entities/team/team.dart';
 import 'package:nutrikid_app/gen/assets.gen.dart';
 import 'package:nutrikid_app/shared/env.dart';
 import 'package:nutrikid_app/shared/variant.dart';
@@ -92,37 +93,55 @@ class _AboutScreenState extends State<AboutScreen> {
                   }
 
                   return Column(
-                    children:
-                        state.teams.map((team) {
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(team.image),
-                              onBackgroundImageError:
-                                  (e, _) => Text(
-                                    letterName(team.image),
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.titleMedium!.copyWith(
-                                      color: VariantColor.primary,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
+                    children: [
+                      if (state.leader != null)
+                        Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(14),
+                              child: Text("Ketua"),
                             ),
-                            title: Text(team.name),
-                            subtitle: Text(
-                              "Jurusan Kesehatan",
-                              style: TextStyle(
-                                color: VariantColor.border.withAlpha(150),
-                              ),
-                            ),
-                          );
-                        }).toList(),
+                            teamList(state.leader!),
+                          ],
+                        ),
+                      Padding(
+                        padding: EdgeInsets.all(14),
+                        child: Text("Anggota"),
+                      ),
+                      Column(
+                        children:
+                            state.teams.map((team) {
+                              return teamList(team);
+                            }).toList(),
+                      ),
+                    ],
                   );
                 },
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget teamList(Team team) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(team.image),
+        onBackgroundImageError:
+            (e, _) => Text(
+              letterName(team.image),
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: VariantColor.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+      ),
+      title: Text(team.name),
+      subtitle: Text(
+        "Jurusan Kesehatan",
+        style: TextStyle(color: VariantColor.border.withAlpha(150)),
       ),
     );
   }

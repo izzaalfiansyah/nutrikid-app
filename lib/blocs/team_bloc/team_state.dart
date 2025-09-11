@@ -5,5 +5,6 @@ abstract class TeamState with _$TeamState {
   const factory TeamState.initial({
     @Default(false) bool isLoading,
     @Default([]) List<Team> teams,
+    Team? leader,
   }) = _TeamState;
 }
