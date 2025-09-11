@@ -163,7 +163,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           SchoolService.setCurrentSchool(result.first);
         }
 
-        emit(state.copyWith(schools: result, isSchoolLoading: false));
+        if (result.isNotEmpty) {
+          emit(state.copyWith(schools: result));
+        }
+
+        emit(state.copyWith(isSchoolLoading: false));
       }
 
       if (event is _SelectSchool) {
