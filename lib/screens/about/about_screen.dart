@@ -39,88 +39,100 @@ class _AboutScreenState extends State<AboutScreen> {
         backgroundColor: VariantColor.primary,
         foregroundColor: Colors.white,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(color: Colors.white),
-            padding: EdgeInsets.all(20),
-            child: Column(
-              spacing: 15,
-              children: [
-                Column(
-                  children: [
-                    Assets.favicon.image(width: 70),
-                    Text(
-                      Env.APP_NAME,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: VariantColor.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(Env.APP_DESCRIPTION, textAlign: TextAlign.center),
-                Assets.polijeCopyright.image(height: 22),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              "Tim Kami",
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
-            ),
-          ),
-          Expanded(
-            child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
               decoration: BoxDecoration(color: Colors.white),
-              child: BlocBuilder<TeamBloc, TeamState>(
-                bloc: teamBloc,
-                builder: (context, state) {
-                  if (state.isLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: VariantColor.primary,
-                      ),
-                    );
-                  }
-
-                  if (state.teams.isEmpty) {
-                    return ListTile(title: Text("Belum ada data tim."));
-                  }
-
-                  return Column(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                spacing: 15,
+                children: [
+                  Column(
                     children: [
-                      if (state.leader != null)
-                        Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(14),
-                              child: Text("Ketua"),
-                            ),
-                            teamList(state.leader!),
-                          ],
+                      Assets.favicon.image(width: 70),
+                      Text(
+                        Env.APP_NAME,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium!.copyWith(
+                          color: VariantColor.primary,
+                          fontWeight: FontWeight.w600,
                         ),
-                      Padding(
-                        padding: EdgeInsets.all(14),
-                        child: Text("Anggota"),
-                      ),
-                      Column(
-                        children:
-                            state.teams.map((team) {
-                              return teamList(team);
-                            }).toList(),
                       ),
                     ],
-                  );
-                },
+                  ),
+                  Text(Env.APP_DESCRIPTION, textAlign: TextAlign.center),
+                  Assets.polijeCopyright.image(height: 22),
+                ],
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                "Tim Kami",
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
+            SafeArea(
+              child: Container(
+                decoration: BoxDecoration(color: Colors.white),
+                child: BlocBuilder<TeamBloc, TeamState>(
+                  bloc: teamBloc,
+                  builder: (context, state) {
+                    if (state.isLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: VariantColor.primary,
+                        ),
+                      );
+                    }
+
+                    if (state.teams.isEmpty) {
+                      return ListTile(title: Text("Belum ada data tim."));
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (state.leader != null)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                  vertical: 8,
+                                ),
+                                child: Text("Ketua"),
+                              ),
+                              teamList(state.leader!),
+                            ],
+                          ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
+                          child: Text("Anggota"),
+                        ),
+                        Column(
+                          children:
+                              state.teams.map((team) {
+                                return teamList(team);
+                              }).toList(),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -138,10 +150,12 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
             ),
       ),
-      title: Text(team.name),
+      title: Text(team.name, style: Theme.of(context).textTheme.bodyMedium!),
       subtitle: Text(
         "Jurusan Kesehatan",
-        style: TextStyle(color: VariantColor.border.withAlpha(150)),
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+          color: VariantColor.border.withAlpha(150),
+        ),
       ),
     );
   }
