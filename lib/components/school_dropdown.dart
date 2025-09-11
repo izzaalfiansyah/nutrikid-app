@@ -33,6 +33,7 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
 
   @override
   void initState() {
+    getSchools();
     super.initState();
   }
 
