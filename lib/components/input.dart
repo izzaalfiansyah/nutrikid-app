@@ -11,6 +11,7 @@ class Input extends StatefulWidget {
     this.controller,
     this.initialValue,
     this.onChanged,
+    this.onFieldSubmitted,
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
@@ -26,6 +27,7 @@ class Input extends StatefulWidget {
   final TextEditingController? controller;
   final String? initialValue;
   final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final TextInputType? keyboardType;
@@ -103,6 +105,7 @@ class _InputState extends State<Input> {
       initialValue: widget.initialValue,
       readOnly: widget.readOnly,
       onTap: widget.onTap,
+      onFieldSubmitted: widget.onFieldSubmitted,
     );
   }
 }

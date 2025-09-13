@@ -53,11 +53,15 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
                 state.schools.map((school) {
                   return DropdownMenuItem(
                     value: school,
-                    onTap: () => handleChange(school),
                     child: Text(school.name),
                   );
                 }).toList(),
-            onChanged: (val) {},
+            onChanged:
+                widget.onChanged != null
+                    ? (value) {
+                      handleChange(value!);
+                    }
+                    : null,
           ),
         );
       },

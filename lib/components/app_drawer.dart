@@ -100,8 +100,9 @@ class _AppDrawerState extends State<AppDrawer> {
                                     placeholder: "Ketikkan Nama atau NIM",
                                     variant: 'none',
                                     suffixIcon: Icon(LucideIcons.search),
-                                    onChanged: (val) {
+                                    onFieldSubmitted: (val) {
                                       searchNotifier.value = val;
+                                      Modular.to.pop();
                                     },
                                   ),
                                   actions: [
