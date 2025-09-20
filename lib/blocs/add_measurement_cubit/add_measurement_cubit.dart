@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrikid_app/blocs/app_bloc/app_bloc.dart';
 import 'package:nutrikid_app/blocs/history_bloc/history_bloc.dart';
 import 'package:nutrikid_app/blocs/home_bloc/home_bloc.dart';
+import 'package:nutrikid_app/screens/home/history/share/history_share_screen.dart';
 import 'package:nutrikid_app/services/measurement_service.dart';
 
 part 'add_measurement_state.dart';
@@ -41,6 +42,13 @@ class AddMeasurementCubit extends Cubit<AddMeasurementState> {
       if (callback != null) {
         callback();
       }
+
+      final latestMeasurement = historyBloc.state.measurements.first;
+
+      Modular.to.pushNamed(
+        '/main/share-measurement',
+        arguments: HistoryShareScreenArgs(measurement: latestMeasurement),
+      );
     } catch (err) {
       emit(
         state.copyWith(

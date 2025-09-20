@@ -21,10 +21,4 @@ class IntroductionService {
 
     return prefs.getString(INTRODUCTION_ROLE) == 'teacher';
   }
-
-  static Future<void> setRole(String role) async {
-    final prefs = await sharedPreferences();
-
-    await prefs.setString(INTRODUCTION_ROLE, role);
-  }
 }

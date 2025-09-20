@@ -43,6 +43,7 @@ class _MeasurementDetailState extends State<MeasurementDetail> {
               "Anda yakin ingin menghapus pengukuran ini? Data akan dihapus secara permanen",
           onDelete: () {
             historyBloc.add(HistoryEvent.deleteMeasurement(id: id));
+            Modular.to.pop();
           },
         );
       },
