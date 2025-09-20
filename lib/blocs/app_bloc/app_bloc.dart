@@ -115,7 +115,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           await Modular.get<AuthService>().deleteToken();
 
           Modular.to.popUntil(ModalRoute.withName('/'));
-          Modular.to.pushReplacementNamed('/');
+          Modular.to.pushReplacementNamed('/login');
         }
       }
 
