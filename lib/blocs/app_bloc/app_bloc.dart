@@ -28,8 +28,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           HistoryEvent.loadMeasurement(isReset: true),
         );
 
-        add(AppEvent.loadDefaultZScore());
-
         Future.delayed(Duration(milliseconds: 300), () {
           Modular.get<StudentBloc>().add(StudentEvent.load());
         });
