@@ -188,7 +188,7 @@ class _StatisticChartWidgetState extends State<StatisticChartWidget> {
             ];
 
             return SfCartesianChart(
-              primaryXAxis: CategoryAxis(
+              primaryXAxis: NumericAxis(
                 interval: 6,
                 majorGridLines: MajorGridLines(color: Colors.transparent),
               ),
@@ -200,10 +200,10 @@ class _StatisticChartWidgetState extends State<StatisticChartWidget> {
                   final name = names[index];
                   final color = colors[index];
 
-                  return RangeAreaSeries<ZScore, String>(
+                  return RangeAreaSeries<ZScore, int>(
                     dataSource: defaultZScores,
                     enableTrackball: false,
-                    xValueMapper: (data, _) => data.month.toString(),
+                    xValueMapper: (data, _) => data.month,
                     lowValueMapper: (data, _) => data.zScoresRange[index].min,
                     highValueMapper: (data, _) => data.zScoresRange[index].max,
                     color: color.withAlpha(135),
@@ -212,9 +212,9 @@ class _StatisticChartWidgetState extends State<StatisticChartWidget> {
                     name: "$name SD",
                   );
                 }),
-                SplineSeries<StatisticChart, String>(
+                SplineSeries<StatisticChart, int>(
                   dataSource: state.measurementData,
-                  xValueMapper: (data, _) => data.totalMonth.toString(),
+                  xValueMapper: (data, _) => data.totalMonth,
                   yValueMapper: (data, _) => data.bmi,
                   color: VariantColor.primary,
                   markerSettings: markerSettings,
