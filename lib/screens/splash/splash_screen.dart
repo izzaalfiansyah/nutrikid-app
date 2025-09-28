@@ -19,16 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   getProfile() async {
     final isIntroductionShowed = await IntroductionService.shown();
-    final isTeacher = await IntroductionService.isTeacher();
 
     appBloc.add(
       AppEvent.loadProfile(
         callback: (profile) {
           var redirect = '/login';
-
-          if (!isTeacher) {
-            redirect = '/main';
-          }
 
           if (!isIntroductionShowed) {
             redirect = '/introduction';

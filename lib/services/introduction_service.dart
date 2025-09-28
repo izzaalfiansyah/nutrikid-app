@@ -15,16 +15,4 @@ class IntroductionService {
 
     await prefs.setBool(INTRODUCTION_SHOWN, true);
   }
-
-  static Future<bool> isTeacher() async {
-    final prefs = await sharedPreferences();
-
-    return prefs.getString(INTRODUCTION_ROLE) == 'teacher';
-  }
-
-  static Future<void> setRole(String role) async {
-    final prefs = await sharedPreferences();
-
-    await prefs.setString(INTRODUCTION_ROLE, role);
-  }
 }

@@ -45,7 +45,7 @@ class MeasurementService {
       final studentId = student?.id;
       final studentAge = student?.age;
 
-      final result = await http().post(
+      await http().post(
         '/measurement',
         data: {
           'student_id': studentId,
