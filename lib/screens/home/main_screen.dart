@@ -29,7 +29,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    appBloc.add(AppEvent.loadStudent());
     super.initState();
   }
 
