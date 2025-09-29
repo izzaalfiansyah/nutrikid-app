@@ -36,8 +36,10 @@ class StudentService {
         queryParameters.addAll({'parent_id': profile?.id});
       }
 
-      if (appBloc.state.currentSchool != null) {
-        queryParameters.addAll({'school_id': appBloc.state.currentSchool?.id});
+      if (appBloc.state.currentSchool != null && profile?.schoolId == null) {
+        queryParameters.addAll({
+          'school_id': profile?.schoolId ?? appBloc.state.currentSchool?.id,
+        });
       }
 
       final response = await http().get(
