@@ -21,66 +21,68 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: intro.IntroductionScreen(
-        pages: [
-          intro.PageViewModel(
-            title: "Selamat datang!",
-            bodyWidget: Column(
-              children: [
-                Text(
-                  Env.APP_DESCRIPTION,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
-                ),
-                const SizedBox(height: 30),
-                Assets.polijeCopyright.image(height: 30),
-              ],
+      body: SafeArea(
+        child: intro.IntroductionScreen(
+          pages: [
+            intro.PageViewModel(
+              title: "Selamat datang!",
+              bodyWidget: Column(
+                children: [
+                  Text(
+                    Env.APP_DESCRIPTION,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
+                  ),
+                  const SizedBox(height: 30),
+                  Assets.polijeCopyright.image(height: 30),
+                ],
+              ),
+              image: Assets.favicon.image(width: 70),
             ),
-            image: Assets.favicon.image(width: 70),
-          ),
-          intro.PageViewModel(
-            title: "Anda sudah siap!",
-            bodyWidget: Text(
-              "Anda sudah siap untuk memulai pengukuran nutrisi anak anda. Semoga hari anda menyenangkan!",
-              textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
+            intro.PageViewModel(
+              title: "Anda sudah siap!",
+              bodyWidget: Text(
+                "Anda sudah siap untuk memulai pengukuran nutrisi anak anda. Semoga hari anda menyenangkan!",
+                textAlign: TextAlign.center,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(color: VariantColor.muted),
+              ),
+              image: Icon(
+                LucideIcons.checkCircle2,
+                color: VariantColor.primary,
+                size: 65,
+              ),
             ),
-            image: Icon(
-              LucideIcons.checkCircle2,
-              color: VariantColor.primary,
-              size: 65,
+          ],
+          showBackButton: true,
+          showNextButton: true,
+          next: Text(
+            'Next'.toUpperCase(),
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          back: Text(
+            'Prev'.toUpperCase(),
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.grey.shade500,
             ),
           ),
-        ],
-        showBackButton: true,
-        showNextButton: true,
-        next: Text(
-          'Next'.toUpperCase(),
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        back: Text(
-          'Prev'.toUpperCase(),
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: Colors.grey.shade500,
+          done: Text(
+            "Selesai".toUpperCase(),
+            style: TextStyle(fontWeight: FontWeight.w600),
           ),
+          dotsDecorator: intro.DotsDecorator(
+            activeColor: VariantColor.primary,
+            color: VariantColor.border,
+          ),
+          onDone: () {
+            IntroductionService.setShown();
+            Modular.to.pushNamed('/login');
+          },
         ),
-        done: Text(
-          "Selesai".toUpperCase(),
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        dotsDecorator: intro.DotsDecorator(
-          activeColor: VariantColor.primary,
-          color: VariantColor.border,
-        ),
-        onDone: () {
-          IntroductionService.setShown();
-          Modular.to.pushNamed('/login');
-        },
       ),
     );
   }
