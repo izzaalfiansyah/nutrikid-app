@@ -8,6 +8,8 @@ import 'package:nutrikid_app/utils/shared_preferences.dart';
 
 const ACCESS_TOKEN = 'access_token';
 const REFRESH_TOKEN = 'refresh_token';
+const AUTH_USERNAME = 'auth_username';
+const AUTH_PASSWORD = 'auth_password';
 
 class AuthService {
   Future<void> saveToken(Token token) async {
@@ -30,6 +32,23 @@ class AuthService {
     return Token(accessToken: accessToken, refreshToken: refreshToken);
   }
 
+  Future setUsernameAndPasswordSaved({
+    required String username,
+    required String password,
+  }) async {
+    final prefs = await sharedPreferences();
+    prefs.setString(AUTH_USERNAME, username);
+    prefs.setString(AUTH_PASSWORD, password);
+  }
+
+  Future<List<String>> getUsernameAndPasswordSaved() async {
+    final prefs = await sharedPreferences();
+    final username = prefs.getString(AUTH_USERNAME);
+    final password = prefs.getString(AUTH_PASSWORD);
+
+    return [username ?? "", password ?? ""];
+  }
+
   Future<Token?> login(LoginParams params) async {
     try {
       final result = await http().post('/login', data: params.toJson());
@@ -44,6 +63,11 @@ class AuthService {
         );
 
         await saveToken(token);
+
+        await setUsernameAndPasswordSaved(
+          username: params.username,
+          password: params.password,
+        );
 
         Modular.get<AppBloc>().add(AppEvent.loadProfile());
 

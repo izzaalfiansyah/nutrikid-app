@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:nutrikid_app/blocs/login_cubit/login_cubit.dart';
 import 'package:nutrikid_app/components/button.dart';
 import 'package:nutrikid_app/components/input.dart';
+import 'package:nutrikid_app/model/login_params/login_params.dart';
+import 'package:nutrikid_app/services/auth_service.dart';
 import 'package:nutrikid_app/shared/size-config.dart';
 import 'package:nutrikid_app/shared/variant.dart';
 
@@ -16,7 +17,37 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final authService = AuthService();
   final loginCubit = Modular.get<LoginCubit>();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  loadUsernameAndPasswordSaved() async {
+    final [username, password] =
+        await authService.getUsernameAndPasswordSaved();
+
+    loginCubit.changeParams(
+      LoginParams(username: username, password: password),
+    );
+
+    usernameController.text = username;
+    passwordController.text = password;
+  }
+
+  @override
+  initState() {
+    super.initState();
+
+    loadUsernameAndPasswordSaved();
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Positioned(
-          //   left: 8,
-          //   child: SafeArea(
-          //     child: IconButton(
-          //       onPressed: () {
-          //         Modular.to.pop();
-          //       },
-          //       icon: Icon(LucideIcons.arrowLeft, size: 24),
-          //     ),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.all(30),
             child: BlocBuilder<LoginCubit, LoginState>(
@@ -63,18 +83,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Input(
                           placeholder: "Username",
-                          onChanged: (value) {
+                          controller: usernameController,
+                          onChanged: (val) {
                             loginCubit.changeParams(
-                              state.params.copyWith(username: value),
+                              state.params.copyWith(username: val),
                             );
                           },
                         ),
                         Input(
                           placeholder: "Password",
+                          controller: passwordController,
                           isPassword: true,
-                          onChanged: (value) {
+                          onChanged: (val) {
                             loginCubit.changeParams(
-                              state.params.copyWith(password: value),
+                              state.params.copyWith(password: val),
                             );
                           },
                         ),
