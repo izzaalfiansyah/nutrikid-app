@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Center(
                       child: Text(
-                        'Jika anda lupa password, hubungi admin',
+                        'Jika anda lupa password, silahkan hubungi admin.',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: VariantColor.muted),
                       ),
