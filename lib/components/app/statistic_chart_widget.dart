@@ -10,7 +10,7 @@ import 'package:nutrikid_app/shared/variant.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class StatisticChartWidget extends StatefulWidget {
-  StatisticChartWidget({super.key, this.isLoad = true});
+  const StatisticChartWidget({super.key, this.isLoad = true});
 
   final bool isLoad;
 

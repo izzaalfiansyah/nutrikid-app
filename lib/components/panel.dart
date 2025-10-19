@@ -7,16 +7,18 @@ final panelShadow = [
 
 class Panel extends StatelessWidget {
   final Widget child;
+  final Color? color;
+  final EdgeInsetsGeometry? padding;
 
-  const Panel({super.key, required this.child});
+  const Panel({super.key, required this.child, this.color, this.padding});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(18),
+      padding: padding ?? EdgeInsets.all(18),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: VariantColor.card,
+        color: color ?? VariantColor.card,
         borderRadius: BorderRadius.circular(10),
         boxShadow: panelShadow,
       ),

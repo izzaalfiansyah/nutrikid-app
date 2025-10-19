@@ -16,25 +16,52 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
       if (event is _LoadStatistic) {
         final historyBloc = Modular.get<HistoryBloc>();
 
+        List<StatisticChart> measurementData = [];
+
+        for (var measurement in historyBloc.state.measurements) {
+          final changeIndex = measurementData.indexWhere(
+            (e) => e.totalMonth == measurement.studentAgeMonthTotal,
+          );
+
+          final statistic = StatisticChart(
+            label: formatDate(measurement.createdAt!, format: "dd/MM/yy"),
+            height: measurement.studentHeight,
+            weight: measurement.studentWeight,
+            bmi: measurement.studentBmi,
+            zScore: measurement.zScore,
+            year: measurement.studentAge,
+            month: measurement.studentAgeMonth,
+            totalMonth: measurement.studentAgeMonthTotal,
+            status: measurement.status,
+          );
+
+          if (changeIndex >= 0) {
+            measurementData[changeIndex] = statistic;
+          } else {
+            measurementData = [...measurementData, statistic];
+          }
+        }
+
         emit(
           state.copyWith(
-            measurementData:
-                historyBloc.state.measurements.map((measurement) {
-                  return StatisticChart(
-                    label: formatDate(
-                      measurement.createdAt!,
-                      format: "dd/MM/yy",
-                    ),
-                    height: measurement.studentHeight,
-                    weight: measurement.studentWeight,
-                    bmi: measurement.studentBmi,
-                    zScore: measurement.zScore,
-                    year: measurement.studentAge,
-                    month: measurement.studentAgeMonth,
-                    totalMonth: measurement.studentAgeMonthTotal,
-                    status: measurement.status,
-                  );
-                }).toList(),
+            measurementData: measurementData,
+            // measurementData:
+            //     historyBloc.state.measurements.map((measurement) {
+            //       return StatisticChart(
+            //         label: formatDate(
+            //           measurement.createdAt!,
+            //           format: "dd/MM/yy",
+            //         ),
+            //         height: measurement.studentHeight,
+            //         weight: measurement.studentWeight,
+            //         bmi: measurement.studentBmi,
+            //         zScore: measurement.zScore,
+            //         year: measurement.studentAge,
+            //         month: measurement.studentAgeMonth,
+            //         totalMonth: measurement.studentAgeMonthTotal,
+            //         status: measurement.status,
+            //       );
+            //     }).toList(),
           ),
         );
       }

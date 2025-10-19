@@ -138,9 +138,10 @@ class _MainScreenState extends State<MainScreen> {
                         (state.profile != null)
                             ? CircleAvatar(
                               radius: 18,
-                              backgroundColor: VariantColor.muted.withAlpha(50),
+                              backgroundColor: Colors.grey.shade300,
                               child: Text(
                                 letterName(state.profile?.name ?? ''),
+                                style: TextStyle(fontWeight: FontWeight.w600),
                               ),
                             )
                             : IconButton(

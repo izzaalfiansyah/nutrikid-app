@@ -117,6 +117,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 14),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Panel(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 14,
+                        horizontal: 14,
+                      ),
+                      color: VariantColor.primary,
+                      child: Center(
+                        child: Text(
+                          state.student.name.toUpperCase(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   Container(
                     margin: EdgeInsets.only(top: 5),
                     padding: const EdgeInsets.all(14),
@@ -218,6 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
+                  SizedBox(height: 14),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Panel(
